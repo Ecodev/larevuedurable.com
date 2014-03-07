@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<theme>
+	<images>
+		<thumb> <!--Image prÃ©vue pour les miniatures dans les listes -->
+			<width>129</width>
+			<height>129</height>
+		</thumb>
+		<slide> <!--Image prÃ©vue pour les slides -->
+			<width>535</width>
+			<height>236</height>
+		</slide>
+	</images>
+	<title_length>80</title_length>
+	<intro_length>200</intro_length>
+	<slide_speed>2500</slide_speed>
+	<slide_timeout>4500</slide_timeout>
+	<slide_effect>fade</slide_effect>
+</theme>

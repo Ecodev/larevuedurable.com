@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>mailchimp</name>
+            <displayName><![CDATA[MailChimp]]></displayName>
+            <version><![CDATA[1.0]]></version>
+            <description><![CDATA[MailChimp vous aide &agrave; concevoir des newsletters, les partager sur les r&eacute;seaux sociaux, les int&eacute;grer et suivre vos r&eacute;sultats. C&#039;est comme votre plateforme de publication personnelle !]]></description>
+            <author><![CDATA[Prestashop]]></author>
+            <tab><![CDATA[administration]]></tab>
+            <is_configurable>1</is_configurable>
+            <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+        </module>

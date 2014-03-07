@@ -1,0 +1,30 @@
+ul.step {
+    background: url("../img/step_start.gif") no-repeat scroll left bottom transparent;
+    height: 25px;
+    list-style: none outside none;
+    margin: 0.8em auto 2em;
+    padding-left: 40px;
+    width: 540px;
+}
+
+ul.step li {
+    background: url("../img/step_standard.gif") no-repeat scroll left bottom transparent;
+    float: left;
+    height: 25px;
+    text-align: center;
+    width: 100px;
+}
+
+ul.step li.step_current {
+    background: url("../img/step_current.gif") no-repeat scroll left bottom transparent;
+    font-weight: bold;
+}
+
+ul.step li.step_todo {
+    font-style: italic;
+}
+
+ul.step li#step_end {
+    background: url("../img/step_end.gif") no-repeat scroll left bottom transparent;
+    width: 40px;
+}

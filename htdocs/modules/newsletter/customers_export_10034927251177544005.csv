@@ -1,0 +1,3 @@
+id_customer;lastname;firstname;email;ip_address;newsletter_date_add
+1;DOE;John;pub@prestashop.com;;2013-05-21 11:48:00
+2;Baptista;Samuel;samuel.baptista@ecodev.ch;127.0.0.1;2013-05-22 15:16:29

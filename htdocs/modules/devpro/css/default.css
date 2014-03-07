@@ -1,0 +1,18 @@
+.devpro_error{ 
+    color:#FF0000;
+    font-weight:bold;
+}
+
+.devpro_important{
+    color:#FF0000;
+    font-weight:bold;
+}
+
+#devpro_pagination a{
+    padding:0 2px 0 2px;
+    text-decoration:underline;
+}
+
+#devpro_pagination .current_page{
+    font-weight:bold;
+}

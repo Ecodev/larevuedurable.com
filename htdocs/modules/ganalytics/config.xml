@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>ganalytics</name>
+            <displayName><![CDATA[Google Analytics]]></displayName>
+            <version><![CDATA[1.4.3]]></version>
+            <description><![CDATA[Int&egrave;gre le script de Google Analytics &agrave; votre boutique]]></description>
+            <author><![CDATA[PrestaShop]]></author>
+            <tab><![CDATA[analytics_stats]]></tab>
+	<confirmUninstall>Etes-vous sûr de vouloir supprimer vos paramètres ?</confirmUninstall>
+            <is_configurable>1</is_configurable>
+            <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+        </module>

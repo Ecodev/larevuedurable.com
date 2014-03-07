@@ -1,0 +1,122 @@
+<h1>Import / Export</h1>
+
+<h2>Raccourcis</h2>
+<ul>
+    <li><a href='##a1'>Transfert de crésus vers prestashop</a></li>
+    <li><a href='##a2'>Transfert de prestashop vers crésus</a></li>
+</ul>
+
+<h2>Généralités</h2>
+<p>Pour faire communiquer prestashop et crésus, il faut que les deux programmes parlent la même langue. Cette langue est traduite dans un fichier CSV.</p>
+<p>
+    Un fichier .csv peut être ouvert dans <a href='http://www.openoffice.org/download/'>Open Office</a> ou encore dans un simple éditeur de texte.
+    Il ne s'agit rien d'autre que d'un fichier de texte dont les colonnes sont séparées soit par des tabulations soit par des points virgule.
+    Il présente des informations tabulaires, idéales pour faire des importations. Il comporte une personne par ligne.
+</p>
+<p>Ces colonnes (fictives dans le fichier lui même mais affichées par OpenOffice) doivent impérativement être dans le même ordre.</p>
+<p>Voici une définition à importer dans crésus afin que celui ci sache de quelle manière il doit exporter et importer les données. Ce fichier sera lu de la même manière par prestashop.</p>
+<ul>
+    <li><a href='sources/fichiers/cresus_definition_prestashop.iofac'>Définition pour Crésus</a></li>
+    <li><a href='sources/fichiers/exemple_cresus_to_prestashop.csv'>Exemple de fichier CSV</a></li>
+    <li><a href='http://www.openoffice.org/download/'>Open Office</a></li>
+</ul>
+
+
+<h2 id='a1'>Transfert de crésus vers prestashop</h2>
+<p>
+    Pour rappel, cet import ne concerne que les clients qui désirent transformer leur abonnement papier actuel en abonnement web pour la durée restante de leur abonnement ou en prolongeant.
+</p>
+
+<h3>Ajouter la définition dans crésus et exporter</h3>
+<p>Une fois passé en mode complet dans crésus, allez dans Fichier/Exporter. Une fenêtre s'ouvre. Cliquez sur <strong>Importer déf.</strong> et sélectionnez la définition disponible à la section précédente.</p>
+<p><a class='illustration' href='sources/img/cresus_import_def.png' rel='shadowbox'><img src='sources/img/cresus_import_def.png' /></a></p>
+<p>
+    Les 5 première colonnes et la 7e sont à remplir à la main. Elles comporteront, lors de l'export, les noms n01, n02, n03, n04, n05 et peuvent contenir un 1 ou un 0. Ces valeurs sont à remplacer.
+    Ces colonnes seront à remplir avec les contenus respectivement mentionnés dans le fichier CSV d'exemple téléchargeable à la section précédente.
+</p>
+<p>Voici le détail : </p>
+<ol>
+    <li>Dernier numéro : le dernier numéro inclû dans l'abonnement en cours [entre 50 et environ 64]</li>
+    <li>Renouvellement : [1] si le client souhaite renouveller son abonnement, [0] si le client souhaite seulement améliorer son abonnement </li>
+    <li>La durée de l'abonnement : [1 ou 2] pour le nombre d'années  (n'est utilisé qu'en cas de renouvellement de l'abonnement -> si le chiffre 1 a été mentionné en 2e colonne.)</li>
+    <li>Type d'abonnement : [1] pour web, [2] web et papier. Les abonnements uniquement papier ne sont pas importés car ils restent dans crésus.</li>
+    <li>L'identifiant du produit : [8] Particuliers, [31] Solidarité, [32] Professionnels </li>
+    <li>L'identifiant rempli (rempli automatiquement par Crésus) </li>
+    <li>La source du fichier Crésus d'où provient le client [EUR] OU [CHF]</li>
+</ol>
+<p>Les colonnes 3,4 et 5 ne sont utilisées que si le client souhaite renouveller son abonnement.</p>
+
+
+<h3>Manipuler le fichier CSV</h3>
+<p>Commencez par ouvrir Open office puis allez dans Fichier > ouvrir et sélectionnez le fichier CSV exporté par Crésus. Vous devriez tomber sur l'écran suivant. </p>
+<p><a class='illustration' href='sources/img/openoffice_ouverture_csv.png' rel='shadowbox'><img src='sources/img/openoffice_ouverture_csv.png' /></a></p>
+<p>Faites comme sur la capture d'image. L'aperçu vous montre le rendu final du fichier. Si vous ne voyez pas des colonnes distinctes, ou que vous voyez des losanges noirs ou des points d'interrogation c'est que les réglages ou l'export ne se sont pas fait correctement.</p>
+<p>Si ces problèmes se produisent, envoyez moi une capture d'écran de votre fenêtre de configuration d'Open office ainsi que le fichier exporté par crésus (attention car celui ci comporte les données de vos clients). Faites des essais sur un échantillon (p.ex sur les clients marqués).</p>
+<p>Une fois que votre fichier comporte toutes les données nécessaires, enregistrez le. Open office vous demandera si vous voulez changer de format. Répondez vous que voulez garder le format actuel.</p>
+<p><a class='illustration' href='sources/img/openoffice-save.png' rel='shadowbox'><img src='sources/img/openoffice-save.png' /></a></p>
+
+
+<h3>Importer dans prestashop</h3>
+<p>Pour importer vos clients dans prestashop, rendez-vous dans le back-office, puis allez dans <strong>Modules</strong> et cherchez <strong>Importeur / Exporteur</strong>.</p>
+<p>Dans la section <strong>Transférer contacts de Crésus vers Prestashop</strong> et sélectionnez le fichier csv sur votre disque dur et cliquez sur <strong>Lancer l'importation.</strong> </p>
+<p>En cas de problèmes d'importation (absente de données p.ex), il vous sera notifié quels contacts n'ont pas été importés. Il faudra le cas échéant corriger le fichier et le réimporter ou saisir les informations à la main (veuillez nous contacter). </p>
+<p><strong>Tous les clients importés ont le même mot de passe, qu'il faudra leur recommander de changer dès leur première connexion : 8Y58n7nj.</strong> Voici un exemple de message que vous pouvez envoyer à vos clients (après importation) :</p>
+<p><i>"Pour pouvoir vous communiquer votre mot de passe, nous avons dû le stoquer de manière non sécurisée. Veuillez le changer dès votre première connexion."</i></p>
+
+<h3>Gérer les erreurs d'importation</h3>
+<p>L'importeur procède en plusieurs étapes, d'abord il crée la fiche client (en s'assurant de ne pas ajouter deux fois le même client), puis lui assigne des addresses. Ensuite il crée un panier d'achat et pour finir il le transforme en commande. Des erreurs peuvent survenir à chaque étape.</p>
+<p>A la fin de l'importation, un compte rendu vous informe si tout s'est bien passé ou s'il y a eu des erreurs. <strong>En cas d'erreur, le script continue l'importation</strong>. Voici un exemple du compte rendu : </p>
+<p><a class='illustration' href='sources/img/import-erreurs.png' rel='shadowbox'><img src='sources/img/import-erreurs.png' /></a></p>
+<p>Ce compte rendu comporte l'adresse e-mail du client, son identifiant crésus ainsi que la source du fichier d'où il provient (EUR ou CHF). Il ajoute ensuite un descriptif de l'étape à laquelle l'erreur s'est produite suivi d'un message d'erreur plus technique. Si vous ne parvenez pas à corriger le fichier excel par vous même, copiez collez ce compte rendu et envoyez le nous.</p>
+<p>Les adresses qui ne sont pas mentionnées comme erronées, ont été correctement importées.</p>
+
+<p>Une erreur peut survenir après la première étape. Dans ce cas, la fiche client est quand même créé et le client ne pourra pas être importé à nouveau ! Après correction du fichier .CSV, il est important d'aller supprimer le client du shop pour qu'il puisse à nouveau etre importé. </p>
+<p>Pour ce faire, rendez-vous dans le backoffice dans <strong>Clients > Clients </strong>, cherchez le client, puis cochez la case à sa gauche. Ensuite, en bas de page, cliquez sur <strong>Supprimer la sélection</strong>. Il est très important de passer par cette démarche et de ne pas cliquer sur la petite corbeille en bout de ligne vis à vis de chaque client. La corbeille ne fait que désactiver le client mais ne le supprime pas.</p>
+<p><a class='illustration' href='sources/img/import-erreurs-2.png' rel='shadowbox'><img src='sources/img/import-erreurs-2.png' /></a></p>
+<p>Une nouvelle page vous demande si vous voulez supprimer complètement l'utilisateur ou le désactiver. Choisissez la première option "supprimer complètement". </p>
+<p><a class='illustration' href='sources/img/import-erreurs-3.png' rel='shadowbox'><img src='sources/img/import-erreurs-3.png' /></a></p>
+
+
+
+<h3>Vérification des informations</h3>
+<p>
+    Après l'importation, vous pouvez vous connecter sur le compte de vos clients avec le mot de passe générique mentionné à la section <strong>Importer dans prestashop</strong>.
+    Ensuite rendez vous sur la page <strong>mon abonnement</strong>.
+</p>
+
+<h3>Quelques exemples</h3>
+<h4>Client 1</h4>
+<p>Le premier client a un abonnement en cours qui se termine au numéro 52, il souhaite le renouveler pour un an avec un abonnement pour particuliers uniquement web.</p>
+<p>Les 5 colonnes : 52, 1, 1, 1, 8</p>
+<p><a class='illustration' href='sources/img/abo-etat-1.png' rel='shadowbox'><img src='sources/img/abo-etat-1.png' /></a></p>
+<h4>Client 2</h4>
+<p>Le deuxième client a un abonnement en cours qui se termine au numéro 53, il ne souhaite pas le renouveler, les 3 dernières colonnes deviennent par conséquent inutilisées par l'importeur.</p>
+<p>Les 5 colonnes : 53, 0, 2, 1, 31</p>
+<p><a class='illustration' href='sources/img/abo-etat-2.png' rel='shadowbox'><img src='sources/img/abo-etat-2.png' /></a></p>
+<h4>Client 3</h4>
+<p>Le troisième client a un abonnement en cours qui se termine au numéro 52, il souhaite le renouveler pour deux ans avec un abonnement pour professionnels en version web et papier.</p>
+<p>Les 5 colonnes : 54, 1, 2, 2, 32</p>
+<p><a class='illustration' href='sources/img/abo-etat-3.png' rel='shadowbox'><img src='sources/img/abo-etat-3.png' /></a></p>
+<p>L'importeur ne permet pas de spécifier les 3 adresses email auxquelles le client souhaite donner l'accès. Pour ce faire, il faut les saisir à la main via le Backoffice, dans <strong>Clients > Clients > Client xxx > Editer (en fin de ligne) puis dans le champ <strong> Add a private note</strong>, insérer une adresse e-mail par ligne.</strong></p>
+
+
+
+<h2 id='a2'>Transfert de Prestashop vers Crésus</h2>
+
+<h3>Exporter de Prestashop</h3>
+<p>Ce script génère une liste de clients ayant une commande valide dans les limites des date mentionnées. Les commandes doivent comporter des produits papier ou doivent avoir été payées par BVR. </p>
+<p>Pour exporter vos clients dans prestashop, rendez-vous dans le back-office, puis allez dans <strong>Modules</strong> et cherchez <strong>Importeur / Exporteur</strong>.</p>
+<p>Dans la section <strong>Transférer contacts de Prestashop vers Crésus</strong> saisissez les dates des jours concernés puis <strong>Lancer l'importation.</strong> </p>
+<p>L'export se fait sur des journées entières, de minuit (inclut) le premier jour jusqu'a minuit le jour suivant (exclu). Pour importer les données d'un seul jour, entrez deux fois la même date. </p>
+<p>Des aides visuelles sont présentes pour vous rappeler quelle est la date la plus proche exportée et les heures qui sont en question. </p>
+<p>Après avoir lancé l'exportation, un message en vert apparait vous invitant à télécharger le fichier généré.</p>
+
+<h3>Distinction entre les clients CHF et EUR</h3>
+<p>La commande exporte une liste de client et non une liste de commandes. Un client peut avoir passé plusieurs commandes dant le délai des dates choisies. Si un client a passé plusieurs commandes, celles ci s'accumulent dans la dernière colonne du fichier CSV. </p>
+<p>Attention, prestashop ne fait pas de distinction entre les clients en Euros et les client en CHF. Dans le détail de la commande, la devise est notée.</p>
+<p>Si le client provenait originellement de crésus, la 7e colonne indique de quel fichier provenait le client EUR ou CHF.</p>
+<p>Constituez manuellement deux fichiers pour distinguer quel client doit être importé dans quel fichier Crésus.</p>
+
+<h3>Importer dans crésus</h3>
+<p>Une fois passé en mode complet, allez dans Fichier > Importer, sélectionnez la définition fournie dans la première section de cette page et faites importer. </p>
+<p>Les clients importés sont cochés afin de les lister aussi après l'import. Dans l'idéal il faudrait veiller à décocher tout le monde avant l'import. </p>

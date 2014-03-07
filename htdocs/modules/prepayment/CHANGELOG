@@ -1,0 +1,53 @@
+PREPAYMENT
+© 2013 All rights reserved
+
+INFORMATIONS
+============
+Please read "README" file.
+
+CHANGELOG
+=========
+
+# Release Notes for Prepayment v0.7 (2013-07-05)
+
+- Installer: fixed bug with default language
+- BO/FO: new module setting to choose column block position or disable it
+
+# Release Notes for Prepayment v0.6 (2013-05-02)
+
+- Installer: fixed missing id_shop field
+- BO: fixed multishop settings
+- FO: renamed template payment to paymentConfirm
+
+# Release Notes for Prepayment v0.5 (2013-04-25)
+
+- Now supports REAL multishop
+- FO: renamed template payment to paymentConfirm
+
+# Release Notes for Prepayment v0.4 (2013-04-12)
+
+- BO/FO: fixed display balance bug
+
+# Release Notes for Prepayment v0.3 (2013-03-21)
+
+- New logo.gif
+- FR: added missing translation
+- INSTALLER: improved sql file read
+- INSTALLER: fixed strtolower DB prefix
+- INSTALLER: fixed warning
+- BO: added missing icon
+- BO: added missing settings.png
+- FO: fixed form method from get to post in account recharge
+
+# Release Notes for Prepayment v0.2 (2013-01-22)
+
+- FO/BO: you can now offer an amount (price or percentage) for each recharge
+- FO: fixed bug while displaying balance in other currency
+
+# Release Notes for Prepayment v0.1 (2013-01-10)
+
+- First major release of module
+
+--
+DrÿSs' Agency <contact@dryss.com>
+http://www.dryss.com

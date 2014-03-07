@@ -1,0 +1,325 @@
+/*
+*  @author HDClic
+*  @copyright  2007-2013 www.hdclic.com
+*  @version  Release: $Revision: 1.5 $
+*/
+/* Slide */
+#prestablog_slide_home {
+	width: 100%;
+	float: left;
+	min-height: 248px;
+	margin-bottom: 7px;
+	position: relative;
+}
+div.prestablog_visuels {
+	width: 100%;
+	float: left;
+	min-height: 248px; /* Merci IE */
+}
+#prestablog_slide_home h2 {
+	text-align: left;
+	font-size: 14px;
+	background: url(none);
+	font-weight: bold;
+	margin: 0px 0px 10px;
+	padding: 0px;
+	color: #E5E5E5;
+	text-transform: none;
+}
+#prestablog_slide_home h2 a, #prestablog_slide_home p a {
+	color: #E5E5E5;
+}
+#prestablog_slide_home p {
+	text-align: left;
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+	color: #DDD;
+}
+#prestablog_slide_home img.visu {
+	position: absolute;
+	float: left;
+	left: 0px;
+	top: 0px;
+	border: 1px solid #CCC;
+}
+#prestablog_slide_home .date-slide {
+	position: absolute;
+	left: 0px;
+	top: 20px;
+	background: url(../img/date-slide.png) no-repeat;
+	text-align: center;
+	height: 31px;
+	width: 84px;
+	padding-top: 12px;
+	display: block;
+	font-size: 15px;
+	font-style: italic;
+	color: #FFF;
+	padding-right: 5px;
+}
+
+#prestablog_slide_home .resume_blog p a {
+	color: #DD2A81;
+}
+
+#prestablog_slide_home .resume_blog {
+	position: absolute;
+	left: 10px;
+	top: 90px;
+	background: url(../img/bg-texte-slide.png) repeat;
+	border: 1px solid #9d9d9d;
+	padding: 5px;
+	height: 126px;
+	width: 362px;
+}
+
+#prestablog_slide_home a:hover img, #blog_list a:hover img {
+	opacity: 0.7;
+	filter:alpha(opacity=70); 
+}
+
+a.bloc-rss img {
+	margin-bottom:5px;
+}
+
+a.bloc-rss:hover img {
+	opacity: 0.7;
+	filter:alpha(opacity=70); 
+}
+/* Listing */
+#blog_list {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	width: 100%;
+	clear: both;
+}
+#blog_list li {
+	margin: 0px 0px 7px;
+	padding: 2%;
+	display: inline-block;
+	width: 96%;
+	list-style: none;
+	background: #EFEFEF;
+}
+#blog_list h3 {padding-bottom:0px; }
+#blog_list .left_block {
+	float: left;
+    width: 135px;
+}
+#blog_list .center_block {	
+    float: right;
+    padding: 0 7px;
+    width: 363px;
+}
+#blog_list .blog_link {
+	border-radius: 3px;
+	background-color: #CCC;
+	padding: 4px;
+}
+#blog_list a.blog_link:hover {
+	text-decoration: none;
+	background: #E6E6E6;
+}
+#blog_list p {padding-bottom: 7px}
+/* Typo*/
+.info_blog {
+	font-size: 11px;
+	color: #8B8B8B;
+	}
+.info_blog a, .date_blog-cat, ul#blog_list li .date_blog-cat a {
+	color: #ED6F1B;
+}
+.date_blog-cat {
+	font-size: 10px;
+	font-weight: normal;
+}
+
+.categorie_blog {
+	color: #A020F0;
+}
+
+.categorie_blog:hover {
+	text-decoration:underline;
+}
+
+/* Navigation slide */
+#prestablog_nav_slide {
+	width: 100%;
+	float: left;
+	display: block;
+	clear: both;
+	text-align: center;
+	padding-bottom: 5px;
+}
+#prestablog_nav_slide a {
+	background: url(../img/nav-slide.png) no-repeat right top;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	outline: medium none;
+	text-indent: -9999em;
+	margin-right: 1px;
+	margin-left: 1px;
+}
+#prestablog_nav_slide a.activeSlide {
+	background: url(../img/nav-slide.png) left top;
+}
+#prestablog_nav_slide a:hover {
+	background: url(../img/nav-slide.png) left top;
+}
+#prestablog_slide_home ul.admin { padding:0px; } 
+
+/* date */
+#prestablog_dateliste ul {
+	font-weight:bold;
+}
+
+#prestablog_dateliste ul ul {
+	color:#7F7F7F;
+	font-size:90%;
+	font-weight:normal;
+	margin-left:15px;
+}
+#prestablog_dateliste ul ul li {
+	list-style-type: square;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+/* bloc last liste */
+img.lastlisteimg {
+	float:left;
+	margin:3px 2px 2px 0;
+}
+
+/* Pagination category */
+.cat_prestablog p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-bottom: 0px;
+}
+div.prestablog_pagination {
+	text-align:left;
+	margin-top:15px;
+	margin-bottom:15px;
+}
+div.prestablog_pagination a {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #ddd;
+	text-decoration: none; 
+	color: #aaa;
+}
+div.prestablog_pagination a:hover, div.prestablog_pagination a:active {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #a0a0a0;
+}
+div.prestablog_pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #929EA2;
+	background-color: #BDC5C8;
+	color: #4D4D4D;
+}
+div.prestablog_pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #f3f3f3;
+	color: #ccc;
+}
+div.prestablog_pagination span.more {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #ddd;
+	color: #aaa;
+}
+
+div.center_block p.categories {
+	font-size: 85%;
+}
+
+div.center_block p.categories a {
+	font-size: 115%;
+}
+
+/* Commentaire */
+fieldset#prestablog-comment {
+	padding: 10px;
+}
+fieldset#prestablog-comment input {
+	width: 100%;
+}
+fieldset#prestablog-comment textarea {
+	width: 100%;
+	height: 200px
+}
+
+fieldset#prestablog-comment p#errors {
+	text-align:center;
+	font-weight:bold;
+}
+
+fieldset#prestablog-comment input.errors, fieldset#prestablog-comment textarea.errors {
+	border:solid 1px #0B9A0B;
+}
+
+div#comments {
+	display: none;
+}
+
+span#toggle-comments {
+	cursor:pointer;
+}
+
+div.comment h4 a {
+	text-decoration:none;
+}
+
+div.comment h4 a:hover {
+	text-decoration:underline;
+}
+
+div.comment {
+	margin: 10px 0 10px 0;
+	padding:5px;
+}
+
+div.comment hr {
+	color:#E5E5E5;
+	background-color: #D9D7D7;
+	
+}
+
+div.comment p.date-comment {
+	color:#7F7F7F;
+	font-size:90%;
+}
+
+div#abo {
+	font-size:90%;
+	float:right;
+}
+
+div#abo a {
+	color: #DD2A81;
+	text-decoration:none;
+}
+
+div#abo a:hover {
+	text-decoration:underline;
+}
+
+ul#prestablog_menu_cat {
+	float:left;
+	width:100%;
+	margin-bottom:20px;
+}
+ul#prestablog_menu_cat li {
+	margin:5px;
+	list-style:none;
+	float: left;
+	color: #383838;
+}

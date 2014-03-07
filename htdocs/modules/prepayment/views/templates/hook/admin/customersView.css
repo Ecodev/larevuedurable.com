@@ -1,0 +1,9 @@
+.separation { margin-top: 15px; }
+.media_title { float:left; }
+.media_add { float:left;  margin: 6px 0px 0px 40px; }
+.media_add img { vertical-align:top; margin-right: 5px; }
+.media_list { width: 100%; margin-top: 15px; }
+.price { color: white; border-radius: 3px 3px 3px 3px; font-size: 11px; padding: 2px 5px; }
+.green { background-color: #108510; }
+.red { background-color: #8f0621; }
+.orange { background-color: DarkOrange; }

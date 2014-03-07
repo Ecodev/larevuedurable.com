@@ -1,0 +1,8 @@
+#left_column { display:none; }
+#center_column { width: 757px; }
+select#amount { font-size: 1.3em; padding: 0.3em; margin-right:1em; }
+div#balance { font-size: 1.3em; float:left; padding: 5px 5em 1.5em 0; }
+div#recharge { float:left; }
+.clear { clear:both; }
+/*.center { text-align:center; }*/
+.bold { font-weight: bold; }

@@ -1,0 +1,33 @@
+#header,
+#footer,
+#left_column,
+.button,
+.button_large, 
+.breadcrumb,
+.sortPagiBar,
+#more_info_block
+{
+	display: none !important; 
+}
+
+#body{
+	margin-top: 0;
+	padding-top: 0; 
+}
+
+#center_column{
+	width: 100%; 
+	font-size: 12pt !important;
+}
+
+#product_list li .center_block{
+	width: 750px !important; 
+}
+
+#pb-left-column{
+	width: 700px !important; 
+}
+
+.mceContentBody p{
+	font-size: 12pt !important; 
+}

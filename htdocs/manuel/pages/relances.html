@@ -1,0 +1,23 @@
+<h1>Relances automatiques</h1>
+
+<p>Les relances sont gérées automatiquement pour notifier les abonnés un mois avant la fin de leur dernier abonnement.</p>
+<p>Chaque jour un script s'exécute et fait les opérations suivantes : </p>
+
+<ol>
+    <li>Importe tous les abonnés dans la liste <strong>Relances (gérées automatiquement)</strong>. Les abonnés ont des informations supplémentaires spécifiées :
+        <ul>
+            <li>La date de relance</li>
+            <li>La date d'échéance</li>
+        </ul>
+    </li>
+    <li>Une réplique de la campagne <strong>Référence pour la relance</strong> est créée.</li>
+    <li>La campagne est envoyée uniquement aux contacts dont la date de relance correspond à la date du jour.</li>
+</ol>
+
+<p>La date de relance correspond au 30e jour avant l'échéance du dernier abonnement.</p>
+
+<h2>Modifier le mail de relance</h2>
+<p>Pour modifier le mail de notification il faut éditer la campagne <strong>Relances (gérées automatiquement)</strong>.</p>
+<p>Elle sert de référence aux suivantes.</p>
+
+<p><a class='illustration' href='sources/img/mailchimp_list_relances.jpg' rel='shadowbox'><img src='sources/img/mailchimp_list_relances.jpg' /></a></p>

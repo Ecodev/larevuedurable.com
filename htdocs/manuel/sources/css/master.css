@@ -1,0 +1,399 @@
+html,body,div,span,applet,object,iframe,
+h1,h2,h3,h4,h5,h6,p,blockquote,pre,
+a,abbr,acronym,address,big,cite,code,
+del,dfn,em,font,img,ins,kbd,q,s,samp,
+small,strike,strong,sub,sup,tt,var,
+dl,dt,dd,ol,ul,li,
+fieldset,form,label,legend,
+table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}
+:focus{outline:0;}
+body{line-height:1;color:black;background:white;}
+ol,ul{list-style:none;}
+table{border-collapse:separate;border-spacing:0;}
+caption,th,td{text-align:left;font-weight:normal;}
+blockquote:before,blockquote:after,
+q:before,q:after{content:"";}
+blockquote,q{quotes:"" "";}
+
+
+body{
+	text-align:center;
+	font-family: 'Asap', sans-serif;
+}
+
+#body{
+	width:950px;
+	margin:0 auto;
+	text-align:left;
+}
+
+#corps{
+	
+}
+
+
+#header{
+	position: fixed;
+	z-index: 900;
+	top: 0;
+	left: -5%;
+	width: 110%;
+	box-shadow:	0px 0px 15px #666;
+	padding: 50px 5% 5px 5%;
+	background: white;
+}
+
+#remonter{
+	position: fixed;
+	z-index:800;
+	bottom: 0px;
+	right: 10px;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+	background: #ddd;
+	text-shadow: 1px 1px 1px #fff;
+	opacity: 0.5;
+	font-size: 42px;
+	color: #888;
+	padding: 10px 10px 5px 10px;
+	text-decoration: none;
+	border:1px solid  #aaa;
+	
+}
+
+#remonter:hover{
+	opacity: 1;
+}
+
+#menuC{
+	position:relative;
+	height:26px;
+}
+
+#menu{
+
+	padding: 0 30px;
+	margin: auto;
+	text-align: left;
+}
+#menu li,.more{
+	position:relative;
+	display:inline-block;
+}
+
+#menu a{
+	display: inline-block;
+	color: #5a5a5a;
+	font-size: 15px;
+	padding: 5px 5px 5px 5px;
+	margin-right: 20px;	
+	text-decoration:none;
+	font-style: italic;
+	text-align: left;
+	
+}
+
+#menu a:hover{
+	color: #067eb0;
+}
+
+#menu ul{
+	display:none;
+	width: 200px;
+	position:absolute;
+	left:0;
+	top:25px;
+	background: white;
+	padding: 5px 0 0 0;
+	box-shadow: 4px 4px 4px #ccc;
+}
+
+/*#menu .more > ul{
+	left: -180px;
+	 
+}*/
+
+#menu .more{
+	width: 250px; 
+}
+
+#menu li:hover > ul,
+#menu .more:hover > ul{
+	display:block;
+}
+
+#menu ul li{
+	display: block;
+	color: #5a5a5a;
+	background: white;
+	border-bottom: 1px solid #eee;
+}
+#menu ul li a{
+	display: block;
+	padding: 10px 15px ;
+	margin-right: 0;
+
+}
+
+#menu ul li:last-child{
+	border: none;
+}
+
+#menu ul li a:hover{
+	background: #f5f5f5;
+}
+
+#menu ul ul{
+	top: 0;
+	left:200px;
+}
+
+#menu .more ul ul{
+	z-index: 999;
+	top: 0;
+	left:-200px;
+}
+
+
+
+
+
+#contenu{
+	margin: 150px 10% 10% 7%;
+}
+
+
+
+
+
+
+
+
+
+/****************************************************************
+	APPLY CMS
+*****************************************************************/
+.applycms{
+	line-height:1.9em;
+	color:#666;
+	text-align: left;
+}
+
+.applycms hr{
+	position: relative;
+	width: 100%;
+	border: none;
+	border-top: 1px solid #bbb;
+	margin-top: 6em;
+}
+.applycms h1{
+	color:#3E93D5;
+	line-height:26px;
+	margin:0 0 1em 0;
+	font-size:42px;	
+	font-weight:bold;
+	letter-spacing:0.1em;
+	font-style:italic;
+	text-align: center;
+}
+
+.applycms h2{
+	color:#3E93D5;
+	margin:3em 0 1em 0 ;
+	font-size:32px;
+	font-weight:bold;
+	font-style:italic;
+}
+.applycms h3{
+	color:#666;
+	margin:2em 0 0.5em 0 ;
+	font-size:24px;
+	font-weight:bold;
+	font-style:italic;
+
+}
+.applycms h4{
+	color:#999;
+	margin:20px 0 5px 0;
+	font-size:16px;
+	font-weight:bold;
+	font-style:italic;
+}
+
+
+.applycms blockquote{
+	background:#eee url(../deco/quote.png) no-repeat 10px 5px;
+	margin:0;
+	padding:10px 20px 0px 95px;
+	margin:2em 40px 2em 20px;
+	border:1px solid #ccc;
+	font-family:Georgia;
+	font-style:italic;
+	color:#666;
+}
+
+
+.applycms p, 
+.applycms ul, 
+.applycms ol,
+.applycms dl, 
+.applycms form, 
+.applycms div.applycms, 
+.applycms td,
+.applycms th,
+.applycms caption
+{
+	
+	margin-bottom:1em;
+	font-size:16px;
+/*	text-shadow:0px 1px 0px rgba(255,255,255,0.8);*/
+}
+
+
+
+.applycms a{
+	color:#444;
+	border-bottom:1px solid #3E93D5;
+	text-decoration:none;
+	font-size:15px;
+	font-weight:bold;
+	text-shadow:none;
+
+}
+.applycms a:hover{
+	position:relative;
+	top:-1px;
+}
+.applycms a:active{
+	color:#bfa05b;
+	position:relative;
+	top:-1px;
+}
+.applycms strong{
+	font-weight:bold;
+	color:#444;
+}
+.applycms ul, .applycms ol{
+	margin-bottom:1em;
+	margin-left:30px;
+}
+.applycms ul li, .applycms ol li{
+	padding-left:5px;
+}
+
+.applycms ul li{
+	list-style: disc outside;/* url(../deco/puce.png) */
+
+}
+.applycms ol li{
+	list-style: outside decimal;
+}
+
+
+.applycms .tabulaire{
+	width:760px;
+}
+
+.applycms .tabulaire th{
+	font-weight:bold;
+}
+.applycms .tabulaire td{
+	padding:1px;
+	text-align:center;
+}
+.applycms .tabulaire tr{
+	
+}
+
+.applycms td,.applycms th{
+	padding:2px;
+	border-bottom:1px dotted #ccc;
+}
+
+.applycms tbody th{
+	width:100px;
+	font-weight:normal;
+
+}
+
+.applycms th{
+	font-weight:bold;
+	color:#4C4C4C;
+	font-size:12px;
+}
+
+
+.applycms a.illustration{
+	display: block;
+	max-width: 1280px;
+	box-shadow: 0px 2px 20px rgba(0,0,0,0.5);
+	border-bottom: none;
+}
+
+.applycms a.illustration span{
+	position: relative;
+	top: -5px;
+	display: block;
+	font-size: 13px;
+	font-weight: normal;
+	color: #fff;
+	border-radius: 5px;
+	background: #3E93D5;
+	margin: 15px 5px 0 5px;
+	padding: 0 10px;
+
+}
+.applycms a.illustration img{
+	display: block;
+	max-width: 100%;
+/*	border:3px solid #fff;*/
+
+}
+
+.applycms a.illustration.small{
+	display: inline-block;
+	vertical-align: top;
+	max-width:45%;
+	margin-right: 20px;
+}
+.applycms a.illustration.small img{
+
+}
+
+.applycms a.illustration.left{
+	float: left; 
+}
+
+.applycms a.illustration.right{
+	float: right; 
+}
+
+.applycms a.illustration.inlineblock{
+	display: inline-block;
+	margin-right: 20px; 
+}
+
+
+.applycms .important{
+	text-transform: uppercase;
+	font-weight:bold;
+	color:red;
+}
+.applycms .surbrillance{
+	font-weight:bold;
+	color:#3E93D5;
+}
+
+.applycms .surligner{
+	background:#3E93D5;
+	color:white;
+	border-radius: 			5px;
+	padding:2px 5px;
+	margin:0 2px;
+}
+
+
+
+
+
+

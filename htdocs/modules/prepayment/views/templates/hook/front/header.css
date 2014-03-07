@@ -1,0 +1,22 @@
+#prepaid_block .block_content {
+    padding:10px 0 15px 0;
+}
+
+#prepaid_block p {
+    padding:0 5px 15px 5px;
+    font-size: 13px;
+    line-height: 18px
+}
+
+#prepaid_block .center {
+    text-align: center;
+}
+
+#prepaid_block .bold {
+    font-weight: bold;
+}
+
+#prepaid_button {
+    padding-top: 10px;
+    clear:both;
+}

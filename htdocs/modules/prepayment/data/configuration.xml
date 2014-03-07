@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <confs>
+        <conf>
+            <name>NEGATIVE_ENABLED</name>
+            <value>0</value>
+        </conf>
+        <conf>
+            <name>NEGATIVE_MAX</name>
+            <value>42</value>
+        </conf>
+        <conf>
+            <name>BLOCK_DISPLAY</name>
+            <value>3</value>
+        </conf>
+    </confs>
+    <hooks>
+        <hook>actionPaymentConfirmation</hook>
+        <hook>actionOrderStatusUpdate</hook>
+        <hook>displayCustomerAccount</hook>
+        <hook>displayProductButtons</hook>
+        <hook>displayAdminCustomers</hook>
+        <hook>displayAdminProductsExtra</hook>
+        <hook optionnal="1">displayMyAccountBlock</hook>
+        <hook optionnal="1">displayHeader</hook>
+        <hook optionnal="1" first="1">displayLeftColumn</hook>
+        <hook optionnal="1" first="1">displayRightColumn</hook>
+        <hook>payment</hook>
+        <hook>paymentReturn</hook>
+    </hooks>
+    <tabs>
+        <tab main="1" first="1">
+            <class>AdminPrepayment</class>
+            <langs>
+                <lang iso="en">Prepayment</lang>
+                <lang iso="fr">Prépaiement</lang>
+            </langs>
+        </tab>
+        <tab>
+            <class>AdminPPHistory</class>
+            <langs>
+                <lang iso="en">History</lang>
+                <lang iso="fr">Historique</lang>
+            </langs>
+        </tab>
+        <tab>
+            <class>AdminPPState</class>
+            <langs>
+                <lang iso="en">Balances</lang>
+                <lang iso="fr">Soldes</lang>
+            </langs>
+        </tab>
+        <tab>
+            <class>AdminPPProduct</class>
+            <langs>
+                <lang iso="en">Amounts</lang>
+                <lang iso="fr">Montants</lang>
+            </langs>
+        </tab>
+        <tab>
+            <class>AdminPPSettings</class>
+            <langs>
+                <lang iso="en">General settings</lang>
+                <lang iso="fr">Paramètres généraux</lang>
+            </langs>
+        </tab>
+    </tabs>
+    <sql>
+    </sql>
+    <metas>
+    </metas>
+    <quicks>
+    </quicks>
+</configuration>
