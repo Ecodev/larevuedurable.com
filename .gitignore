@@ -21,6 +21,7 @@ htdocs/config/*
 !htdocs/classes/
 htdocs/classes/*
 !htdocs/classes/Subscription.php
+
 !htdocs/modules/
 htdocs/modules/ecodevscripts/de_cresus/*
 htdocs/modules/ecocevscripts/pour_cresus/*
