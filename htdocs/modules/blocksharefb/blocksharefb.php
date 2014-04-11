@@ -19,7 +19,8 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2013 PrestaShop SA
+*  @copyright  2007-2013 PrestaShop SA
+
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
@@ -46,13 +47,14 @@ class blocksharefb extends Module
 	
 	public function install()
 	{
-		return (parent::install() AND $this->registerHook('extraLeft'));
+        Tools::createHookIfNoExist('displayEndPageBlog');
+		return (parent::install() AND $this->registerHook('extraLeft') AND $this->registerHook('displayEndPageBlog'));
 	}
 	
 	public function uninstall()
 	{
 		//Delete configuration			
-		return (parent::uninstall() AND $this->unregisterHook(Hook::getIdByName('extraLeft')));
+		return (parent::uninstall() AND $this->unregisterHook(Hook::getIdByName('extraLeft')) AND $this->unregisterHook(Hook::getIdByName('displayEndPageBlog')));
 	}
 	
 	public function hookExtraLeft($params)
@@ -65,7 +67,7 @@ class blocksharefb extends Module
 		{		
 			$product_infos = new Product((int)$id_product, true, $cookie->id_lang);
 			$smarty->assign(array(
-				'product_link' => urlencode($link->getProductLink($product_infos)),
+				'product_link' => $link->getProductLink($product_infos),
 				'product_title' => urlencode($product_infos->name),
 			));
 			
@@ -74,5 +76,18 @@ class blocksharefb extends Module
 			return '';
 		}
 	}
+	public function hookDisplayEndPageBlog($params)
+	{
+		global $smarty, $cookie, $link;
+
+        if ($id = Tools::getValue('id')){
+
+            $news = new NewsClass($id);
+            $smarty->assign('id', $id);
+            $smarty->assign('title', $news->title[Context::getContext()->language->id]);
+            return $this->display(__FILE__, 'prestablog.tpl');
+        }
+
+        return '';
+    }
 }
-?>

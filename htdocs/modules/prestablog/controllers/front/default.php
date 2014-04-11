@@ -375,9 +375,8 @@ class PrestaBlogDefaultModuleFrontController extends ModuleFrontController
 
         $this->context->smarty->assign(array(
             //'tpl_menu_cat'			=> $this->context->smarty->fetch(_PS_MODULE_DIR_.'prestablog/themes/'.Configuration::get('prestablog_theme').'/tpl/module_page-menucat.tpl')
-            'HOOK_LEFT_COLUMN_BLOG' => HOOK::exec('displayLeftColumnBlog')
+            'HOOK_LEFT_COLUMN_BLOG' => HOOK::exec('displayLeftColumnBlog'),
+            'HOOK_END_PAGE_BLOG' => HOOK::exec('displayEndPageBlog')
         ));
     }
 }
-
-?>

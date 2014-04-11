@@ -59,4 +59,5 @@
 {else}
 	<p class="warning">{l s='Empty' mod='prestablog'}</p>
 {/if}
+
 <!-- /Module Presta Blog -->

@@ -2472,3 +2472,34 @@ tr.subitem > td:first-child + td {
 {
 	margin-bottom: 20px;	
 }
+
+
+/* link list */
+#usefull_link_block {
+    list-style-type:none;
+    margin-top:20px;
+}
+
+#usefull_link_block li {
+    padding:2px 0;
+}
+
+#usefull_link_block li.print {
+    padding-left:20px;
+    background:url(../img/icon/print.gif) no-repeat 0 0;
+}
+
+#usefull_link_block li.sendtofriend {
+    padding-left:20px;
+    background:url(../img/icon/send_friend.gif) no-repeat 0 0;
+}
+
+#usefull_link_block li#left_share_fb {
+    padding-left:20px;
+    background:url(../img/icon/picto_fb.png) no-repeat 0 0;
+}
+
+#usefull_link_block li#left_share_twitter {
+    padding-left:20px;
+    background:url(../img/icon/picto_twitter.png) no-repeat 0 0;
+}

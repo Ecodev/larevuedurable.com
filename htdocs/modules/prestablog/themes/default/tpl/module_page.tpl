@@ -28,3 +28,7 @@
 {if isset($tpl_all) && $tpl_all}{$tpl_all}{/if}
 
 <!-- /Module Presta Blog END PAGE -->
+
+<ul id='usefull_link_block'>
+    {$HOOK_END_PAGE_BLOG}
+</ul>
