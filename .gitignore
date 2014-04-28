@@ -28,7 +28,6 @@ htdocs/modules/ecodevscripts/de_cresus/*
 htdocs/modules/ecocevscripts/pour_cresus/*
 htdocs/modules/ecodevscripts/tests/*
 htdocs/modules/prestablog/themes/*/up-img/*
-htdocs/themes/larevuedurable/modules/*/translations/*
 !htdocs/override/
 
 !htdocs/manuel/
@@ -39,3 +38,4 @@ htdocs/themes/*
 !htdocs/themes/larevuedurable/
 htdocs/themes/larevuedurable/cache/*.js
 htdocs/themes/larevuedurable/cache/*.css
+htdocs/themes/larevuedurable/modules/*/translations/*
