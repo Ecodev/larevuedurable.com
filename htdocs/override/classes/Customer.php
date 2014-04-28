@@ -121,10 +121,7 @@ class Customer extends CustomerCore
                 return $subs;
             }
         } elseif ($type = 'himself') {
-
             $subscriptions = Customer::getSubscriptionsByUserID($this->id);
-
-
             $subscriptions = Subscription::manageConflicts($subscriptions);
 
             return $subscriptions;
@@ -245,11 +242,6 @@ class Customer extends CustomerCore
      */
     private function getInstituteBuyer()
     {
-        // les abonnements "instituts" sont identifiés par le fabriquant "Institut"
-        $manufacturer = new Manufacturer(_MANUFACTURE_INSTITUTE_);
-
-        // récupère les produits qui sont des abonnements instituts
-        $products = $manufacturer->getProductsLite(Context::getContext()->language->id);
 
         // récupère toutes les personnes ayant acheté un abonnement institut
         $sql = '
@@ -311,7 +303,8 @@ class Customer extends CustomerCore
     private function verifyAccounts($acheteur)
     {
         foreach ($acheteur['conditions'] as $cond) {
-            if (trim($cond, ' ') == $this->email) {
+            $cond = trim($cond, ' ');
+            if (!empty($cond) && $cond== $this->email) {
                 return true;
             }
         }
