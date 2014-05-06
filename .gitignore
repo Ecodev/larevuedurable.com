@@ -11,7 +11,6 @@
 
 !htdocs/
 htdocs/*
-htdocs/.htaccess
 
 !htdocs/config/
 htdocs/config/*
@@ -38,4 +37,3 @@ htdocs/themes/*
 !htdocs/themes/larevuedurable/
 htdocs/themes/larevuedurable/cache/*.js
 htdocs/themes/larevuedurable/cache/*.css
-htdocs/themes/larevuedurable/modules/*/translations/*
