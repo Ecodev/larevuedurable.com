@@ -2,14 +2,14 @@
 
 	<div class='homeTitle'>
 		<a href="{$nextEditoProduct->getLink()|escape:'htmlall':'UTF-8'}">
-			{l s='Dernier editorial' mod='ecodevnextconf'}
+			{l s='Dernier éditorial' mod='ecodevnextconf'}
 		</a>
 	</div>
 	<a id='editoPict' href="{$nextEditoProduct->getLink()|escape:'htmlall':'UTF-8'}">
 		<img id='nextEditoImg' src="{$link->getImageLink($nextEditoProduct->link_rewrite, $nextEditoImage, 'home_portrait')}" />
 	</a>
 	<span id='prochaineConferenceDetailTitre' class='mceContentBody'>{$nextEditoProduct->description_short}</span>
-	<a class='finalLink' href="{$nextEditoProduct->getLink()|escape:'htmlall':'UTF-8'}">{l s='Voir l\'éditiorial' mod='ecodevnextconf'}</a>
+	<a class='finalLink' href="{$nextEditoProduct->getLink()|escape:'htmlall':'UTF-8'}">{l s='Voir l\'éditorial' mod='ecodevnextconf'}</a>
 </div>
 
 
@@ -27,6 +27,6 @@
     </a>
 	<span id='prochaineConferenceDetailTitre' class='mceContentBody'>{$nextIndicatorProduct->description_short}</span>
 
-	<a class='finalLink' href="{$nextIndicatorProduct->getLink()|escape:'htmlall':'UTF-8'}">{l s='Voir l\'éditorial' mod='ecodevnextconf'}</a>
+	<a class='finalLink' href="{$nextIndicatorProduct->getLink()|escape:'htmlall':'UTF-8'}">{l s='Voir les indicateurs' mod='ecodevnextconf'}</a>
 
 </div>

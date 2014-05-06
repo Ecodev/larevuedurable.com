@@ -652,7 +652,8 @@ ul#uploadable_files,ul#text_fields li{
 	
 	#more_info_sheets li
 	{
-		list-style-position: inside;
+		/*list-style-position: inside;*/
+        list-style:none;
 	}
 
 

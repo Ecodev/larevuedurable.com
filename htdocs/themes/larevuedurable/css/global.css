@@ -2503,3 +2503,8 @@ tr.subitem > td:first-child + td {
     padding-left:20px;
     background:url(../img/icon/picto_twitter.png) no-repeat 0 0;
 }
+
+
+.homeblock .mceContentBody p{
+    line-height:1.6em;
+}
