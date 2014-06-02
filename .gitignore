@@ -11,6 +11,7 @@
 
 !htdocs/
 htdocs/*
+!htdocs/robots.txt
 
 !htdocs/config/
 htdocs/config/*
