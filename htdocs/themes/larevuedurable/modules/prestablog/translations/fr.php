@@ -6,7 +6,7 @@ $_MODULE['<{prestablog}larevuedurable>prestablog_f053545db1f4926f9f65343d8f1a4cf
 $_MODULE['<{prestablog}larevuedurable>prestablog_f9b9dddfee3bcf6f4813459a502f3c10'] = 'Un module blog sur votre boutique en ligne.';
 $_MODULE['<{prestablog}larevuedurable>prestablog_d6f47e627cb8b9186caa435aba1c32ae'] = 'Etes-vous sûr de vouloir supprimer ce module?';
 $_MODULE['<{prestablog}larevuedurable>prestablog_86f5978d9b80124f509bdb71786e929e'] = 'Janvier';
-$_MODULE['<{prestablog}larevuedurable>prestablog_659e59f062c75f81259d22786d6c44aa'] = 'Février';
+$_MODULE['<{prestablog}larevuedurable>prestablog_0fdabc3f3cc2d5af99bed69aa5320258'] = 'Février';
 $_MODULE['<{prestablog}larevuedurable>prestablog_fa3e5edac607a88d8fd7ecb9d6d67424'] = 'Mars';
 $_MODULE['<{prestablog}larevuedurable>prestablog_3fcf026bbfffb63fb24b8de9d0446949'] = 'Avril';
 $_MODULE['<{prestablog}larevuedurable>prestablog_195fbb57ffe7449796d23466085ce6d8'] = 'Mai';
