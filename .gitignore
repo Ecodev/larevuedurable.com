@@ -1,5 +1,5 @@
 # This is a template .gitignore file for git-managed Prestashop projects. Inspired by micahwalter wordpress gitignore
- 
+
 #Ignore ds_store
 *.DS_Store
 
@@ -12,6 +12,7 @@
 !htdocs/
 htdocs/*
 !htdocs/robots.txt
+!htdocs/.htaccess.sample
 
 !htdocs/config/
 htdocs/config/*
