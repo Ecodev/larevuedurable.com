@@ -103,22 +103,21 @@ class Customer extends CustomerCore
     /**
      *    Retourne les abonnements dont l'utilisateur courant bénéficie ou les siens
      *
-     * @param $user            : tierce pour avoir les abonnements qu'on lui offre ou 'himself' pour avoir les abonnements qu'il a lui même acheté.
-     * @param $manageConflicts : dans le cas du paramètre $user est égal himself, on gère le conflit de ses abonnement. On ne le fait pas pour les tierce, car ce n'est pas l'utilisateur courant qui gère les abonnements qui lui sont offerts et il n'a pas d'opérations à y faire.
+     * @param $type tierce pour avoir les abonnements qu'on lui offre ou 'himself' pour avoir les abonnements qu'il a lui même acheté.
      */
     public function getSubscriptionsByUserType($type)
     {
         if ($type == 'tierce') {
             $institute_user = $this->getInstituteBuyer();
             if ($institute_user) {
-                $subs = Customer::getSubscriptionsByUserID($institute_user['id_customer']);
-                foreach ($subs as $sub) {
+                $subscriptions = Customer::getSubscriptionsByUserID($institute_user['id_customer']);
+                foreach ($subscriptions as $sub) {
                     if ($sub->is_active) {
                         $this->is_tierce = true;
                     }
-                } // seulement si un abonnement tiers est valide
+                }
 
-                return $subs;
+                return $subscriptions;
             }
         } elseif ($type = 'himself') {
             $subscriptions = Customer::getSubscriptionsByUserID($this->id);
@@ -127,7 +126,6 @@ class Customer extends CustomerCore
             return $subscriptions;
         }
     }
-
 
     public function getSubscriptions()
     {
@@ -271,22 +269,16 @@ class Customer extends CustomerCore
 
 
     /**
-     *    Vérifie si le visiteur courant bénéficie d'avantages achetés par qqn d'autre
+     * Vérifie si le visiteur courant bénéficie d'avantages achetés par qqn d'autre
      *
      * @param Une liste des personnes ayant acheté des abonnements Insituts
+     * @return bool
      */
     private function verifyAccesses($institute_users)
     {
         foreach ($institute_users as $acheteur) {
-            if (isset($acheteur['conditions'])
-                && sizeof($acheteur['conditions']) > 0
-                && strpos($acheteur['conditions'][0], '@')
-            ) {
-                if ($this->verifyAccounts($acheteur)) {
-                    return $acheteur;
-                }
-            } else {
-                if ($this->verifyIP($acheteur)) {
+            foreach($acheteur['conditions'] as $condition){
+                if ($this->verifyAccount($condition) || $this->verifyIP($condition) || $this->verifyDomain($condition)) {
                     return $acheteur;
                 }
             }
@@ -300,13 +292,11 @@ class Customer extends CustomerCore
      *    Vérifie les droits des abonnements "pro", qui ont droit à 3 comptes
      *    Pour faire cette vérification on autorise les adresses e-mail ajoutées dans les champs personnalisés
      */
-    private function verifyAccounts($acheteur)
+    private function verifyAccount($cond)
     {
-        foreach ($acheteur['conditions'] as $cond) {
-            $cond = trim($cond, ' ');
-            if (!empty($cond) && $cond== $this->email) {
-                return true;
-            }
+        $cond = trim($cond, ' ');
+        if (!empty($cond) && $cond == $this->email) {
+            return true;
         }
     }
 
@@ -314,26 +304,10 @@ class Customer extends CustomerCore
     /**
      *    Vérifie que les ip qui sont insérées dans les notes du client dans le BO de prestashop sont strictement égales à l'ip du visiteur courant
      */
-    private function verifyIP($acheteur)
+    private function verifyIP($cond)
     {
-        $ip = $this->getIP();
-        $userEmail = explode('@', $this->email);
-        $userEmailDomain = array_pop($userEmail);
+        $cond = trim($cond, ' ');
 
-        $instituteEmailDomain = explode('@', $acheteur['email']);
-        $instituteEmailDomain = array_pop($instituteEmailDomain);
-
-        foreach ($acheteur['conditions'] as $cond) {
-            $ip = explode(', ', $cond);
-            if ($ip = $ip[0] && $userEmailDomain == $instituteEmailDomain) {
-                return true;
-            }
-        }
-    }
-
-
-    function getIp()
-    {
         $ip = $_SERVER['REMOTE_ADDR'];
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -341,9 +315,26 @@ class Customer extends CustomerCore
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
 
-        return $ip;
+        if ($cond == $ip) {
+            return true;
+        }
+
+        return false;
     }
 
+    private function verifyDomain($cond)
+    {
+        $cond = trim($cond, ' ');
+
+        $userEmail = explode('@', $this->email);
+        $userEmailDomain = array_pop($userEmail);
+
+        if ($cond == $userEmailDomain) {
+            return true;
+        }
+
+        return false;
+    }
 
     public function getConditions()
     {
