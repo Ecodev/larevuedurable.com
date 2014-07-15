@@ -23,7 +23,6 @@
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
-
 /* Debug only */
 define('_PS_MODE_DEV_', true);
 if (_PS_MODE_DEV_)
@@ -240,16 +239,15 @@ define('_PS_IMPORT_FROM_CRESUS_API_KEY_', 'OX7P1KT26VMCR2N6FPRA3NB1JZKXRSAF');
 
 if(_PS_MODE_DEV_)
 {
-	// api compte Sam.
-	define('_MAILCHIMP_API_KEY_','d9701ec03f04041316a4bb7de4f13187-us7');
-	define('_MC_NEWSLETTER_LIST_', '936d8db096' ); 
-	define('_MC_SUBSCRIBERS_LIST_', 'c0bede435e'); // subscribers, utilisé pour les relances
-	define('_MC_RELANCE_CAMPAIGN_', 'f48e236338');
+	define('_MAILCHIMP_API_KEY_',  DEV_MAILCHIMP_API_KEY_);
+	define('_MC_NEWSLETTER_LIST_', DEV_MC_NEWSLETTER_LIST_ );
+	define('_MC_SUBSCRIBERS_LIST_',DEV_MC_SUBSCRIBERS_LIST_); // subscribers, utilisé pour les relances
+	define('_MC_RELANCE_CAMPAIGN_',DEV_MC_RELANCE_CAMPAIGN_);
 }
 else 
 {
-	define('_MAILCHIMP_API_KEY_', LRD_MAILCHIMP_API_KEY_);
-	define('_MC_NEWSLETTER_LIST_', LRD_MC_NEWSLETTER_LIST_ );
+	define('_MAILCHIMP_API_KEY_',   LRD_MAILCHIMP_API_KEY_);
+	define('_MC_NEWSLETTER_LIST_',  LRD_MC_NEWSLETTER_LIST_ );
 	define('_MC_SUBSCRIBERS_LIST_', LRD_MC_SUBSCRIBERS_LIST_); // subscribers, utilisé pour les relances
 	define('_MC_RELANCE_CAMPAIGN_', LRD_MC_RELANCE_CAMPAIGN_);
 }

@@ -77,10 +77,6 @@ class Subscription
         $this->__toString();
     }
 
-
-    /**
-     *
-     */
     public function defineStatus()
     {
         $actualMagazine = Product::getLastMagazineReleased(null);
@@ -97,7 +93,6 @@ class Subscription
             $this->is_future = false;
         }
     }
-
 
     public function setStartEdition($date)
     {
@@ -132,30 +127,6 @@ class Subscription
     public function __toString()
     {
         return $this->product_attributes_name;
-//        // cache
-//        if ($this->product_attributes_name) {
-//            return $this->product_attributes_name;
-//        }
-//
-//        // Récupère le nom des attributs mis en semble (durée, type) pour avoir une sorte de __toString
-//        $combination = new Combination($this->product_attribute_id);
-//        $combination_names = $combination->getAttributesAndGroupName(Context::getContext()->language->id);
-//
-//        // récupère un string dans $this->product_attributes_name  pour afficher par écrit le nom des attributs (exclu le soutient qui n'influence pas l'abonnement)
-//        $this->product_attributes_name = '';
-//        foreach ($combination_names as $cn) {
-//            if ($cn['id_attribute'] == _UN_AN_
-//                || $cn['id_attribute'] == _DEUX_ANS_
-//                || $cn['id_attribute'] == _PAPIER_
-//                || $cn['id_attribute'] == _WEB_
-//                || $cn['id_attribute'] == _PAPIER_ET_WEB_
-//            ) {
-//                $this->product_attributes_name .= $cn['public_name'] . ' : ' . $cn['name'] . ', ';
-//            }
-//        }
-//        $this->product_attributes_name = trim($this->product_attributes_name, ', ');
-//
-//        return $this->product_attributes_name;
     }
 
     public function getStartDate()
@@ -168,7 +139,5 @@ class Subscription
     {
         return Product::getParutionDateByRef($this->first_edition+$this->number_of_editions);
     }
-
-
 
 }

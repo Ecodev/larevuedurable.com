@@ -138,8 +138,6 @@ class Product extends ProductCore
         }
 
         return $result['date_parution'];
-
     }
-
 
 }

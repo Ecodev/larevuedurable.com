@@ -278,7 +278,7 @@ class Customer extends CustomerCore
     {
         foreach ($institute_users as $acheteur) {
             foreach($acheteur['conditions'] as $condition){
-                if ($this->verifyAccount($condition) || $this->verifyIP($condition) || $this->verifyDomain($condition)) {
+                if ($condition && $this->verifyAccount($condition) || $this->verifyIP($condition) || $this->verifyDomain($condition)) {
                     return $acheteur;
                 }
             }
@@ -459,7 +459,7 @@ class Customer extends CustomerCore
 				od.product_id=' . _ABONNEMENT_PARTICULIER_ . ' OR
 				od.product_id=' . _ABONNEMENT_INSTITUT_ . ' OR
 				od.product_id=' . _ABONNEMENT_SOLIDARITE_ . ' OR
-				OR od.product_id = ' . _ABONNEMENT_MOOC_;
+				od.product_id = ' . _ABONNEMENT_MOOC_;
         ;
 
         if ($includeBigInstitutes) {
