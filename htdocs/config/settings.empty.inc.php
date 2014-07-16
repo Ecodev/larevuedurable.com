@@ -17,8 +17,15 @@ define('_PS_VERSION_', '1.5.4.1');
 define('_RIJNDAEL_KEY_', 'PUar8YbtOKJRdC0M2YRYRfDmS9rcNK8y');
 define('_RIJNDAEL_IV_', 'HGOjmu4oJWZJCwrUjz+M/A==');
 
-
 define('LRD_MAILCHIMP_API_KEY_', '');
 define('LRD_MC_NEWSLETTER_LIST_', '' );
 define('LRD_MC_SUBSCRIBERS_LIST_', '');
 define('LRD_MC_RELANCE_CAMPAIGN_', '');
+
+define('DEV_MAILCHIMP_API_KEY_', '');
+define('DEV_MC_NEWSLETTER_LIST_', '');
+define('DEV_MC_SUBSCRIBERS_LIST_', '');
+define('DEV_MC_RELANCE_CAMPAIGN_', '');
+
+define('LRD_CUSTOMER_CHANGE_NOTIFICATION', '');
+define('DEV_CUSTOMER_CHANGE_NOTIFICATION', '');

@@ -22,21 +22,16 @@ class Tools extends ToolsCore
 		return true;
 				
 	}
-	
 
-	
-	
 	public static function date_to_timestamp ($date) {
 	    return preg_match('/^\s*(\d\d\d\d)-(\d\d)-(\d\d)\s*(\d\d):(\d\d):(\d\d)/', $date, $m)
 	           ?  mktime($m[4], $m[5], $m[6], $m[2], $m[3], $m[1])
 	           : 0;
 	}
-	
-	
+
 	public static function date_diff ($date_recent, $date_old) {
 	   return Tools::date_to_timestamp($date_recent) - Tools::date_to_timestamp($date_old);
 	}
-	
 	
 	public static function arrayToString($array, $deep=0)
 	{
@@ -109,6 +104,25 @@ class Tools extends ToolsCore
         return $tab;
     }
 
-}
+    public static function notifyCustomerChanged($id_customer)
+    {
+        if ($id_customer) {
+            $customer = new Customer($id_customer);
+            $sql = "select GROUP_CONCAT(DISTINCT id_order) AS ids, GROUP_CONCAT(DISTINCT reference) AS refs from ps_orders where id_customer = ".$id_customer." group by id_customer;";
+            $orders = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
 
-?>
+            $subject = "Changement d'adresse : " . $customer->id . ', '. $customer->firstname . ' ' . $customer->lastname . ', ' . $customer->email;
+
+            $vars = array(
+                '{id}' => $customer->id,
+                '{firstname}' => $customer->firstname,
+                '{lastname}' => $customer->lastname,
+                '{email}' => $customer->email,
+                '{order_ids}' => $orders[0]['ids'],
+                '{order_refs}' => $orders[0]['refs']
+            );
+
+            Mail::send(Context::getContext()->language->id, 'customer_notification', $subject, $vars, explode(',', _CUSTOMER_CHANGE_NOTIFICATION_), null, null, null, null, null);
+        }
+    }
+}

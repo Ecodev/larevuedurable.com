@@ -22,6 +22,15 @@ class Customer extends CustomerCore
         $this->getConditions();
     }
 
+    public function update($nullValues = false) {
+        $saved = parent::update($nullValues);
+
+        if ($saved) {
+            Tools::notifyCustomerChanged($this->id);
+        }
+
+        return $saved;
+    }
 
     /**
      *    Fonction très importante : Récupère tous les changements de status des commandes comportant un abonnement.
@@ -456,9 +465,9 @@ class Customer extends CustomerCore
 			LEFT JOIN ps_cart ca ON ca.id_cart = o.id_cart
 		WHERE o.valid=1 
 			AND ( 
-				od.product_id=' . _ABONNEMENT_PARTICULIER_ . ' OR
-				od.product_id=' . _ABONNEMENT_INSTITUT_ . ' OR
-				od.product_id=' . _ABONNEMENT_SOLIDARITE_ . ' OR
+				od.product_id =' . _ABONNEMENT_PARTICULIER_ . ' OR
+				od.product_id =' . _ABONNEMENT_INSTITUT_ . ' OR
+				od.product_id =' . _ABONNEMENT_SOLIDARITE_ . ' OR
 				od.product_id = ' . _ABONNEMENT_MOOC_;
         ;
 
