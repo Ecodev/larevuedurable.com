@@ -24,7 +24,6 @@ class AdminOrdersController extends AdminOrdersControllerCore
             if (!$newDate) {
                 $this->errors[] = Tools::displayError('La date est incorrecte');
             } else {
-                echo $newDate->format(_DATE_FORMAT_);
                 $order->date_add = $newDate->format(_DATE_FORMAT_);
                 $order->save();
             }
