@@ -13,7 +13,6 @@ class Product extends ProductCore
         parent::__construct($id_product, $full, $id_lang, $id_shop, $context);
     }
 
-
     /*
     * Génère la requête SQL comportant les id de tous les produits identifiés comme étant institutionnels
     */
@@ -32,7 +31,6 @@ class Product extends ProductCore
 
         return $return;
     }
-
 
     // Récupère les accessoires -> dans ce contexte, ce sont les articles liés
     // il trie par référence, c'est la raison de la surcharge.
@@ -96,15 +94,15 @@ class Product extends ProductCore
         } else {
             $reference_date = new DateTime($order->date_add);
         }
+
         $sql = 'select id_product, reference from ps_product where
             date_parution <= "'.$reference_date->format(_DATE_FORMAT_SHORT_).'" and active = 1  and
             reference REGEXP "^[0-9]{3}$" order by date_parution desc';
 
-
         $product = DB::getInstance(_PS_USE_SQL_SLAVE_)->getRow($sql);
+
         return $product;
     }
-
 
     public static function getLastMagazineUntil($startNUmber)
     {

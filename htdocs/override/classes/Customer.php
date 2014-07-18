@@ -235,7 +235,6 @@ class Customer extends CustomerCore
             }
         }
 
-
         return $final_subs;
     }
 
@@ -499,10 +498,43 @@ class Customer extends CustomerCore
 
         foreach ($users as $key => $user) {
             $customer = new Customer($user['ID']);
-            $adresses = $customer->getAddresses(1);
-            if (sizeof($adresses) > 0) {
-                $users[$key]['NPA'] = $adresses[0]['postcode'];
+            $customer->manageSubscriptions();
+
+            // Ajoute les numéros auquel est abonné l'utilisateur
+            $editionsAbonnees = [];
+            foreach($customer->subscriptions as $sub) {
+                for($i = $sub->first_edition; $i <= $sub->last_edition; $i++) {
+                    $editionsAbonnees[] = $i;
+                }
             }
+            sort($editionsAbonnees);
+            if ($editionsAbonnees) {
+                $users[$key]['NUMEROS'] = ',' . implode(',', $editionsAbonnees) . ',';
+            } else {
+                $users[$key]['NUMEROS'] = '';
+            }
+
+            // Ajoute les addresses et les NPA
+            $addresses = $customer->getAddresses(Context::getContext()->language->id);
+            $npas = [];
+            $countries = [];
+            foreach($addresses as $address) {
+                $address = new Address($address['id_address']);
+                $npas[] = $address->postcode;
+                $countries[] = $address->country;
+            }
+
+            if ($npas) {
+                $users[$key]['NPA'] = ',' . implode(',', $npas) . ',';
+            } else {
+                $users[$key]['NPA'] = '';
+            }
+            if ($countries) {
+                $users[$key]['COUNTRY'] = ',' . implode(',', $countries) . ',';
+            } else {
+                $users[$key]['COUNTRY'] = '';
+            }
+
         }
 
         $sql = 'select email as EMAIL FROM ps_newsletter WHERE active=1';
@@ -526,5 +558,3 @@ class Customer extends CustomerCore
 
 
 }
-
-?>
