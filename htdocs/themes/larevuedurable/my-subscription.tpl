@@ -72,13 +72,7 @@
 				{if $sub->customer->conditions}
 				<tr class='last_item'>
 					<td colspan='2'>
-						<p>{l s='Cet abonnement est accessible par les comptes suivants'} : </p>
-						<ul>
-
-						{foreach from=$sub->customer->conditions item=condition}
-							<li>{$condition}</li>
-						{/foreach}
-						</ul>
+						<p>{l s='Cet abonnement est géré par'} : {{$sub->customer->firstname}} {{$sub->customer->lastname}} ({{$sub->customer->email}}) </p>
 					</td>
 				</tr>
 				{/if}
