@@ -1,13 +1,17 @@
+#!/usr/bin/php
 <?php
-
+if (php_sapi_name() == 'cli')
+{
+    define('_PS_ADMIN_DIR_', getcwd());
+    $_SERVER['DOCUMENT_ROOT'] = dirname(dirname(dirname(__FILE__)));
+    $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+}
 require_once(dirname(__FILE__).'/../../config/config.inc.php');
 require_once(_PS_MODULE_DIR_."/mailchimp/mailchimp.php");
-
 $execution_date = date( _DATE_FORMAT_);
 //$date_now = $date_now->format(_DATE_FORMAT_SHORT_);
 $mailchimp = new Mailchimp();
 $api  = new MCAPI(_MAILCHIMP_API_KEY_);
-
 
 // inscriptions
 $newsletterSub = Customer::getNewsletterSubscribers();

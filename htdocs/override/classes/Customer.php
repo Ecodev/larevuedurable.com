@@ -95,9 +95,8 @@ class Customer extends CustomerCore
             $this->unsubscribe();
         }
 
-
+        $this->subscriptions = array();
         if (count($subs) > 0 ) {
-            $this->subscriptions = array();
             foreach ($subs as $sub) {
                 if (!in_array($sub, $this->subscriptions)) {
                     $this->subscriptions[] = $sub;
@@ -158,7 +157,7 @@ class Customer extends CustomerCore
 			SELECT o.id_order, o.id_customer, oh.date_add, od.product_attribute_id, oh.id_order_history, od.product_name  FROM ps_orders o
 				LEFT JOIN ps_order_detail od ON o.id_order = od.id_order
 				LEFT JOIN ps_order_history oh ON o.id_order = oh.id_order
-			WHERE o.valid = 1 
+			WHERE o.valid = 1
 				and o.id_customer = ' . (int) $user_id . ' AND (1=0 ';
 
         foreach ($validStates as $state) {
@@ -252,12 +251,12 @@ class Customer extends CustomerCore
         // récupère toutes les personnes ayant acheté un abonnement institut
         $sql = '
 		select c.id_customer, c.note, o.id_cart, od.product_attribute_id, o.id_order, od.product_id, o.id_address_delivery, cu.id_customization, c.email, GROUP_CONCAT(cud.value) as emails
-			FROM ps_customer c 			
-			LEFT JOIN `ps_orders` o ON (c.`id_customer` = o.`id_customer`) 
-			LEFT JOIN `ps_order_detail` od ON (od.`id_order` = o.`id_order`) 
+			FROM ps_customer c
+			LEFT JOIN `ps_orders` o ON (c.`id_customer` = o.`id_customer`)
+			LEFT JOIN `ps_order_detail` od ON (od.`id_order` = o.`id_order`)
 			LEFT JOIN ps_cart ca ON ca.id_cart = o.id_cart
 			LEFT JOIN ps_customization cu ON cu.id_cart = ca.id_cart
-			LEFT JOIN ps_customized_data cud ON cud.id_customization = cu.id_customization 
+			LEFT JOIN ps_customized_data cud ON cud.id_customization = cu.id_customization
 		WHERE o.valid=1 AND (1=0 ' . Product::getInstituteProductsAsSql() . ') GROUP BY c.id_customer';
 
         $acheteurs_tiers = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
@@ -351,12 +350,12 @@ class Customer extends CustomerCore
         } // cache
 
         $sql = 'select c.id_customer, c.note, cu.id_customization, c.email, GROUP_CONCAT(cud.value) as emails
-				FROM ps_customer c 			
-				LEFT JOIN `ps_orders` o ON (c.`id_customer` = o.`id_customer`) 
-				LEFT JOIN `ps_order_detail` od ON (od.`id_order` = o.`id_order`) 
+				FROM ps_customer c
+				LEFT JOIN `ps_orders` o ON (c.`id_customer` = o.`id_customer`)
+				LEFT JOIN `ps_order_detail` od ON (od.`id_order` = o.`id_order`)
 				LEFT JOIN ps_cart ca ON ca.id_cart = o.id_cart
 				LEFT JOIN ps_customization cu ON cu.id_cart = ca.id_cart
-				LEFT JOIN ps_customized_data cud ON cud.id_customization = cu.id_customization 
+				LEFT JOIN ps_customized_data cud ON cud.id_customization = cu.id_customization
 			WHERE o.valid=1 AND c.id_customer =' . (int) $this->id;
 
         $acheteurs = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
@@ -458,12 +457,12 @@ class Customer extends CustomerCore
         }
 
         $sql .= '
-			FROM ps_customer c 			
-			LEFT JOIN `ps_orders` o ON (c.`id_customer` = o.`id_customer`) 
-			LEFT JOIN `ps_order_detail` od ON (od.`id_order` = o.`id_order`) 
+			FROM ps_customer c
+			LEFT JOIN `ps_orders` o ON (c.`id_customer` = o.`id_customer`)
+			LEFT JOIN `ps_order_detail` od ON (od.`id_order` = o.`id_order`)
 			LEFT JOIN ps_cart ca ON ca.id_cart = o.id_cart
-		WHERE o.valid=1 
-			AND ( 
+		WHERE o.valid=1
+			AND (
 				od.product_id =' . _ABONNEMENT_PARTICULIER_ . ' OR
 				od.product_id =' . _ABONNEMENT_INSTITUT_ . ' OR
 				od.product_id =' . _ABONNEMENT_SOLIDARITE_ . ' OR
@@ -495,11 +494,9 @@ class Customer extends CustomerCore
     {
         $sql = "select c.email as EMAIL , c.firstname as FNAME, c.lastname as LNAME, c.id_customer as ID FROM ps_customer c WHERE c.newsletter=1";
         $users = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
-
         foreach ($users as $key => $user) {
             $customer = new Customer($user['ID']);
             $customer->manageSubscriptions();
-
             // Ajoute les numéros auquel est abonné l'utilisateur
             $editionsAbonnees = [];
             foreach($customer->subscriptions as $sub) {
@@ -549,7 +546,7 @@ class Customer extends CustomerCore
     {
         $sql = '
 		select c.email as EMAIL , c.firstname as FNAME, c.lastname as LNAME
-			FROM ps_customer c 			
+			FROM ps_customer c
 		WHERE c.newsletter=0';
 
         return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
