@@ -67,15 +67,10 @@ Importe les clients (seulement ceux qui ont un abonnement)
  *****************************************************************/
 
 $array_newsletter = Customer::getAllSubscribers();
+$usersToFollowUp = [];
 
-$email_list = array();
 foreach ($array_newsletter as $key => $user) {
     $customer = new Customer($user['ID']);
-    array_push($email_list, $user['EMAIL']);
-
-    // ajout de l'adresse
-    $adresses = $customer->getAddresses(1);
-    $array_newsletter[$key]['NPA'] = $adresses[0]['postcode'];
 
     // ajout de la date d'expiration
     $subscriptions = $customer->manageSubscriptions();
@@ -86,25 +81,30 @@ foreach ($array_newsletter as $key => $user) {
         if ($date_dernier_numero) {
             $date_dernier_numero = new DateTime($date_dernier_numero);
             $date_relance = $date_dernier_numero->modify('-10 day');
-            $array_newsletter[$key]['RELANCE'] = $date_relance->format(_DATE_FORMAT_SHORT_); // format utilisé sur LRD techniquement pour gérer les relances
-        } else {
-            $array_newsletter[$key]['RELANCE'] = '';
+            if ($date_now == $date_relance) {
+                $user['ECHEANCE'] = $current_subscription->last_edition;
+
+                // ajout de l'adresse
+                $adresses = $customer->getAddresses(1);
+                $user['NPA'] = $adresses[0]['postcode'];
+
+                $usersToFollowUp[] = $user;
+            }
         }
-        $end_date = new DateTime($current_subscription->getEndDate());
-        $array_newsletter[$key]['ECHEANCE'] = $current_subscription->last_edition;
-    } else {
-        $current_subscription[$key]['RELANCE'] = '';
-        $array_newsletter[$key]['ECHEANCE'] = '';
     }
 }
 
-$res = $api->listBatchSubscribe(_MC_SUBSCRIBERS_LIST_, $array_newsletter, false, true, false);
+if(count($usersToFollowUp) === 0) {
+    exit('No users to follow up at this date ' . $date_now->format(_DATE_FORMAT_SHORT_));
+}
+
+$res = $api->listBatchSubscribe(_MC_SUBSCRIBERS_LIST_, $usersToFollowUp, false, true, false);
 
 /****************************************************************
 Réplique la campagne
  *****************************************************************/
 
-$newCampaign = $api->campaignReplicate(_MC_RELANCE_CAMPAIGN_);
+$campaign = $api->campaignReplicate(_MC_RELANCE_CAMPAIGN_);
 
 if ($api->errorCode) {
     $message = '';
@@ -117,45 +117,13 @@ if ($api->errorCode) {
     exit();
 }
 
-Configuration::updateValue('SUBSCRIPTION_LAST_CAMPAIGN', $newCampaign);
-
-/****************************************************************
-Met à jour la segmentation
- *****************************************************************/
-
-$segmentation_cond = array(
-    'match' => 'all',
-    'conditions' => array(
-        array(
-            'field' => 'RELANCE',
-            'op' => 'eq',
-            'value' => $date_now->format(_DATE_FORMAT_SHORT_)
-            // '2014-05-28'
-        )
-    )
-);
-
-$campaign = $api->campaignUpdate($newCampaign, 'title', 'Relance du ' . $execution_date);
-//$campaign = $api->campaignUpdate($newCampaign, 'subject', 'Relance du '.$execution_date); // change le sujet pour les phases de test
-$segmentation = $api->campaignSegmentTest(_MC_SUBSCRIBERS_LIST_, $segmentation_cond);
-$campaign = $api->campaignUpdate($newCampaign, 'segment_opts', $segmentation_cond);
-
-if ($api->errorCode) {
-    $message = '';
-    $message .= "Unable to update Campaign!";
-    $message .= "\n\tCode=" . $api->errorCode;
-    $message .= "\n\tMsg=" . $api->errorMessage . "\n";
-
-    echo $message;
-    error_log(date(_DATE_FORMAT_) . chr(10) . $message . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/_module_ecodevsubscriptions_cron_relances_log.txt');
-    exit();
-}
+Configuration::updateValue('SUBSCRIPTION_LAST_CAMPAIGN', $campaign);
 
 /****************************************************************
 Envoi la campagne
  *****************************************************************/
 
-$res = $api->campaignSendNow($newCampaign);
+$res = $api->campaignSendNow($campaign);
 
 if ($api->errorCode) {
     $message = '';
@@ -168,6 +136,6 @@ if ($api->errorCode) {
     exit();
 }
 
-$message = 'Campagne envoyée avec succès à ' . $segmentation . ' personnes.';
+$message = 'Campagne envoyée avec succès à ' . count($usersToFollowUp) . ' personnes.';
 echo $message;
 error_log(date(_DATE_FORMAT_) . ' - ' . $message . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/_module_ecodevsubscriptions_cron_relances_log.txt');
