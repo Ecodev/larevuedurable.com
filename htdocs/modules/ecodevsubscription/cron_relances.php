@@ -87,7 +87,7 @@ foreach ($array_newsletter as $key => $user) {
         if ($date_dernier_numero) {
             $date_dernier_numero = new DateTime($date_dernier_numero);
             $date_relance = $date_dernier_numero->modify('-10 day');
-            if ($date_now == $date_relance) {
+            if ($date_now->format(_DATE_FORMAT_SHORT_) == $date_relance->format(_DATE_FORMAT_SHORT_)) {
                 $user['ECHEANCE'] = $current_subscription->last_edition;
 
                 // ajout de l'adresse
@@ -100,11 +100,14 @@ foreach ($array_newsletter as $key => $user) {
     }
 }
 
+
 if(count($usersToFollowUp) === 0) {
     exit('No users to follow up at this date ' . $date_now->format(_DATE_FORMAT_SHORT_));
 }
 
 $res = $api->listBatchSubscribe(_MC_SUBSCRIBERS_LIST_, $usersToFollowUp, false, true, false);
+
+
 
 /****************************************************************
 Réplique la campagne
@@ -123,6 +126,7 @@ if ($api->errorCode) {
     exit();
 }
 
+$campaign = $api->campaignUpdate($newCampaign, 'title', 'Relance du ' . $execution_date);
 Configuration::updateValue('SUBSCRIPTION_LAST_CAMPAIGN', $campaign);
 
 /****************************************************************
