@@ -92,7 +92,13 @@
 			
 			<div id='headerMid'>
 				<div class='container_9'>
-					<a id='creeCompteHeader' href="{$link->getPageLink('my-account', true)}">{l s='Créer un nouveau compte' mod='blockuserinfo'}</a>
+
+                    {if $logged}
+                        <a id='creeCompteHeader' href="{$link->getPageLink('my-account', true)}" title="{l s='View my customer account' mod='blockuserinfo'}" class="account" rel="nofollow"><span>{$cookie->customer_firstname} {$cookie->customer_lastname}</span></a>
+                    {else}
+                        <a id='creeCompteHeader' href="{$link->getPageLink('my-account', true)}">{l s='Créer un nouveau compte' mod='blockuserinfo'}</a>
+                    {/if}
+
 					<ul>
 						{$HOOK_TOP}
 					</ul>
