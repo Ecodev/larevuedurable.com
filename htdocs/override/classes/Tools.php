@@ -111,18 +111,18 @@ class Tools extends ToolsCore
             $sql = "select GROUP_CONCAT(DISTINCT id_order) AS ids, GROUP_CONCAT(DISTINCT reference) AS refs from ps_orders where id_customer = ".$id_customer." group by id_customer;";
             $orders = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
 
-            $subject = "Changement d'adresse : " . $customer->id . ', '. $customer->firstname . ' ' . $customer->lastname . ', ' . $customer->email;
-
-            $vars = array(
-                '{id}' => $customer->id,
-                '{firstname}' => $customer->firstname,
-                '{lastname}' => $customer->lastname,
-                '{email}' => $customer->email,
-                '{order_ids}' => $orders[0]['ids'],
-                '{order_refs}' => $orders[0]['refs']
-            );
-
-            Mail::send(Context::getContext()->language->id, 'customer_notification', $subject, $vars, explode(',', _CUSTOMER_CHANGE_NOTIFICATION_), null, null, null, null, null);
+			if (count($orders) > 0) {
+	            $subject = "Changement d'adresse : " . $customer->id . ', '. $customer->firstname . ' ' . $customer->lastname . ', ' . $customer->email;
+	            $vars = array(
+	                '{id}' => $customer->id,
+	                '{firstname}' => $customer->firstname,
+	                '{lastname}' => $customer->lastname,
+	                '{email}' => $customer->email,
+	                '{order_ids}' => $orders[0]['ids'],
+	            );
+	
+	            Mail::send(Context::getContext()->language->id, 'customer_notification', $subject, $vars, explode(',', _CUSTOMER_CHANGE_NOTIFICATION_), null, null, null, null, null);
+	       	}
         }
     }
 }
