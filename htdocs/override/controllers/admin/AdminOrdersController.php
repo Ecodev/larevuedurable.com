@@ -4,7 +4,6 @@ class AdminOrdersController extends AdminOrdersControllerCore
 
     public function postProcess()
     {
-
         // If id_order is sent, we instanciate a new Order object
         if (Tools::isSubmit('id_order') && Tools::getValue('id_order') > 0)
         {
