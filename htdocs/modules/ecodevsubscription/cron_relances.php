@@ -126,7 +126,7 @@ if ($api->errorCode) {
     exit();
 }
 
-$campaign = $api->campaignUpdate($newCampaign, 'title', 'Relance du ' . $execution_date);
+$campaign = $api->campaignUpdate($campaign, 'title', 'Relance du ' . $execution_date);
 Configuration::updateValue('SUBSCRIPTION_LAST_CAMPAIGN', $campaign);
 
 /****************************************************************
