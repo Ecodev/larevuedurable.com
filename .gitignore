@@ -18,6 +18,7 @@ htdocs/*
 htdocs/config/*
 !htdocs/config/defines.inc.php
 !htdocs/config/config.inc.php
+!htdocs/config/local.inc.empty.php
 !htdocs/config/smartyadmin.config.inc.php
 !htdocs/config/settings.empty.inc.php
 
