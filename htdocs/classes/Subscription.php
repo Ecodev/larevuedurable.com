@@ -44,19 +44,18 @@ class Subscription
         foreach ($attributs as $attribut) {
             if ($attribut['id'] == _UN_AN_) {
                 $this->number_of_editions = 4;
-            } else if ($attribut['id'] == _DEUX_ANS_) {
+            } elseif ($attribut['id'] == _DEUX_ANS_) {
                 $this->number_of_editions = 8;
-            } else if ($attribut['id'] == _SIX_MOIS_) { // ! mois, pas années
+            } elseif ($attribut['id'] == _SIX_MOIS_) { // ! mois, pas années
                 $this->number_of_editions = 2;
-            } else if ($attribut['id'] == _TROIS_ANS_) {
+            } elseif ($attribut['id'] == _TROIS_ANS_) {
                 $this->number_of_editions = 12;
-            } else if ($attribut['id'] == _QUATRE_ANS_) {
+            } elseif ($attribut['id'] == _QUATRE_ANS_) {
                 $this->number_of_editions = 16;
-            } else if ($attribut['id'] == _CINQ_ANS_) {
+            } elseif ($attribut['id'] == _CINQ_ANS_) {
                 $this->number_of_editions = 20;
             }
         }
-
 
         // récupère la dernière revue publiée et récupère le numéro de référence pour en faire le numéro de départ
         // !!! au moment de l'achat
@@ -82,13 +81,13 @@ class Subscription
         $actualMagazine = Product::getLastMagazineReleased(null);
         $actualMagazineNumber = (int) $actualMagazine['reference'];
         // infos sur l'état du produit , passé, actif ou futur
-        if ($actualMagazineNumber >= $this->first_edition && $actualMagazineNumber < $this->last_edition) {
+        if ($actualMagazineNumber >= $this->first_edition && $actualMagazineNumber <= $this->last_edition) {
             $this->is_active = true;
             $this->is_future = false;
         } else if ($actualMagazineNumber < $this->first_edition) {
             $this->is_active = false;
             $this->is_future = true;
-        } else if ($actualMagazineNumber == null || $actualMagazineNumber >= $this->last_edition) {
+        } else if ($actualMagazineNumber == null || $actualMagazineNumber > $this->last_edition) {
             $this->is_active = false;
             $this->is_future = false;
         }
