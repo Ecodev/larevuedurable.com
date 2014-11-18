@@ -1,0 +1,14 @@
+Hi {toName},
+
+You received a gift certificate "{product_name}"!
+
+This crtificate was bought by {bought_by}.
+
+{message}
+
+Certificate: {product_name}
+Qty: {qty}
+Amount: {amount}
+Code: {code}
+
+To use the voucher, please visit our store: {shop_url}
