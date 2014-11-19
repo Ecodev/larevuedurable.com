@@ -125,4 +125,43 @@ class Tools extends ToolsCore
 	       	}
         }
     }
+
+
+    public static function addIsGiftProperty($products)
+    {
+        $productsIds = array_map(function ($p) {
+            return $p['id_product'];
+        }, $products);
+
+        if (count($productsIds)) {
+
+            $sql = 'SELECT active FROM ps_module WHERE name like "belvg_giftcert"';
+            $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow($sql);
+
+            if ($result && $result['active']) {
+
+                $sql = 'SELECT id_product FROM ' . belvg_giftcert::getTableName() . '_product WHERE `id_product` IN (' . implode(',', $productsIds) . ') AND `id_shop` = 1';
+                $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+
+                $gifts = [];
+                foreach ($result as $gift) {
+                    $gifts[$gift['id_product']] = true;
+                }
+
+                foreach ($products as $key => $product) {
+                    if (isset($gifts[$product['id_product']])) {
+                        $products[$key]['is_gift'] = true;
+                    } else {
+                        $products[$key]['is_gift'] = false;
+                    }
+                }
+            } else {
+                foreach($products as $key => $p) {
+                    $products[$key]['is_gift'] = false;
+                }
+            }
+        }
+
+        return $products;
+    }
 }

@@ -181,6 +181,8 @@ class Category extends CategoryCore
         if (!$result)
             return array();
 
+        // gift module
+        $result = Tools::addIsGiftProperty($result);
 
         /* Modify SQL result */
         return Product::getProductsProperties($id_lang, $result);

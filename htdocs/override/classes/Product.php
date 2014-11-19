@@ -138,6 +138,18 @@ class Product extends ProductCore
         return $result['date_parution'];
     }
 
+    public function isGift()
+    {
+        $sql = 'SELECT id_giftcert_product FROM ' . belvg_giftcert::getTableName() . '_product WHERE `id_product` = ' . $this->id . ' AND `id_shop` = 1';
+        $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow($sql);
+
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 	public static function getPriceStatic($id_product, $usetax = true, $id_product_attribute = null, $decimals = 6, $divisor = null,
 		$only_reduc = false, $usereduc = true, $quantity = 1, $force_associated_tax = false, $id_customer = null, $id_cart = null,
 		$id_address = null, &$specific_price_output = null, $with_ecotax = true, $use_group_reduction = true, Context $context = null,

@@ -33,7 +33,7 @@ class CartController extends CartControllercore
 		}
 
 		// ajout d'un produit non-abonnement
-		// vérifie si le panier comporte una bonnement au moment de l'ajout au panier.
+		// vérifie si le panier comporte un abonnement au moment de l'ajout au panier.
 		foreach( $cartProducts as $product)
 		{
 			if( isset($product['id_product']) &&
@@ -53,4 +53,3 @@ class CartController extends CartControllercore
 		parent::processChangeProductInCart();
 	}
 }
-?>

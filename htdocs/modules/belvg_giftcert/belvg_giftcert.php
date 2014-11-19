@@ -293,6 +293,7 @@ class belvg_giftcert extends Module
 	            	$rule->active = TRUE;
 	            	$rule->minimum_amount_currency = 1;
 	            	$rule->reduction_currency = 1;
+	            	$rule->reduction_tax = 1;
 	            	$rule->save();
 
 	            	$gift->id_cart_rule = $rule->id;
@@ -300,7 +301,7 @@ class belvg_giftcert extends Module
 	            	
 	            	$id_lang = $this->context->language->id;
 	            	$_productName = Product::getProductName($gift->id_product, $gift->id_product_attribute, $id_lang);
-	            	$emailSubject = $this->l('Gift Certificate!') . ' "' . $_productName . '"';
+	            	$emailSubject = $_productName;
 
 	            	$_order = new Order($params['id_order']);
 	            	$_customer = new Customer($_order->id_customer, $id_lang);
@@ -319,12 +320,13 @@ class belvg_giftcert extends Module
 
 	            	$fromEmail = Configuration::get('PS_SHOP_EMAIL');
 
-					$templateVars['{toName}'] = $toName;
+                    $templateVars['{toName}'] = $toName;
                     $templateVars['{product_name}'] = $_productName;
                     $templateVars['{qty}'] = $qty;
                     $templateVars['{message}'] = $message;
                     $templateVars['{code}'] = $rule->code;
-                    $templateVars['{amount}'] = $gift->custom_price;
+                    $templateVars['{amount}'] = Tools::ps_round($gift->custom_price, 2);
+                    $templateVars['{currency}'] = Context::getContext()->currency->iso_code;
                     $templateVars['{bought_by}'] = $_customer->firstname . ' ' . $_customer->lastname;
                     $templateVars['{shop_url}'] = _PS_BASE_URL_;
 

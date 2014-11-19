@@ -28,34 +28,33 @@
 		var addToCartEvent = true;
 		var price_elem = $('#our_price_display');
 		if (price_elem.length) {
-
 			price_elem.attr('id', 'our_price_display_old');
 
-			var additionalQuery = "&belvg_giftcert='+encodeURIComponent($('#belvg_price').val())+'";
-			additionalQuery += "&belvg_send_gift='+encodeURIComponent($('.gift_radio:checked').val())+'";
-			additionalQuery += "&belvg_recipient_message='+encodeURIComponent($('.recipient_message').val())+'";
-			additionalQuery += "&belvg_recipient_name='+encodeURIComponent($('.recipient_name').val())+'";
-			additionalQuery += "&belvg_recipient_email='+encodeURIComponent($('.recipient_email').val())+'";
-			additionalQuery += "&belvg_recipient_address='+encodeURIComponent($('.recipient_address').val())+'";
-			var addToCartRewrite = ajaxCart.add.toString()
-				.replace('function ', 'function addToCartFunc')
-				.replace("controller=cart&add=1", "controller=cart&add=1"+additionalQuery);
-
-			eval(addToCartRewrite);
-			ajaxCart.add = addToCartFunc;
+			//var additionalQuery = "&belvg_giftcert='+encodeURIComponent($('#belvg_price').val())+'";
+			//additionalQuery += "&belvg_send_gift='+encodeURIComponent($('.gift_radio:checked').val())+'";
+			//additionalQuery += "&belvg_recipient_message='+encodeURIComponent($('.recipient_message').val())+'";
+			//additionalQuery += "&belvg_recipient_name='+encodeURIComponent($('.recipient_name').val())+'";
+			//additionalQuery += "&belvg_recipient_email='+encodeURIComponent($('.recipient_email').val())+'";
+			//additionalQuery += "&belvg_recipient_address='+encodeURIComponent($('.recipient_address').val())+'";
+			//var addToCartRewrite = ajaxCart.add.toString()
+			//	.replace('function ', 'function addToCartFunc')
+			//	.replace("controller=cart&add=1", "controller=cart&add=1"+additionalQuery);
+            //
+			//eval(addToCartRewrite);
+			//ajaxCart.add = addToCartFunc;
 
 			if (giftType == 'dropdown') {
 				price_elem.hide().after(
 					$('<select>').attr({
 						'name': 'belvg_giftcert',
-						'id': 'belvg_price' 
-					})				
+						'id': 'belvg_price'
+					})
 				);
-				
+
 				for (var price in giftPrice) {
 					$('#belvg_price').append('<option value="'+giftPrice[price]+'">'+formatCurrency(giftPrice[price], currencyFormat, currencySign, currencyBlank)+'</option>');
 				}
-				
+
 				$('#belvg_price').before('<span class="belvg_custom_price">'+price_label+'</span>');
 			} else if (giftType == 'fixed') {
 
@@ -74,9 +73,9 @@
 						'name': 'belvg_giftcert',
 						'id': 'belvg_price' 
 					}).css({
-						'width': productPrice.length * 15 + 'px',
-						'text-align': 'center',
-					})					
+						'width': 6 * 15 + 'px',
+						'text-align': 'center'
+					})
 				);
 
 				$('#belvg_price').keydown(function(e){
@@ -94,10 +93,10 @@
 				});
 				
 				$('#belvg_price').before('<span class="belvg_custom_price">'+price_label+'</span>');
-				
-				
-				$('#belvg_price').after('<div class="belvg_amount">From '+formatCurrency(giftPrice[0], currencyFormat, currencySign, currencyBlank)+' to '+formatCurrency(giftPrice[1], currencyFormat, currencySign, currencyBlank)+'</div>');
-				
+                if (giftType != 'custom') {
+                    $('#belvg_price').after('<div class="belvg_amount">From ' + formatCurrency(giftPrice[0], currencyFormat, currencySign, currencyBlank) + ' to ' + formatCurrency(giftPrice[1], currencyFormat, currencySign, currencyBlank) + '</div>');
+                }
+
 				$('#add_to_cart input').mousedown(function(){
 					priceValidate = true;
 					var val = parseFloat($('#belvg_price').val());
@@ -126,12 +125,8 @@
 				});
 			}
 
-            console.log('asdf');
-            console.log($('#buy_block .price'));
-            console.log($('#gift_container'));
-
-            $('#buy_block .price').after($('#gift_container').html());
-			$('#gift_container').remove();
+            //$('#buy_block .price').after($('#gift_container').html());
+            //$('#gift_container').remove();
 			
 			$('#old_price, #reduction_percent, #reduction_amount').hide();
 			

@@ -244,24 +244,24 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 	<!-- left infos-->
 	<div id="pb-left-column" class='mceContentBody'>
 		<h1>{$product->name|escape:'htmlall':'UTF-8'}</h1>
-	
+
 		{if ($product->id == $_ABONNEMENT_PARTICULIER_ || $product->id == $_ABONNEMENT_INSTITUT_ || $product->id == $_ABONNEMENT_MOOC_ || $product->id == $_ABONNEMENT_SOLIDARITE_) && $subs|count > 0}
-		<p><strong>{l s='Vous avez déjà au moins un abonnement actif'} : </strong> </p> 
-			
+		<p><strong>{l s='Vous avez déjà au moins un abonnement actif'} : </strong> </p>
+
 			<ul id='productSubscriptions'>
 			{foreach from=$subs item=sub}
-			
+
 				{if $sub->is_active || $sub->is_future}
 				<li class='{if $sub->is_active}active{/if}{if $sub->is_future}future{/if}'>
 					{if $sub->is_active}Actif - Dernier numéro : {$sub->last_edition}{/if}
 					{if $sub->is_future}En attente - Premier numéro : {$sub->first_edition}{/if}
 					<br/>{$sub->product_attributes_name}
-				</li>	
+				</li>
 				{/if}
 			{/foreach}
 			</ul>
 		{/if}
-		
+
 
 		{if $product->description_short OR $packItems|@count > 0}
 		<div id="short_description_block">
@@ -284,7 +284,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 			{/if}
 		</div>
 		{/if}
-		
+
 {if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_  && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_) || $nbPresentOrFutureActives <=1}
 
 
@@ -301,8 +301,8 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 			<div class="clear"></div>
 		</div>
 		{/if}*}
-		
-		
+
+
 
 		{if ($product->show_price AND !isset($restricted_country_mode)) OR isset($groups) OR $product->reference OR (isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS)}
 		<!-- add to cart form-->
@@ -315,15 +315,15 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 				<input type="hidden" name="add" value="1" />
 				<input type="hidden" name="id_product_attribute" id="idCombination" value="" />
 			</p>
-			
+
 			<div class="product_attributes">
-			
+
 				<p id="product_reference" {if isset($groups) OR !$product->reference}style="display: none;"{/if}>
 					<label for="product_reference">{l s='Reference:'} </label>
 					<span class="editable">{$product->reference|escape:'htmlall':'UTF-8'}</span>
 				</p>
 
-			
+
 				{if isset($groups)}
 				<!-- attributes -->
 				<div id="attributes">
@@ -393,7 +393,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 			<!-- availability -->
 			<p id="availability_statut"{if ($product->quantity <= 0 && !$product->available_later && $allow_oosp) OR ($product->quantity > 0 && !$product->available_now) OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
 				<span id="availability_label">{l s='Availability:'}</span>
-				<span id="availability_value"{if $product->quantity <= 0} class="warning_inline"{/if}>{if $product->quantity <= 0}{if $allow_oosp}{$product->available_later}{else}{l s='This product is no longer in stock'}{/if}{else}{$product->available_now}{/if}</span>				
+				<span id="availability_value"{if $product->quantity <= 0} class="warning_inline"{/if}>{if $product->quantity <= 0}{if $allow_oosp}{$product->available_later}{else}{l s='This product is no longer in stock'}{/if}{else}{$product->available_now}{/if}</span>
 			</p>
 			<p id="availability_date"{if ($product->quantity > 0) OR !$product->available_for_order OR $PS_CATALOG_MODE OR !isset($product->available_date) OR $product->available_date < $smarty.now|date_format:'%Y-%m-%d'} style="display: none;"{/if}>
 				<span id="availability_date_label">{l s='Availability date:'}</span>
@@ -413,7 +413,9 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 				{$HOOK_PRODUCT_OOS}
 			</div>
 
-			<p class="warning_inline" id="last_quantities"{if ($product->quantity > $last_qties OR $product->quantity <= 0) OR $allow_oosp OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none"{/if} >{l s='Warning: Last items in stock!'}</p>
+            {if isset($HOOK_PRODUCT_FOOTER) && $HOOK_PRODUCT_FOOTER}{$HOOK_PRODUCT_FOOTER}{/if}
+
+            <p class="warning_inline" id="last_quantities"{if ($product->quantity > $last_qties OR $product->quantity <= 0) OR $allow_oosp OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none"{/if} >{l s='Warning: Last items in stock!'}</p>
 		</div>
 
 		<div class="content_prices clearfix">
@@ -496,7 +498,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 				<p id="add_to_cart" class="buttons_bottom_block">
 					<input type="submit" name="Submit" value="{if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_)|| $nbPresentOrFutureActives == 0}{l s='Add to cart'}{elseif $nbPresentOrFutureActives == 1}{l s='Renouveler selon options sélectionnées'}{/if}" class="exclusive" />
 				</p>
-                {if $productPrice <= 0}
+                {if $productPrice <= 0 && !$product->isGift()}
                     <p class='clear'>Votre abonnement numérique vous donne libre accès à tous les pdfs disponibles sur le site. Pour accéder à chaque pdf, vous devez ajouter le produit désiré au panier, accepter les conditions générales de vente et confirmer la commande. Vous trouverez les documents à télécharger dans le détail de votre historique d’achats.</p>
                 {/if}
 			{/if}
@@ -505,7 +507,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 		</div>
 		</form>
 		{/if}
-		
+
 {/if}
 
 		{if isset($HOOK_EXTRA_RIGHT) && $HOOK_EXTRA_RIGHT}{$HOOK_EXTRA_RIGHT}{/if}
@@ -550,7 +552,6 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 	</table>
 </div>
 {/if}
-{if isset($HOOK_PRODUCT_FOOTER) && $HOOK_PRODUCT_FOOTER}{$HOOK_PRODUCT_FOOTER}{/if}
 
 <!-- description and features -->
 {if (isset($product) && $product->description) || (isset($features) && $features) || (isset($accessories) && $accessories) || (isset($HOOK_PRODUCT_TAB) && $HOOK_PRODUCT_TAB) || (isset($attachments) && $attachments) || isset($product) && $product->customizable}

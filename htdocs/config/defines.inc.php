@@ -231,11 +231,11 @@ define('_CATEGORY_LITTLE_ARTICLES_' , 22);
 
 // mailchimp // ids obtenus en appelant la liste des campagnes et des lists puis en prenant le champ id
 
-
-
 // API prestashop
 define('_PS_IMPORT_FROM_CRESUS_API_KEY_', 'OX7P1KT26VMCR2N6FPRA3NB1JZKXRSAF');
 
+// Module bon cadeau
+define('_GIFT_PRODUCT_ID_', 1028);
 
 if(_PS_MODE_DEV_)
 {

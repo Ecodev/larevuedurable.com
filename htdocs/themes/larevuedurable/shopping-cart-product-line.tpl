@@ -37,7 +37,7 @@
 			{if !empty($product.gift)}
 				<span class="gift-icon">{l s='Gift!'}</span>
 			{else}
-				{if isset($product.is_discounted) && $product.is_discounted}
+				{if isset($product.is_discounted) && $product.is_discounted && !$product.is_gift}
 					<span style="text-decoration:line-through;">{convertPrice price=$product.price_without_specific_price}</span><br />
 				{/if}
 				{if !$priceDisplay}

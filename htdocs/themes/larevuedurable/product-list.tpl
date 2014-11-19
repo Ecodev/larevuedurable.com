@@ -58,10 +58,10 @@
                         {/foreach}
                     {/if}
 
-                    <div class='ref'>ref : {$product.reference}</div>
+                    {if !$product.is_gift}<div class='ref'>ref : {$product.reference}</div>{/if}
 					{if isset($product.on_sale) && $product.on_sale && isset($product.show_price) && $product.show_price && !$PS_CATALOG_MODE}<span class="on_sale">{l s='On sale!'}</span>
 					{elseif isset($product.reduction) && $product.reduction && isset($product.show_price) && $product.show_price && !$PS_CATALOG_MODE}<span class="discount">{l s='Reduced price!'}</span>{/if}
-					{if isset($category) && $category->id != 19}
+					{if isset($category) && $category->id != 19 && !$product.is_gift}
 						{if (!$PS_CATALOG_MODE AND ((isset($product.show_price) && $product.show_price) || (isset($product.available_for_order) && $product.available_for_order)))}
 							<div class="content_price">
 								{if isset($product.show_price) && $product.show_price && !isset($restricted_country_mode)}<span class="price" style="display: inline;">{if !$priceDisplay}{convertPrice price=$product.price}{else}{convertPrice price=$product.price_tax_exc}{/if}</span><br />{/if}
@@ -70,7 +70,7 @@
 						{/if}
 					{/if}
 				
-					{if isset($category) && $category->id != 19}
+					{if isset($category) && $category->id != 19 && !$product.is_gift}
 						{if ($product.id_product_attribute == 0 || (isset($add_prod_display) && ($add_prod_display == 1))) && $product.available_for_order && !isset($restricted_country_mode) && $product.minimal_quantity <= 1 && $product.customizable != 2 && !$PS_CATALOG_MODE}
 							{if ($product.allow_oosp || $product.quantity > 0)}
 								{if isset($static_token)}
