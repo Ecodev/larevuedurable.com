@@ -2,7 +2,7 @@
 	<div class="gift_inner">
 		<b>Envoyer ce bon cadeau :</b>
 			<input type="radio" class="gift_radio" name="belvg_send_gift" value="myself" checked="checked"> A moi même
-			<input type="radio" class="gift_radio" name="belvg_send_gift" value="friend"> A un ami
+			<input type="radio" class="gift_radio" name="belvg_send_gift" value="friend"> A un proche
 		<div class="gift_inner_hider">
 			<br>
 				Nom du destinataire <br/>
@@ -16,7 +16,7 @@
 					<textarea class="gift_input recipient_address" name="belvg_recipient_address"></textarea>
 			{/if}
 			<br>
-                Votre message (optionel)<br/>
+                Votre propre message<br/>
                 <textarea class="gift_input recipient_message" name="belvg_recipient_message"></textarea>
 			<br>
 		</div>
