@@ -314,7 +314,8 @@ class belvg_giftcert extends Module
 	            	} else {
 		            	$toName = $gift->recipient_name;
 		            	$toEmail = $gift->recipient_email;
-		            	$message = $gift->message;
+                        $messageTitle = "<strong>Voici son message à votre intention : </strong>";
+		            	$message = $gift->message ? $messageTitle . $gift->message : '';
 		            	$fromName = $_customer->firstname . ' ' . $_customer->lastname;
 	            	}
 

@@ -1,14 +1,15 @@
-Hi {toName},
+Bonjour {toName},
 
-You received a gift certificate "{product_name}"!
-
-This crtificate was bought by {bought_by}.
+Nous sommes heureux de vous informer que {bought_by} vous a offert un bon cadeau d'une valeur de : {amount} {currency}
 
 {message}
 
-Certificate: {product_name}
-Qty: {qty}
-Amount: {amount}
-Code: {code}
+Avec LaRevueDurable, vous bénéficierez d’une information solide, constructive et agréable à lire : un dossier d’une quarantaine de pages consacrées à un thème essentiel pour construire la société de demain et l’actualité nationale et internationale de l’écologie et du développement durable. LaRevueDurable a été créée en 2002 (voir le dossier anniversaire paru dans le No 46).
 
-To use the voucher, please visit our store: {shop_url}
+Par le WEB, vous avez accès à l’ensemble des archives de LaRevueDurable, soit plus de 50 numéros complets et près de 1000 articles de fond sur la durabilité. En bref, plus de douze ans de savoirs sur mille et un sujets écologiques dans plus de 60 pays. Il s’agit de l'une des plus importantes bases de données sur la durabilité dans le monde francophone.
+
+Vous pouvez utiliser ce montant pour vous abonner ou commander des articles ou des anciens numéros. Nous espérons que ce cadeau vous fera plaisir et vous souhaitons, {toName}, une lecture enrichissante, de chaleureuses fêtes de fin d’année et une excellente santé.
+
+{code}
+
+Pour prendre possession de ce bon, rendez-vous sur notre boutique, créez votre compte et faites vos achats. Au moment de régler, saisissez le code affiché ci-dessous dans la rubrique « bon de réduction ». Si vous n’utilisez pas la totalité du bon, le solde restera disponible pour des achats futurs sous forme d'un nouveau code qui vous sera communiqué dans un e-mail.
