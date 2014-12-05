@@ -68,30 +68,6 @@ class FrontController extends FrontControllerCore
         $this->addCSS(_THEME_CSS_DIR_ . 'editor.css');
         $this->addCSS(_THEME_CSS_DIR_ . 'print.css', 'print');
         $this->addJS(_THEME_JS_DIR_.'default.js');
-
-        // $this->addJS(_THEME_JS_DIR_.'prefixfree.dynamic-dom.min.js');
-        // $this->addJS(_THEME_JS_DIR_.'prefixfree.min.js');
-        // $this->addJS(_THEME_JS_DIR_.'noty/jquery.noty.js');
-        // $this->addJS(_THEME_JS_DIR_.'noty/layouts/topCenter.js');
-        // $this->addJS(_THEME_JS_DIR_.'noty/layouts/center.js');
-
-
-        // $this->addjquery();
-        // $this->addjqueryPlugin('easing');
-        // $this->addJS(_PS_JS_DIR_.'tools.js');
-        //
-        // if (Tools::isSubmit('live_edit') && Tools::getValue('ad') && Tools::getAdminToken('AdminModulesPositions'.(int)Tab::getIdFromClassName('AdminModulesPositions').(int)Tools::getValue('id_employee')))
-        // {
-        // 	$this->addJqueryUI('ui.sortable');
-        // 	$this->addjqueryPlugin('fancybox');
-        // 	$this->addJS(_PS_JS_DIR_.'hookLiveEdit.js');
-        // 	$this->addCSS(_PS_CSS_DIR_.'jquery.fancybox-1.3.4.css', 'all'); // @TODO
-        // }
-        // if ($this->context->language->is_rtl)
-        // 	$this->addCSS(_THEME_CSS_DIR_.'rtl.css');
-        //
-        // // Execute Hook FrontController SetMedia
-        // Hook::exec('actionFrontControllerSetMedia', array());
     }
 
 }
