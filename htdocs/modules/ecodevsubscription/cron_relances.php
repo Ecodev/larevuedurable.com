@@ -102,7 +102,10 @@ foreach ($array_newsletter as $key => $user) {
 
 
 if(count($usersToFollowUp) === 0) {
-    exit('No users to follow up at this date ' . $date_now->format(_DATE_FORMAT_SHORT_));
+    $message = 'Aucun utilisateur à relancer à cette date : ' . $date_now->format(_DATE_FORMAT_SHORT_);
+    echo $message;
+    error_log(date(_DATE_FORMAT_) . ' - ' . $message . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/_module_ecodevsubscriptions_cron_relances_log.txt');
+    exit();
 }
 
 $res = $api->listBatchSubscribe(_MC_SUBSCRIBERS_LIST_, $usersToFollowUp, false, true, false);
