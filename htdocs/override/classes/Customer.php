@@ -285,7 +285,8 @@ class Customer extends CustomerCore
     {
         foreach ($institute_users as $acheteur) {
             foreach($acheteur['conditions'] as $condition){
-                if ($condition && $this->verifyAccount($condition) || $this->verifyIP($condition) || $this->verifyDomain($condition)) {
+
+                if ($condition && ($this->verifyAccount($condition) || $this->verifyIP($condition) || $this->verifyDomain($condition))) {
                     return $acheteur;
                 }
             }
