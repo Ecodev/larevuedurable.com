@@ -22,11 +22,10 @@
 			{l s='Indicateurs' mod='ecodevnextconf'}
 		</a>
 	</div>
-	<span id='prochaineConferenceDetailTitre' class='mceContentBody'>{$nextIndicatorProduct->description_short}</span>
 
     <a id='indicatorPict' href="{$nextIndicatorProduct->getLink()|escape:'htmlall':'UTF-8'}">
         <img id='nextEditoImg' src="{$link->getImageLink($nextIndicatorProduct->link_rewrite, $nextIndicatorImage, 'home_pleine_largeur_grand')}" />
     </a>
-
+    <span id='prochaineConferenceDetailTitre' class='mceContentBody'>{$nextIndicatorProduct->description_short}</span>
 	<a class='finalLink' href="{$nextIndicatorProduct->getLink()|escape:'htmlall':'UTF-8'}">{l s='Voir les indicateurs' mod='ecodevnextconf'}</a>
 </div>
