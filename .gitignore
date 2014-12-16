@@ -4,12 +4,8 @@
 *.DS_Store
 
 # Ignore everything in the root except modules, themes and override.
-/*
-!.gitignore
+.idea
 
-!bin/
-
-!htdocs/
 htdocs/*
 !htdocs/robots.txt
 !htdocs/.htaccess.sample
