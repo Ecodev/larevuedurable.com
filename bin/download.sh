@@ -2,8 +2,9 @@
 
 cd htdocs
 
-rsync -av larevuedurable.com:/sites/larevuedurable.com/htdocs/upload/ upload
 rsync -av larevuedurable.com:/sites/larevuedurable.com/htdocs/img/ img
+rsync -av larevuedurable.com:/sites/larevuedurable.com/htdocs/log/ log
+rsync -av larevuedurable.com:/sites/larevuedurable.com/htdocs/upload/ upload
 rsync -av larevuedurable.com:/sites/larevuedurable.com/htdocs/download/ download
 rsync -av larevuedurable.com:/sites/larevuedurable.com/htdocs/download_tmp/ download_tmp
 rsync -av larevuedurable.com:/sites/larevuedurable.com/htdocs/modules/homeslider/images/ modules/homeslider/images
