@@ -6,6 +6,9 @@
 # Ignore everything in the root except modules, themes and override.
 .idea
 
+logs/*
+!logs/.gitkeep
+
 htdocs/*
 !htdocs/robots.txt
 !htdocs/.htaccess.sample
