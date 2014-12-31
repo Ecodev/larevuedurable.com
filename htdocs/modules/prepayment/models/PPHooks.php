@@ -156,7 +156,7 @@ class PPHooks extends PaymentModule
     {
     
     	$message = 'asdf';
-    	error_log($message.chr(10).__LINE__.", ".__FILE__.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/_debug_error_log.txt');
+    	error_log($message.chr(10).__LINE__.", ".__FILE__.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/logs/_debug_error_log.txt');
         $order = new Order(intval($params['id_order']));
         $products = $order->getProducts();
 
