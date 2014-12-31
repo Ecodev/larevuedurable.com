@@ -364,7 +364,7 @@ class Customer extends CustomerCore
             $message = "Important ! Nombre d'acheteurs plus grand que 1\n";
             $message .= "Requête pour l'utilisateur " . $this->id . "\n";
             $message .= "$sql\n";
-            error_log($message . chr(10) . date(_DATE_FORMAT_) . ",\t ligne :" . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/_debug_error_log.txt');
+            error_log($message . chr(10) . date(_DATE_FORMAT_) . ",\t ligne :" . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/debug_log.txt');
         }
 
         $acheteur = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow($sql);
