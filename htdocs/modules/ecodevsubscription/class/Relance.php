@@ -38,21 +38,23 @@ class Relance
     private function videListe()
     {
         $subscribed = $this->api->listMembers(_MC_SUBSCRIBERS_LIST_, 'subscribed');
+        $subscribed = is_array($subscribed['data']) ? $subscribed['data'] : [];
+
         $unsubscribed = $this->api->listMembers(_MC_SUBSCRIBERS_LIST_, 'unsubscribed');
+        $unsubscribed = is_array($unsubscribed['data']) ? $unsubscribed['data'] : [];
 
         $email_list = array();
-        foreach ($subscribed['data'] as $sub) {
+        foreach ($subscribed as $sub) {
             array_push($email_list, $sub['email']);
         }
 
-        foreach ($unsubscribed['data'] as $sub) {
+        foreach ($unsubscribed as $sub) {
             array_push($email_list, $sub['email']);
         }
 
         if (sizeof($email_list)) {
             $this->api->listBatchUnsubscribe(_MC_SUBSCRIBERS_LIST_, $email_list, true, false, false);
         }
-
     }
 
     private function importeAbonnes($num = null)
@@ -101,10 +103,7 @@ class Relance
         $campaign = $this->api->campaignReplicate(_MC_RELANCE_CAMPAIGN_);
 
         if ($this->api->errorCode) {
-            $message = '';
-            $message .= "Unable to Replicate Campaign!";
-            $message .= "\n\tCode=" . $this->api->errorCode;
-            $message .= "\n\tMsg=" . $this->api->errorMessage . "\n";
+            $message = "Unable to Replicate Campaign - Code = " . $this->api->errorCode . " - Msg = " . $this->api->errorMessage . "\n";
             $this->reporteErreur($message, 1);
 
         } else {
@@ -129,10 +128,7 @@ class Relance
             $this->api->campaignSendNow($campagne);
 
             if ($this->api->errorCode) {
-                $message = '';
-                $message .= "Unable to send Campaign!";
-                $message .= "\n\tCode=" . $this->api->errorCode;
-                $message .= "\n\tMsg=" . $this->api->errorMessage . "\n";
+                $message = "Unable to send Campaign - Code = " . $this->api->errorCode . " - Msg = " . $this->api->errorMessage . "\n";
                 $this->reporteErreur($message, 1);
             } else {
                 $this->reporteErreur($msg);
@@ -145,7 +141,9 @@ class Relance
 
     private function reporteErreur($msg, $exit = false)
     {
-        error_log(date(_DATE_FORMAT_) . ' - ' . $msg . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/_cron_relances_log.txt');
+        $msg = date(_DATE_FORMAT_) . ' - RELANCES -  ' . $msg . "\r\n" ;
+        error_log($msg, 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/cron_log.txt');
+
         echo $msg;
 
         if ($exit) {

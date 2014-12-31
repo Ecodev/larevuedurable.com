@@ -1,15 +1,10 @@
 #!/usr/bin/php
 <?php
-if (php_sapi_name() == 'cli')
-{
-    define('_PS_ADMIN_DIR_', getcwd());
-    $_SERVER['DOCUMENT_ROOT'] = dirname(dirname(dirname(__FILE__)));
-    $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-}
-require_once(dirname(__FILE__).'/../../config/config.inc.php');
-require_once(_PS_MODULE_DIR_."/mailchimp/mailchimp.php");
-$execution_date = date( _DATE_FORMAT_);
-//$date_now = $date_now->format(_DATE_FORMAT_SHORT_);
+
+require_once(dirname(__FILE__) . '/../../config/config.inc.php');
+require_once(_PS_MODULE_DIR_ . "/mailchimp/mailchimp.php");
+
+$date = date(_DATE_FORMAT_);
 $mailchimp = new Mailchimp();
 $api  = new MCAPI(_MAILCHIMP_API_KEY_);
 
@@ -18,24 +13,18 @@ $newsletterSub = Customer::getNewsletterSubscribers();
 $vals = $api->listBatchSubscribe(_MC_NEWSLETTER_LIST_, $newsletterSub, false,true , false);
 if ($api->errorCode)
 {
-	$message = '';
-	$message.= "Unable to Batch subscribe List!\n";
-	$message.= "\n\tCode=".$api->errorCode;
-	$message.= "\n\tMsg=".$api->errorMessage;
+	$message = $date . ' - MC IMPORT -  ';
+	$message.= "Unable to Batch subscribe List! - Code = " . $api->errorCode . " - Msg = ".$api->errorMessage;
 
-	echo $message;
-	error_log($message." ".date(_DATE_FORMAT_).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/log/_module_newsletter_cron_mailchimp_import_log.txt');
+	echo $message . "\r\n";
+	error_log($message, 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/cron_log.txt');
 }
 else
 {
-	$message = '';
-	$message.= "Success Batch subscribe List!";
-	echo $message;
-	error_log($message." ".date(_DATE_FORMAT_).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/log/_module_newsletter_cron_mailchimp_import_log.txt');
+	$message = $date . ' - MC IMPORT - Success Batch subscribe List!';
+	echo $message . "\r\n";
+	error_log($message . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/cron_log.txt');
 }
-
-
-
 
 // désinscriptions
 $newsletterUnsub = Customer::getNewsletterUnsubscribed();
@@ -51,21 +40,17 @@ if( sizeof($unsub) )
 
 	if ($api->errorCode)
 	{
-		$message = '';
-		$message.= "Unable to Batch unsubscribe List!\n";
-		$message.= "\n\tCode=".$api->errorCode;
-		$message.= "\n\tMsg=".$api->errorMessage;
+		$message = $date . ' - MC IMPORT -  ';
+		$message.= "Unable to Batch unsubscribe List! - Code = " . $api->errorCode . " - Msg = ".$api->errorMessage;
 
-		echo $message;
-		error_log($message." ".date(_DATE_FORMAT_).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/log/_module_newsletter_cron_mailchimp_import_log.txt');
-
+		echo $message . "\r\n";
+		error_log($message . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/cron_log.txt');
 	}
 	else
 	{
-		$message = '';
-		$message.= "Success Batch unsubscribe List!";
-		echo $message;
-		error_log($message." ".date(_DATE_FORMAT_).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/log/_module_newsletter_cron_mailchimp_import_log.txt');
+		$message = $date . " - MC IMPORT -  Success Batch unsubscribe List!";
 
+		echo $message . "\r\n";
+		error_log($message . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/cron_log.txt');
 	}
 }

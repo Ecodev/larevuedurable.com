@@ -51,8 +51,16 @@ if (!file_exists(dirname(__FILE__).'/settings.inc.php'))
 
 require_once(dirname(__FILE__).'/settings.inc.php');
 require_once(dirname(__FILE__).'/defines.inc.php');
-
 require_once(dirname(__FILE__).'/autoload.php');
+
+if (php_sapi_name() == 'cli')
+{
+	define('_PS_ADMIN_DIR_', getcwd());
+	$_SERVER['DOCUMENT_ROOT'] = _DOCUMENT_ROOT_;
+	$_SERVER['REMOTE_ADDR'] = _REMOTE_ADDR_;
+	$_SERVER['HTTP_HOST'] = _HTTP_HOST_;
+	$_SERVER['REQUEST_URI'] = _REQUEST_URI_;
+}
 
 if (_PS_DEBUG_PROFILING_)
 {

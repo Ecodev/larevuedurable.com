@@ -23,22 +23,8 @@
 *  @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 */
-/* Debug only */
+
 include_once('local.inc.php');
-if (_PS_MODE_DEV_)
-{
-	@ini_set('display_errors', 'on');	
-	define('_PS_DEBUG_SQL_', true);
-	/* Compatibility warning */
-	define('_PS_DISPLAY_COMPATIBILITY_WARNING_', true);
-}
-else
-{
-	@ini_set('display_errors', 'off');
-	define('_PS_DEBUG_SQL_', false);
-	/* Compatibility warning */
-	define('_PS_DISPLAY_COMPATIBILITY_WARNING_', false);
-}
 
 define('_PS_DEBUG_PROFILING_', false);
 define('_PS_MODE_DEMO_', false);
@@ -163,95 +149,3 @@ define('_PS_SMARTY_CONSOLE_OPEN_BY_URL_', 1);
 define('_PS_SMARTY_CONSOLE_OPEN_', 2);
 
 define('_PS_JQUERY_VERSION_', '1.7.2');
-
-
-
-
-
-/****************************************************************
-	Constantes pour le projet LRD
-*****************************************************************/
-
-
-/**
-*	exemples de manipulation de date (objet DateTime)
-*	$dateB = clone $dateA;
-*	$dateSecure = new DateTime($dateNow->format('Y-m-d H:i:s'));
-*	$dateSecure->modify('+'.JOURS_SECURITE.' day');
-*/
-$date_now = new DateTime();
-
-// constantes de format de dates
-define('_DATE_FORMAT_', 'Y-m-d H:i:s');
-define('_DATE_FORMAT_SHORT_', 'Y-m-d');
-
-
-// Groupes de clients
-define('_PS_SUBSCRIBER_ARCHIVES_GROUP_', 5); 
-define('_PS_SUBSCRIBER_PAPER_GROUP_', 6);
-define('_PS_SUBSCRIBER_INSTITUTE_', 4); 
-
-/** 
-*	La table ps_product_attribute_combination comporte les liaisons déclinaisons -> attributs
-*	- 1 an : attribut 23
-*	- 2 ans : attribut 24
-*	- etc...
-*	
-*	- Papier : attribut 26
-*	- Web : attribut 27
-*	- web et papier : attribut 28
-*/
-define('_SIX_MOIS_', 46);
-define('_UN_AN_', 23);
-define('_DEUX_ANS_', 24);
-define('_TROIS_ANS_', 40);
-define('_QUATRE_ANS_', 41);
-define('_CINQ_ANS_', 42);
-
-define('_PAPIER_', 26);
-define('_WEB_', 27);
-define('_PAPIER_ET_WEB_', 28);
-
-
-// Types d'abonnements
-define('_ABONNEMENT_PARTICULIER_', 8);
-define('_ABONNEMENT_INSTITUT_', 32);
-define('_ABONNEMENT_SOLIDARITE_', 31); 
-define('_ABONNEMENT_MOOC_', 971);
-
-
-// Permet d'identifier un produit institutionnel, qui peut être utilisé par qqch d'autre, ne l'ayant pas acheté 
-define('_MANUFACTURE_INSTITUTE_', 3);
-
-
-// Catégorie de tous les numéros des revues complètes, ce sont elles qui feront fois pour les dates et ainsi déterminer les numéros associés aux abonnement
-define('_CATEGORY_FULL_BOOK_' , 21);
-define('_CATEGORY_LITTLE_ARTICLES_' , 22);
-
-
-// mailchimp // ids obtenus en appelant la liste des campagnes et des lists puis en prenant le champ id
-
-// API prestashop
-define('_PS_IMPORT_FROM_CRESUS_API_KEY_', 'OX7P1KT26VMCR2N6FPRA3NB1JZKXRSAF');
-
-// Module bon cadeau
-define('_GIFT_PRODUCT_ID_', 1028);
-
-if(_PS_MODE_DEV_)
-{
-	define('_MAILCHIMP_API_KEY_',  DEV_MAILCHIMP_API_KEY_);
-	define('_MC_NEWSLETTER_LIST_', DEV_MC_NEWSLETTER_LIST_ );
-	define('_MC_SUBSCRIBERS_LIST_',DEV_MC_SUBSCRIBERS_LIST_); // subscribers, utilisé pour les relances
-	define('_MC_RELANCE_CAMPAIGN_',DEV_MC_RELANCE_CAMPAIGN_);
-	define('_CUSTOMER_CHANGE_NOTIFICATION_', DEV_CUSTOMER_CHANGE_NOTIFICATION);
-}
-else 
-{
-	define('_MAILCHIMP_API_KEY_',   LRD_MAILCHIMP_API_KEY_);
-	define('_MC_NEWSLETTER_LIST_',  LRD_MC_NEWSLETTER_LIST_ );
-	define('_MC_SUBSCRIBERS_LIST_', LRD_MC_SUBSCRIBERS_LIST_); // subscribers, utilisé pour les relances
-	define('_MC_RELANCE_CAMPAIGN_', LRD_MC_RELANCE_CAMPAIGN_);
-    define('_CUSTOMER_CHANGE_NOTIFICATION_', LRD_CUSTOMER_CHANGE_NOTIFICATION);
-}
-
-
