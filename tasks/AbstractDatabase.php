@@ -38,15 +38,26 @@ STRING;
         $username = _DB_USER_;
         $database = _DB_NAME_;
         $host = _DB_SERVER_;
-        $pass = _DB_PASSWD_;
 
         echo "dumping $dumpFile...\n";
-        $dumpCmd = "mysqldump --host $host --user $username  $database ";
-        if ($pass) {
-            $dumpCmd .= "--password=" . $pass . " ";
-        }
-        $dumpCmd .= "| gzip > \"$dumpFile\"";
+        $dumpCmd = "mysqldump --host $host --user $username  $database" . self::addPasswordIfNeeded();
+
+        $dumpCmd .= " | gzip > \"$dumpFile\"";
         self::executeLocalCommand($dumpCmd);
+    }
+
+    /**
+     * The password may be empty, this function returns empty or --password mypassword
+     * Avoid --password with empty string that prompt password.
+     * @return string
+     */
+    protected static function addPasswordIfNeeded()
+    {
+        if (_DB_PASSWD_) {
+           return " --password=" . _DB_PASSWD_;
+        }
+
+        return '';
     }
 
     /**
@@ -93,6 +104,17 @@ STRING;
         self::loadDump($siteLocal, $dumpFile);
 
         echo "database loaded\n";
+    }
+
+    protected static function executeSql($sql)
+    {
+        $username = _DB_USER_;
+        $database = _DB_NAME_;
+        $host = _DB_SERVER_;
+
+        echo "executing sql : $sql\n";
+        self::executeLocalCommand("mysql --host $host --user $username $database " . self::addPasswordIfNeeded() . " -e '$sql'");
+        echo "database updated";
     }
 
 }
