@@ -4,11 +4,10 @@ require_once __DIR__ . '/Utility.php';
 
 /**
  * Tool to reload the entire local database from remote database for a given site
- * require_oncements:
+ * requirements:
  * - ssh access to remote server (via ~/.ssh/config)
  * - both local and remote sites must be accesible via: /sites/MY_SITE
- * - both local and remote config/autoload/local.php files must contains the database connection info
- * - both local and remote database must be configured with ~/.pgpass file for prompt-free access
+ * - both local and remote htdocs/config/local.inc.php and htdocs/config/settings.inc.php files must contains the database connection info
  */
 abstract class AbstractDatabase extends Utility
 {
