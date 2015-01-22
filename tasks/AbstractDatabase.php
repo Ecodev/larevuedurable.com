@@ -36,10 +36,9 @@ STRING;
     {
         $username = _DB_USER_;
         $database = _DB_NAME_;
-        $host = _DB_SERVER_;
 
         echo "dumping $dumpFile...\n";
-        $dumpCmd = "mysqldump --host $host --user $username  $database" . self::addPasswordIfNeeded();
+        $dumpCmd = "mysqldump --user $username  $database" . self::addPasswordIfNeeded();
 
         $dumpCmd .= " | gzip > \"$dumpFile\"";
         self::executeLocalCommand($dumpCmd);
@@ -83,14 +82,13 @@ STRING;
     {
         $username = _DB_USER_;
         $database = _DB_NAME_;
-        $host = _DB_SERVER_;
 
         echo "loading dump $dumpFile...\n";
         if (!is_readable($dumpFile)) {
             throw new \Exception("Cannot read dump file \"$dumpFile\"");
         }
 
-        self::executeLocalCommand("gunzip -c \"$dumpFile\" | mysql --host $host --user $username $database");
+        self::executeLocalCommand("gunzip -c \"$dumpFile\" | mysql --user $username $database");
     }
 
     public static function loadRemoteDump($remote)
@@ -109,10 +107,9 @@ STRING;
     {
         $username = _DB_USER_;
         $database = _DB_NAME_;
-        $host = _DB_SERVER_;
 
         echo "executing sql : $sql\n";
-        self::executeLocalCommand("mysql --host $host --user $username $database " . self::addPasswordIfNeeded() . " -e '$sql'");
+        self::executeLocalCommand("mysql --user $username $database " . self::addPasswordIfNeeded() . " -e '$sql'");
         echo "database updated";
     }
 
