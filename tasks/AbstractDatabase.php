@@ -88,6 +88,7 @@ STRING;
             throw new \Exception("Cannot read dump file \"$dumpFile\"");
         }
 
+
         self::executeLocalCommand("gunzip -c \"$dumpFile\" | mysql --user $username $database");
     }
 
@@ -98,7 +99,7 @@ STRING;
         $dumpFile = "/tmp/$remote." . exec("whoami") . ".backup.gz";
         self::dumpDataRemotely($remote, $dumpFile);
         self::copyFile($remote, $dumpFile);
-        self::loadDump($siteLocal, $dumpFile);
+        self::loadDump($dumpFile);
 
         echo "database loaded\n";
     }
