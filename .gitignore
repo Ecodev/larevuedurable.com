@@ -6,6 +6,8 @@
 # Ignore everything in the root except modules, themes and override.
 .idea
 
+*.gz
+
 logs/*
 !logs/.gitkeep
 
