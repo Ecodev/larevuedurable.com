@@ -22,15 +22,15 @@ class Customer extends CustomerCore
         $this->getConditions();
     }
 
-    public function update($nullValues = false) {
-        $saved = parent::update($nullValues);
-
-        if ($saved) {
-            Tools::notifyCustomerChanged($this->id);
-        }
-
-        return $saved;
-    }
+//    public function update($nullValues = false) {
+//        $saved = parent::update($nullValues);
+//
+//        if ($saved) {
+//            Tools::notifyCustomerChanged($this->id);
+//        }
+//
+//        return $saved;
+//    }
 
     /**
      *    Fonction très importante : Récupère tous les changements de status des commandes comportant un abonnement.

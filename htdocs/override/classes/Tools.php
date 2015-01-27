@@ -119,6 +119,7 @@ class Tools extends ToolsCore
 	                '{lastname}' => $customer->lastname,
 	                '{email}' => $customer->email,
 	                '{order_ids}' => $orders[0]['ids'],
+	                '{order_refs}' => $orders[0]['refs'],
 	            );
 	
 	            Mail::send(Context::getContext()->language->id, 'customer_notification', $subject, $vars, explode(',', _CUSTOMER_CHANGE_NOTIFICATION_), null, null, null, null, null);
