@@ -10,6 +10,9 @@
 
 logs/*
 !logs/.gitkeep
+!logs/emails
+logs/emails/*
+!logs/emails/.gitkeep
 
 htdocs/*
 !htdocs/robots.txt

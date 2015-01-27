@@ -7,7 +7,7 @@ define('_PS_MODE_DEV_', false); // should be obsolete
 @ini_set('display_errors', 'off');
 define('_PS_DEBUG_SQL_', false);
 define('_PS_DISPLAY_COMPATIBILITY_WARNING_', false);
-
+//define('_OVERRIDE_EMAIL_', '');
 
 /**
  * Constantes de projet ----------------------------------------------------------
