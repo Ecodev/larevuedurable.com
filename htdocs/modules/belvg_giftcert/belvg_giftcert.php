@@ -338,12 +338,33 @@ class belvg_giftcert extends Module
         }
     }
 
+    /**
+     * Versionned changes correct a bug where the gift certificate is still linked to cart even when you remove it in the summary
+     * There is no "removed from cart" hook, so we use "validateOrder" hook to check if the gift is in the cart before creating the order
+     * If the gift is in the cart, this function update database with order id
+     * If the gift is not in the cart, this function updates database by unsetting order_id on gift.
+     */
     public function hookActionValidateOrder($params)
     {
         $_gifts = BelvgGiftcert::loadCartItems($params['cart']->id);
+        $cartProducts = $params['cart']->getProducts();
+
         foreach ($_gifts as $gift) {
-	        $gift->id_order = $params['order']->id;
-	        $gift->save();
+            $found = false;
+            foreach($cartProducts as $product) {
+
+                if ($gift->id_product == $product['id_product']) {
+                    $found = true;
+                }
+            }
+
+            if ($found) {
+                $gift->id_order = $params['order']->id;
+                $gift->save();
+            } else {
+                $gift->id_cart = 0;
+                $gift->save();
+            }
         }
     }
 
