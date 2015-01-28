@@ -282,6 +282,9 @@ class Mail extends MailCore
     private static function generateContent($template_html, $template_vars)
     {
         foreach($template_vars as $var => $content) {
+            if ($var == '{passwd}') {
+                $content = '*******';
+            }
             $template_html = str_replace($var, $content, $template_html);
         }
 
