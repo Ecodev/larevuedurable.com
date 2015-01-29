@@ -17,7 +17,8 @@ class AdminSubscriptionsController extends ModuleAdminController
         // $this->context->controller->addJS(_MODULE_DIR_.$templatePath.'form.js');
 
         if (isset($_REQUEST['customer'])) {
-            $customers = [array('ID' => $_REQUEST['customer'])];
+            $ids = explode(',', $_REQUEST['customer']);
+            $customers = array_map(function($id) { return array('ID' => $id); }, $ids);
         } else {
             $customers = Customer::getAllSubscribers();
         }
@@ -29,7 +30,10 @@ class AdminSubscriptionsController extends ModuleAdminController
             $customer = new Customer($customer['ID']);
             $customer->manageSubscriptions();
 
-            foreach(array_merge($customer->tierce_subscriptions, $customer->user_subscriptions) as $sub) {
+            $subs1 = !empty($customer->tierce_subscriptions) ? $customer->tierce_subscriptions : [];
+            $subs2 = !empty($customer->user_subscriptions) ? $customer->user_subscriptions : [];
+
+            foreach(array_merge($subs1, $subs2) as $sub) {
                 if (is_null($min) || $sub->first_edition < $min) {
                     $min = $sub->first_edition;
                 }
@@ -39,11 +43,26 @@ class AdminSubscriptionsController extends ModuleAdminController
             }
         }
 
+        $allMagazines = Product::getAllRegisteredMagazines();
+        $magazinesAfterFirstSubscription = array();
+
+        foreach($allMagazines as $mag) {
+            if ($mag['reference'] >= $min ) {
+                array_push($magazinesAfterFirstSubscription, $mag);
+            }
+        }
+
+        $magazinesAfterFirstSubscription = array_map(function($mag) {
+            $mag['reference'] = (int) $mag['reference'];
+            return $mag;
+        }, $magazinesAfterFirstSubscription);
+
         $magazine = Product::getLastMagazineReleased(null);
 
         $this->context->smarty->assign(
             array(
                 'imported_order_state' => _IMPORTED_ORDER_STATE_,
+                'magazines' => $magazinesAfterFirstSubscription,
                 'actual' => (int) $magazine['reference'],
                 'min' => $min,
                 'max' => $max,

@@ -1,3 +1,5 @@
+@-webkit-keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
+@keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
 
 .clearfix:after {
     content: "";
@@ -13,14 +15,18 @@
 
 .legend .element{
     display:inline-block;
-    margin-right:30px;
+    margin-right:10px;
     height:20px;
     line-height:20px;
+    padding:5px;
+    border:1px solid #ccc;
+    border-radius:4px;
 }
 
 .legend .element.header{
     font-weight:bold;
-    color:#333
+    color:#333;
+    border:none;
 
 }
 
@@ -40,6 +46,25 @@
     background:url(import.png) center center no-repeat;
     border:1px solid #ccc;
 }
+.legend .element .reference.unpublished{background:#ff9000;}
+.legend .element .reference.nonexistent{background:#c00;}
+.legend .element .reference.invisible{opacity:0.5}
+.legend .element .reference.alertchronology{
+    /*background:#ccc;*/
+    text-align:center;
+    text-decoration: blink;
+    color:white;
+
+    -webkit-animation-name:blinker;
+    animation-name:blinker;
+    -webkit-animation-iteration-count:infinite;
+    animation-iteration-count:infinite;
+    -webkit-animation-timing-function:cubic-bezier(1.0,0,0,1.0);
+    animation-timing-function:cubic-bezier(1.0,0,0,1.0);
+    -webkit-animation-duration:1s;
+    animation-duration:1s;
+}
+
 
 
 /* row */
@@ -62,15 +87,32 @@
 }
 
 .adminsubs .num {
+    position:relative;
     float:left;
     width:39px;
     height:40px;
-    line-height:40px;
+    line-height:55px;
     padding:0 5px;
     color:#333;
     font-weight:bold;
+    font-size:22px;
     background:rgba(0,0,0,0.1);
     border-left:1px solid;
+}
+
+.adminsubs .num .infobox{
+    display:none;
+    position:absolute;
+    z-index:999;
+    bottom:50px;
+    left:0;
+    width:400px;
+    padding:0 10px;
+    font-weight:normal;
+    font-size:12px;
+    border-radius:2px;
+    box-shadow:2px 1px 2px rgba(0,0,0,0.5);
+    background:inherit;
 }
 .adminsubs .num:first-child {
     margin-left:410px;
@@ -86,6 +128,11 @@
 }
 .adminsubs .row.years.mini .num {
     height:3px;
+    text-indent: -9999px;
+}
+
+.adminsubs .row.years:not(.mini) .num:hover .infobox{
+    display:block;
 }
 
 .adminsubs .num.active {
@@ -104,6 +151,38 @@
     background:#eee;
     border-color:#999;
     color:#777;
+}
+
+.adminsubs .num.unpublished {
+    background:#ff9000;
+    border-color:#fff;
+    color:#fff;
+}
+
+.adminsubs .num.nonexistent {
+    background:#c00;
+    border-color:#fff;
+    color:white;
+}
+
+.adminsubs .num.invisible {
+    opacity:0.5
+}
+
+
+
+
+.adminsubs .row.years:not(.mini) .num.chronologyAlert {
+    text-decoration: blink;
+
+    -webkit-animation-name:blinker;
+    animation-name:blinker;
+    -webkit-animation-iteration-count:infinite;
+    animation-iteration-count:infinite;
+    -webkit-animation-timing-function:cubic-bezier(1.0,0,0,1.0);
+    animation-timing-function:cubic-bezier(1.0,0,0,1.0);
+    -webkit-animation-duration:1s;
+    animation-duration:1s;
 }
 
 

@@ -80,6 +80,17 @@ class Product extends ProductCore
     }
 
 
+    public static function getAllRegisteredMagazines() {
+
+        $sql = 'select id_product, reference, date_parution, active, visibility  from ps_product where
+            reference REGEXP "^[0-9]{3}$" order by date_parution asc';
+
+        $products = DB::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+
+        return $products;
+    }
+
+
     /**
      * Retourne la dernère revue publiée à la date de la commande
      * Pour changer la date de référence (de la commande), il faut ajouter dans cette fonction une récupération des statuts de la commande, puis exploiter le statut numéro 15 qui remplacera la date de la commande

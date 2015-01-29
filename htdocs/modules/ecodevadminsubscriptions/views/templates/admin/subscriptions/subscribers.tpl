@@ -1,9 +1,22 @@
 {assign "numWidth" "50"}
+{assign "chronologyAlert" 0}
 
 <div class="legend">
 
    <div class="element header">
       Légende :
+   </div>
+
+   <div class="element">
+      <div class="reference tierce"></div> Hérité d'un tiers
+   </div>
+
+   <div class="element">
+      <div class="reference imported"></div> Importé
+   </div>
+
+   <div class="element">
+      <div class="reference archive"></div> Echu
    </div>
 
    <div class="element">
@@ -15,15 +28,19 @@
    </div>
 
    <div class="element">
-      <div class="reference archive"></div> Echu
+      <div class="reference nonexistent"></div> N'existe pas
    </div>
 
    <div class="element">
-      <div class="reference tierce"></div> Hérité d'un tiers
+      <div class="reference unpublished"></div> Non publié
    </div>
 
    <div class="element">
-      <div class="reference imported"></div> Importé
+      <div class="reference future invisible"></div><div class="reference unpublished invisible"></div><div class="reference nonexistent invisible"></div> Invisible
+   </div>
+
+   <div class="element">
+      <div class="reference future alertchronology">X</div> <div class="reference unpublished alertchronology">X</div> Problème de chronologie
    </div>
 
 </div>
@@ -31,12 +48,43 @@
 <div class="adminsubs" style="width:{($max-$min+1) * $numWidth + 410}px">
 
 
+
+      {capture name="years"}
+         {foreach $magazines as $mag}
+
+            {if isset($lastMagazine) && ($mag.reference != ($lastMagazine.reference + 1) )}
+               {assign "chronologyAlert" 1}
+            {/if}
+
+            {assign "lastMagazine" $mag}
+
+            {if !isset($biggerMagazine) || $mag.reference > $biggerMagazine.reference}
+               {assign "biggerMagazine" $mag}
+            {/if}
+
+            <a href="index.php?controller=AdminProducts&amp;id_product={$mag.id_product}&amp;updateproduct&amp;token={Tools::getAdminTokenLite('AdminProducts')}" class="num{if $mag.reference < $actual} archive{/if}{if $mag.reference == $actual} active{/if}{if $mag.reference > $actual} future{/if}{if $mag.active == 0} unpublished{/if}{if $mag.visibility == 'none'} invisible{/if}{if $chronologyAlert==1} chronologyAlert{/if}" title="Modifier">
+               {$mag.reference}
+               <div class="infobox">
+                  Parution : {$mag.date_parution}
+                  {if $chronologyAlert==1}, problème de chronologie{/if}
+                  {if $mag.active == 0}, inactif{/if}
+                  {if $mag.visibility == 'none'}, invisible{/if}
+               </div>
+            </a>
+         {/foreach}
+
+         {for $num=($biggerMagazine.reference + 1) to $max}
+            <div class="num nonexistent">
+               {$num}
+               <div class="infobox">
+                  Ce numéro n'existe pas
+               </div>
+            </div>
+         {/for}
+      {/capture}
+
    <div class="row years">
-      {for $num=$min to $max}
-         <div class="num{if $num < $actual} archive{/if}{if $num == $actual} active{/if}{if $num > $actual} future{/if}">
-            {$num}
-         </div>
-      {/for}
+      {$smarty.capture.years}
    </div>
 
 
@@ -90,11 +138,8 @@
          <div class="clearfix"></div>
       </div>
 
-      <div class="row years mini">
-         {for $num=$min to $max}
-            <div class="num{if $num < $actual} archive{/if}{if $num == $actual} active{/if}{if $num > $actual} future{/if}"></div>
-         {/for}
-      </div>
+      <div class="row years mini">{$smarty.capture.years}</div>
+
    {/foreach}
 
 </div>
