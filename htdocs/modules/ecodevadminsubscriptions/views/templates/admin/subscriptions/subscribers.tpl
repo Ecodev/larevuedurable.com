@@ -4,15 +4,45 @@
 <div class="legend">
 
    <div class="element header">
-      Légende :
+      Numéros  :
    </div>
 
    <div class="element">
-      <div class="reference tierce"></div> Hérité d'un tiers
+      <div class="reference archive"></div> Passé
    </div>
 
    <div class="element">
-      <div class="reference imported"></div> Importé
+      <div class="reference active"></div> Actuel
+   </div>
+
+   <div class="element">
+      <div class="reference future"></div> Futur
+   </div>
+
+
+   <div class="element">
+      <div class="reference unpublished"></div> Non publié
+   </div>
+
+   <div class="element">
+      <div class="reference future invisible"></div><div class="reference unpublished invisible"></div><div class="reference nonexistent invisible"></div> Invisible
+   </div>
+
+   <div class="element">
+      <div class="reference future alertchronology">X</div> <div class="reference unpublished alertchronology">X</div> Problème de chronologie
+   </div>
+
+   <div class="element">
+      <div class="reference nonexistent"></div> N'existe pas
+   </div>
+
+
+</div>
+
+<div class="legend">
+
+   <div class="element header">
+      Abonnements :
    </div>
 
    <div class="element">
@@ -28,20 +58,13 @@
    </div>
 
    <div class="element">
-      <div class="reference nonexistent"></div> N'existe pas
+      <div class="reference tierce"></div> Hérité d'un tiers
    </div>
 
    <div class="element">
-      <div class="reference unpublished"></div> Non publié
+      <div class="reference imported"></div> Importé
    </div>
 
-   <div class="element">
-      <div class="reference future invisible"></div><div class="reference unpublished invisible"></div><div class="reference nonexistent invisible"></div> Invisible
-   </div>
-
-   <div class="element">
-      <div class="reference future alertchronology">X</div> <div class="reference unpublished alertchronology">X</div> Problème de chronologie
-   </div>
 
 </div>
 
