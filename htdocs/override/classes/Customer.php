@@ -148,22 +148,16 @@ class Customer extends CustomerCore
      */
     public static function getSubscriptionsByUserID($user_id)
     {
-        $sql = "SELECT id_order_state as id
-			    FROM ps_order_state
-                WHERE logable = 1 ";
-        $validStates = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
 
         $sql = '
 			SELECT o.id_order, o.id_customer, oh.date_add, od.product_attribute_id, oh.id_order_history, od.product_name  FROM ps_orders o
 				LEFT JOIN ps_order_detail od ON o.id_order = od.id_order
 				LEFT JOIN ps_order_history oh ON o.id_order = oh.id_order
-			WHERE o.valid = 1
-				and o.id_customer = ' . (int) $user_id . ' AND (1=0 ';
+				LEFT JOIN ps_order_state os on oh.id_order_state = os.id_order_state
+			WHERE o.valid = 1 AND o.id_customer = ' . (int) $user_id . ' AND os.logable = 1 AND ';
 
-        foreach ($validStates as $state) {
-            $sql .= ' OR oh.id_order_state = ' . $state['id'];
-        }
-        $sql .= ') AND (od.product_id = ' . _ABONNEMENT_PARTICULIER_ . ' OR od.product_id =' . _ABONNEMENT_INSTITUT_ . ' OR od.product_id = ' . _ABONNEMENT_SOLIDARITE_ . ' OR od.product_id = ' . _ABONNEMENT_MOOC_ . Product::getInstituteProductsAsSql() . ') ORDER BY invoice_date desc, date_add asc';
+        $sql .= '(od.product_id = ' . _ABONNEMENT_PARTICULIER_ . ' OR od.product_id = ' . _ABONNEMENT_INSTITUT_ . ' OR od.product_id = ' . _ABONNEMENT_SOLIDARITE_ . ' OR od.product_id = ' . _ABONNEMENT_MOOC_ . Product::getInstituteProductsAsSql() . ') ';
+        $sql .= 'ORDER BY invoice_date desc, date_add asc';
 
         $subscriptions = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
         $subscriptions = Customer::cleanExtraOrderStatus($subscriptions);
@@ -218,7 +212,7 @@ class Customer extends CustomerCore
 
 
     /**
-     *    Ne garde que le premier état de l'historique de chaque commande (selon l'ordre défini dans la requette SQL)
+     * Ne garde que le premier état de l'historique de chaque commande (selon l'ordre défini dans la requette SQL)
      *
      * @return Retourne une liste d'abonnements (objets Subscription)
      */
