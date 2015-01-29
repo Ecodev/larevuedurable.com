@@ -111,7 +111,13 @@
 <div class="separation"></div>
 
 <div>
-    <h2>{l s='Abonnements en cours'}</h2>
+    <h2>
+		{l s='Abonnements en cours'}
+		<a href="index.php?controller=AdminSubscriptions&customer={$customer->id}&token={Tools::getAdminTokenLite('AdminSubscriptions')}" class="button" title="Modifier" style="margin-left:20px;font-size:12px;font-weight:normal">
+			<img src="../img/admin/themes.gif" alt="Voir"> Voir graphiquement
+		</a>
+
+	</h2>
 
     {if isset($customer->subscriptions) && count($customer->subscriptions)}
             <table  class="table media_list" cellspacing="0" cellpadding="0" >
@@ -152,6 +158,7 @@
             </table>
 
         <div id="block-order-detail" class="hidden">&nbsp;</div>
+
     {else}
         <p class="warning">{l s='Aucun abonnement actuellement actif ou ayant été actif'}</p>
     {/if}
