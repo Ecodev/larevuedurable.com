@@ -1,4 +1,33 @@
 {assign "numWidth" "50"}
+
+<div class="legend">
+
+   <div class="element header">
+      Légende :
+   </div>
+
+   <div class="element">
+      <div class="reference active"></div> Actif
+   </div>
+
+   <div class="element">
+      <div class="reference future"></div> Futur
+   </div>
+
+   <div class="element">
+      <div class="reference archive"></div> Echu
+   </div>
+
+   <div class="element">
+      <div class="reference tierce"></div> Hérité d'un tiers
+   </div>
+
+   <div class="element">
+      <div class="reference imported"></div> Importé
+   </div>
+
+</div>
+
 <div class="adminsubs" style="width:{($max-$min+1) * $numWidth + 410}px">
 
 
