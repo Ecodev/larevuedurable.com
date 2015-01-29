@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>ecodevadminsubscriptions</name>
+            <displayName><![CDATA[Tous les abonnements en admin]]></displayName>
+            <version><![CDATA[1.0.0]]></version>
+            <description><![CDATA[Affiche dans le backoffice une vue graphique repr&eacute;sentant tous les abonn&eacute;s et leurs abonnements.]]></description>
+            <author><![CDATA[]]></author>
+            <tab><![CDATA[ecodev]]></tab>
+            <is_configurable>0</is_configurable>
+            <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+        </module>

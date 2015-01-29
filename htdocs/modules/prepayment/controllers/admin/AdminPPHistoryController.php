@@ -1,8 +1,8 @@
 <?php
 
 /*
-* DrÿSs' Agency
-* © 2013 All rights reserved
+* Drï¿½Ss' Agency
+* ï¿½ 2013 All rights reserved
 * http://www.dryss.com
 * contact@dryss.com
 */

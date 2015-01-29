@@ -5,7 +5,7 @@ class EcodevSubscription extends Module
     public function __construct()
     {
         $this->name = 'ecodevsubscription';
-        $this->tab = 'Ecodev';
+        $this->tab = 'ecodev';
         $this->version = '1.0';
 
         $this->_errors = array();

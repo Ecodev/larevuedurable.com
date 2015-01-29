@@ -6,7 +6,7 @@ class EcodevProductSorting extends Module
     public function __construct()
     {
         $this->name = 'ecodevproductsorting';
-        $this->tab = 'Ecodev';
+        $this->tab = 'ecodev';
         $this->version = '1.0';
 
         $this->_errors = array();

@@ -12,7 +12,7 @@ class EcodevScripts extends Module
     public function __construct()
     {
         $this->name = 'ecodevscripts';
-        $this->tab = 'Ecodev';
+        $this->tab = 'ecodev';
         $this->version = '1.0';
         $this->_errors = array();
 

@@ -9,7 +9,7 @@ class EcodevNextConf extends Module
 	public function __construct()
 	{
 		$this->name = 'ecodevnextconf';
-		$this->tab = 'Net-lead';
+		$this->tab = 'ecodev';
 		$this->version = '1.0';
 		
 		$this->_errors = array();

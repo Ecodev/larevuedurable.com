@@ -5,7 +5,7 @@ class Ecodevganalytics extends Module
 	function __construct()
 	{
 	 	$this->name = 'ecodevganalytics';
-	 	$this->tab = 'Ecodev';
+	 	$this->tab = 'ecodev';
 	 	$this->version = '1';
         $this->displayName = 'Google Analytics';
 		

@@ -1,0 +1,168 @@
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.adminsubs{
+    margin-top:50px;
+}
+
+/* row */
+.adminsubs .row {
+    position:relative;
+    padding:5px 0;
+    border-bottom:1px solid #ccc;
+    clear:both;
+    width:10000px;
+
+}
+.adminsubs .row:hover {
+    background-color:rgba(22,138,30,0.1);
+}
+
+
+/* years / nums */
+.adminsubs .row.years{
+    height:40px;
+}
+
+.adminsubs .num {
+    float:left;
+    width:39px;
+    height:40px;
+    line-height:40px;
+    padding:0 5px;
+    color:#333;
+    font-weight:bold;
+    background:rgba(0,0,0,0.1);
+    border-left:1px solid;
+}
+.adminsubs .num:first-child {
+    margin-left:410px;
+}
+
+/* mini */
+.adminsubs .row.years {
+    background:#eee;
+    padding:0;
+}
+.adminsubs .row.years.mini {
+    height:3px;
+}
+.adminsubs .row.years.mini .num {
+    height:3px;
+}
+
+.adminsubs .num.active {
+    background:#8cc642;
+    border-color:#999;
+    color:#055b0b;
+}
+
+.adminsubs .num.future {
+    background:#067EB1;
+    border-color:white;
+    color:white;
+}
+
+.adminsubs .num.archive {
+    background:#eee;
+    border-color:#999;
+    color:#777;
+}
+
+
+
+/* Customers zone */
+.adminsubs .leftheader {
+    float:left;
+    width:400px;
+    line-height:40px;
+    margin-right:10px;
+    font-weight:bold;
+    font-size:14px;
+    color:#555
+}
+
+.adminsubs .subscriptionsContainer {
+    float:left;
+    position:relative;
+    width:0px;
+}
+
+.adminsubs .subscriptions {
+    position:relative;
+    height:40px;
+    width:10000px;
+}
+
+.adminsubs .subscriptions.tierce {
+    margin-top:5px;
+    padding-top:5px;
+    border-top:1px dotted #ccc;
+}
+
+
+/* single subs */
+.adminsubs .sub {
+    position:absolute;
+    top:5px;
+    overflow-x:scroll;
+    overflow-y:hidden;
+    padding:0 5px;
+    height:40px;
+    line-height:40px;
+    border-radius:4px;
+    font-size:11px;
+}
+
+.adminsubs .subscriptionsContainer .subscriptions:first-child .sub {
+    top:0px;
+}
+
+
+.adminsubs .sub.active {
+    /*background:#8cc642;*/
+    background:rgba(49,170,0,0.5);
+    color:#034608;
+}
+
+.adminsubs .sub.future {
+    background:#067EB1;
+    color:white;
+}
+
+.adminsubs .sub.archive {
+    background:#ddd;
+    color:#555;
+}
+
+.adminsubs .tierce .sub {
+    background:rgba(191,58,193,0.5);
+    color:#590064
+}
+
+.adminsubs .sub1 {
+    width:190px;
+}
+
+.adminsubs .sub2 {
+    width:390px;
+}
+
+.adminsubs .sub.imported {
+    padding-right:30px;
+    background-image:url(import.png);
+    background-position: 98% center;
+    background-repeat:no-repeat;
+}
+.adminsubs .sub1.imported {
+    width:165px;
+}
+
+.adminsubs .sub2.imported {
+    width:365px;
+}
+
