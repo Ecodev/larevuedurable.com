@@ -367,7 +367,7 @@ class EcodevAPIImporter
             $xml->order->module = 'bankwire';
             $xml->order->payment = 'Virement bancaire';
             $xml->order->total_paid = $cart->getOrderTotal(true);
-            $xml->order->current_state = 12;
+            $xml->order->current_state = _IMPORTED_ORDER_STATE_;
             $xml->order->total_paid_real = $cart->getOrderTotal(true);
             $xml->order->total_products = 0;
             $xml->order->total_products_wt = 0;

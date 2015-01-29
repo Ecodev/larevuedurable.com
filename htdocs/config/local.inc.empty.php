@@ -72,7 +72,8 @@ define('_CATEGORY_FULL_BOOK_' , 21);
 define('_CATEGORY_LITTLE_ARTICLES_' , 22);
 
 // API prestashop
-define('_PS_IMPORT_FROM_CRESUS_API_KEY_', 'OX7P1KT26VMCR2N6FPRA3NB1JZKXRSAF');
+define('_PS_IMPORT_FROM_CRESUS_API_KEY_', '');
+define('_IMPORTED_ORDER_STATE_', 12);
 
 // Module bon cadeau
 define('_GIFT_PRODUCT_ID_', 1028);
