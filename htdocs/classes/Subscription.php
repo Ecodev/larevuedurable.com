@@ -9,11 +9,6 @@ class Subscription
     public $last_edition;
     public $number_of_editions; // nombre de revues inclues dans l'abo
 
-    // related objects
-    public $customer;
-    public $order_history;
-    public $order;
-
     // ids to related objects
     public $id_order;
     public $id_order_history;
@@ -26,9 +21,13 @@ class Subscription
 
     public $type;
 
+    // related objects
+    public $order_history;
+    public $order;
+    public $customer;
+
     public function __construct($abonnement)
     {
-        //$this->customer = new Customer($abonnement['id_customer']);
         $this->product_attributes_name = $abonnement['product_name'];
         $this->id_order = $abonnement['id_order'];
         $this->order = new Order($this->id_order);
@@ -110,7 +109,7 @@ class Subscription
                 $premier_abo = $subs[$i]; // le plus *ancien* des deux
                 $deuxieme_abo = $subs[$i - 1]; // le plus *récent* des deux
 
-                if ($deuxieme_abo->first_edition < $premier_abo->last_edition) {
+                if ($deuxieme_abo->first_edition <= $premier_abo->last_edition) {
                     $deuxieme_abo->setStartEdition($premier_abo->last_edition + 1);
                 }
             }
