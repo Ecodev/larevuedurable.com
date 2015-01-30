@@ -221,12 +221,18 @@ class Customer extends CustomerCore
         $final_subs = array();
         $orders = array();
 
+
         foreach ($subscriptions as $subscription) {
             if (!in_array($subscription['id_order'], $orders)) {
                 array_push($orders, $subscription['id_order']);
                 array_push($final_subs, new Subscription($subscription));
             }
         }
+
+//        echo "<pre>";
+//        print_r($final_subs);
+//        echo "</pre>";
+//
 
         return $final_subs;
     }

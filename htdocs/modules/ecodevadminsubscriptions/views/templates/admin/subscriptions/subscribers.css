@@ -1,5 +1,20 @@
-@-webkit-keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
-@keyframes blinker { from {opacity:1.0;} to {opacity:0.0;} }
+@-webkit-keyframes blinker {
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes blinker {
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0;
+    }
+}
 
 .clearfix:after {
     content: "";
@@ -8,16 +23,17 @@
 }
 
 .legend {
-    margin:20px;
-    font-size:14px;
+    margin: 5px;
+    font-size: 13px;
     color:#555
 }
 
 .legend .element{
     display:inline-block;
+    vertical-align: top;
     margin-right:10px;
-    height:20px;
-    line-height:20px;
+    height: 15px;
+    line-height: 15px;
     padding:5px;
     border:1px solid #ccc;
     border-radius:4px;
@@ -32,53 +48,24 @@
 }
 
 .legend .element .reference{
-    border-radius:5px;
+    border-radius: 3px;
     float:left;
-    height:20px;
-    width:20px;
-    margin-right:10px;
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+    font-size: 11px;
 }
-
-.legend .element .reference.active{background:rgba(49,170,0,0.5);}
-.legend .element .reference.future{background:#067EB1;}
-.legend .element .reference.archive{background:#ddd;}
-.legend .element .reference.tierce{background:rgba(191,58,193,0.5);}
-.legend .element .reference.imported{
-    background:url(import.png) center center no-repeat;
-    border:1px solid #ccc;
-}
-.legend .element .reference.unpublished{background:#ff9000;}
-.legend .element .reference.nonexistent{background:#c00;}
-.legend .element .reference.invisible{opacity:0.5}
-.legend .element .reference.alertchronology{
-    /*background:#ccc;*/
-    text-align:center;
-    text-decoration: blink;
-    color:white;
-
-    -webkit-animation-name:blinker;
-    animation-name:blinker;
-    -webkit-animation-iteration-count:infinite;
-    animation-iteration-count:infinite;
-    -webkit-animation-timing-function:cubic-bezier(1.0,0,0,1.0);
-    animation-timing-function:cubic-bezier(1.0,0,0,1.0);
-    -webkit-animation-duration:1s;
-    animation-duration:1s;
-}
-
 
 
 /* row */
 .adminsubs .row {
     position:relative;
-    padding:5px 0;
+    padding: 15px 0;
     border-bottom:1px solid #ccc;
     clear:both;
-    width:10000px;
-
 }
 .adminsubs .row:hover {
-    background-color:rgba(22,138,30,0.1);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 
@@ -92,13 +79,17 @@
     float:left;
     width:39px;
     height:40px;
-    line-height:55px;
+    line-height: 30px;
     padding:0 5px;
     color:#333;
     font-weight:bold;
     font-size:22px;
     background:rgba(0,0,0,0.1);
-    border-left:1px solid;
+    margin-left: 1px;
+}
+
+.adminsubs .years.mini .num {
+    border-bottom: none !important
 }
 
 .adminsubs .num .infobox{
@@ -119,6 +110,14 @@
     margin-left:410px;
 }
 
+.adminsubs .unpublished,
+.adminsubs .nonexistent,
+.adminsubs .invisible {
+    height: 30px;
+    border-bottom: 10px solid;
+}
+
+
 /* mini */
 .adminsubs .row.years {
     background:#eee;
@@ -136,44 +135,7 @@
     display:block;
 }
 
-.adminsubs .num.active {
-    background:#8cc642;
-    border-color:#999;
-    color:#055b0b;
-}
-
-.adminsubs .num.future {
-    background:#067EB1;
-    border-color:white;
-    color:white;
-}
-
-.adminsubs .num.archive {
-    background:#eee;
-    border-color:#999;
-    color:#777;
-}
-
-.adminsubs .num.unpublished {
-    background:#ff9000;
-    border-color:#fff;
-    color:#fff;
-}
-
-.adminsubs .num.nonexistent {
-    background:#c00;
-    border-color:#fff;
-    color:white;
-}
-
-.adminsubs .num.invisible {
-    opacity:0.5
-}
-
-
-
-
-.adminsubs .row.years:not(.mini) .num.chronologyAlert {
+.adminsubs .chronologyAlert {
     text-decoration: blink;
 
     -webkit-animation-name:blinker;
@@ -186,6 +148,10 @@
     animation-duration:1s;
 }
 
+.adminsubs .row.years.mini .chronologyAlert {
+    -webkit-animation-name: none;
+    animation-name: none;
+}
 
 
 /* Customers zone */
@@ -208,10 +174,10 @@
 .adminsubs .subscriptions {
     position:relative;
     height:40px;
-    width:10000px;
+
 }
 
-.adminsubs .subscriptions.tierce {
+.adminsubs .subscriptions.tierces {
     margin-top:5px;
     padding-top:5px;
     border-top:1px dotted #ccc;
@@ -225,57 +191,22 @@
     overflow-x:scroll;
     overflow-y:hidden;
     padding:0 5px;
-    height:40px;
-    line-height:40px;
+    height: 30px;
+    line-height: 35px;
     border-radius:4px;
     font-size:11px;
+}
+
+.web, .paper {
+    border-bottom: 10px solid;
 }
 
 .adminsubs .subscriptionsContainer .subscriptions:first-child .sub {
     top:0px;
 }
 
-
-.adminsubs .sub.active {
-    /*background:#8cc642;*/
-    background:rgba(49,170,0,0.5);
-    color:#034608;
-}
-
-.adminsubs .sub.future {
-    background:#067EB1;
-    color:white;
-}
-
-.adminsubs .sub.archive {
-    background:#ddd;
-    color:#555;
-}
-
-.adminsubs .tierce .sub {
-    background:rgba(191,58,193,0.5);
-    color:#590064
-}
-
-.adminsubs .sub1 {
-    width:190px;
-}
-
-.adminsubs .sub2 {
-    width:390px;
-}
-
 .adminsubs .sub.imported {
     padding-right:30px;
-    background-image:url(import.png);
     background-position: 98% center;
     background-repeat:no-repeat;
 }
-.adminsubs .sub1.imported {
-    width:165px;
-}
-
-.adminsubs .sub2.imported {
-    width:365px;
-}
-

@@ -14,10 +14,25 @@ class Subscription
     public $id_order_history;
     public $product_attribute_id;
 
-    // booleans
+    /**
+     * @var boolean
+     */
     public $is_active;
+
+    /**
+     * @var boolean
+     */
     public $is_future;
+
+    /**
+     * @var boolean
+     */
     public $is_archive;
+
+    /**
+     * @var boolean
+     */
+    public $is_paper;
 
     public $type;
 
@@ -62,12 +77,18 @@ class Subscription
         $this->first_edition = (int) $magazineOrder['reference'];
         $this->last_edition = $this->first_edition + $this->number_of_editions - 1;
 
+        $this->is_archive = false;
+        $this->is_paper = false;
+
         // Récupère le type d'abonnement ( incluant le web avec archives ou seulement le papier )
         foreach ($attributs as $attribut) {
+
             if ($attribut['id'] == _WEB_ || $attribut['id'] == _PAPIER_ET_WEB_) {
                 $this->is_archive = true;
-            } else if ($attribut['id'] == _PAPIER_) {
-                $this->is_archive = false;
+            }
+
+            if ($attribut['id'] == _PAPIER_ || $attribut['id'] == _PAPIER_ET_WEB_) {
+                $this->is_paper = true;
             }
         }
 
