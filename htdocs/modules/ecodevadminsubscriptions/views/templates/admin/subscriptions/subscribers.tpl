@@ -50,7 +50,7 @@
       <div class="element">
          <div class="reference archive"></div> Echu
       </div>
-
+      
       <div class="element">
          <div class="reference active"></div> Actif
       </div>
@@ -60,7 +60,11 @@
       </div>
 
       <div class="element">
-         <div class="reference tierce"></div> Hérité d'un tiers
+         <div class="reference active"></div> <div class="reference future"></div> Possédé (parti,soli,insti)
+      </div>
+
+      <div class="element">
+         <div class="reference tierce"></div> Reçu
       </div>
 
       <div class="element">
