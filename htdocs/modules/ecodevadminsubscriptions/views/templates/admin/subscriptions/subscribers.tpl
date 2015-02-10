@@ -89,6 +89,7 @@
 
          {capture name = "years"}
             {foreach $magazines as $mag}
+               {if $mag.reference > $max}{break}{/if}
 
                {if isset($lastMagazine) && ($mag.reference != ($lastMagazine.reference + 1) )}
                   {assign "chronologyAlert" 1}
@@ -110,6 +111,7 @@
                      {if $mag.visibility == 'none'}, invisible{/if}
                   </div>
                </a>
+
             {/foreach}
 
             {for $num=($biggerMagazine.reference + 1) to $max}
