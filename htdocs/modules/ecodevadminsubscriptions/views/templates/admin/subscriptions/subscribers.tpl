@@ -85,9 +85,16 @@
 
    </div>
 
+
+   <br/>
+
    <div style="width:{$subsWidth + 410}px">
 
-         {capture name = "years"}
+      {capture name = "years"}
+            <div class="leftheader">
+               Prochaine relance : {$nextFollowUpDate|date_format:'%e %B %Y'}
+            </div>
+
             {foreach $magazines as $mag}
                {if $mag.reference > $max}{break}{/if}
 

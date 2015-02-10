@@ -74,6 +74,10 @@
     height:40px;
 }
 
+.adminsubs .row.years .leftheader{
+    text-indent:10px;
+}
+
 .adminsubs .num {
     position:relative;
     float:left;
@@ -92,6 +96,12 @@
     border-bottom: none !important
 }
 
+.adminsubs .row.years.mini .leftheader{
+    height:1px;
+    text-indent:-99999em;
+}
+
+
 .adminsubs .num .infobox{
     display:none;
     position:absolute;
@@ -105,9 +115,6 @@
     border-radius:2px;
     box-shadow:2px 1px 2px rgba(0,0,0,0.5);
     background:inherit;
-}
-.adminsubs .num:first-child {
-    margin-left:410px;
 }
 
 .adminsubs .unpublished,

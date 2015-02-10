@@ -60,11 +60,15 @@ class AdminSubscriptionsController extends ModuleAdminController
 
         $magazine = Product::getLastMagazineReleased(null);
 
+        $nextProductParutionDate = new DateTime(Product::getParutionDateByRef((int) $magazine['reference'] + 1));
+        $nextFollowUpDate = $nextProductParutionDate->modify('-10 day');
+
         $this->context->smarty->assign(
             array(
                 'imported_order_state' => _IMPORTED_ORDER_STATE_,
                 'magazines' => $magazinesAfterFirstSubscription,
                 'actual' => (int) $magazine['reference'],
+                'nextFollowUpDate' => $nextFollowUpDate,
                 'min' => $min,
                 'max' => $max,
                 'customers' => $customers
