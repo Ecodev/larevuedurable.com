@@ -31,14 +31,15 @@ htdocs/classes/*
 !htdocs/classes/Subscription.php
 
 !htdocs/modules/
-htdocs/modules/ecodevscripts/de_cresus/*
-htdocs/modules/ecocevscripts/pour_cresus/*
 htdocs/modules/ecodevscripts/tests/*
 htdocs/modules/prestablog/themes/*/up-img/*
 htdocs/modules/prestablog/themes/default/up-img/*
 htdocs/modules/homeslider/images/*
 htdocs/modules/ecodevscripts/de_cresus/*
 !htdocs/modules/ecodevscripts/de_cresus/.gitkeep
+htdocs/modules/ecodevscripts/pour_cresus/*
+!htdocs/modules/ecodevscripts/pour_cresus/.gitkeep
+
 !htdocs/override/
 
 !htdocs/manuel/
