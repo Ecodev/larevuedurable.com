@@ -24,7 +24,7 @@ class Relance
 
     /**
      * Liste les campagnes et les listes telles que vues par l'API afin de pouvoir récupérer manuellement l'ID de ces objets dans l'API.
-     * Ces Ids ne sont pas accessibles via le GUI de maichimp.
+     * Ces Ids ne sont pas accessibles via le GUI de mailchimp.
      */
     public function echoData()
     {
@@ -59,7 +59,8 @@ class Relance
 
     private function importeAbonnes($num = null)
     {
-        $array_newsletter = Customer::getAllSubscribers();
+        $array_newsletter = Customer::getAllSubscribersForFollowUp();
+
         $relances = [];
 
         foreach ($array_newsletter as $key => $user) {
