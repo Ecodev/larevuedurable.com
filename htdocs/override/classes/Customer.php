@@ -416,6 +416,22 @@ class Customer extends CustomerCore
         return $this->user_subscriptions[0];
     }
 
+    public function getNextFollowUpDate()
+    {
+        $current_subscription = $this->getLastSubscription();
+        if ($current_subscription) {
+            $date_dernier_numero = Product::getParutionDateByRef($current_subscription->last_edition -1);
+            if ($date_dernier_numero) {
+                $date_dernier_numero = new DateTime($date_dernier_numero);
+                $date_relance = $date_dernier_numero->modify('-10 day');
+
+                return $date_relance;
+            }
+        }
+
+        return null;
+    }
+
     /**
      *    Récupère tous les bénéficiaires d'un abonnement (une commande comportant un abonnement doit être valide)
      */

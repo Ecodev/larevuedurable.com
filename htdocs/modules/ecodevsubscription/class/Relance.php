@@ -57,6 +57,10 @@ class Relance
         }
     }
 
+    /**
+     * @param null $num if given filters customers that last subscription finishes with specified number (ignoring current day date)
+     * @return array
+     */
     private function importeAbonnes($num = null)
     {
         $array_newsletter = Customer::getAllSubscribersForFollowUp();
@@ -71,7 +75,7 @@ class Relance
             $current_subscription = $customer->getLastSubscription();
 
             if ($current_subscription != null && (!$num || $num && $num == $current_subscription->last_edition)) {
-                $date_dernier_numero = Product::getParutionDateByRef($current_subscription->last_edition);
+                $date_dernier_numero = Product::getParutionDateByRef($current_subscription->last_edition - 1);
                 if ($date_dernier_numero) {
                     $date_dernier_numero = new DateTime($date_dernier_numero);
                     $date_relance = $date_dernier_numero->modify('-10 day');

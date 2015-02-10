@@ -33,6 +33,11 @@ class AdminCustomersController extends AdminCustomersControllerCore
 			return;
 
 		$customer->manageSubscriptions();
+//
+//
+//		$this->tpl_view_vars = array(
+//			'followUpDate' => $customer->getNextFollowUpDate()
+//		);
 
         return parent::renderView();
 	}

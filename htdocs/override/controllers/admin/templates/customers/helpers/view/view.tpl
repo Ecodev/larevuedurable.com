@@ -140,10 +140,17 @@
 	</h2>
 
 	<p>
+		{if $customer->getNextFollowUpDate()}
+			<strong>Date de la prochaine relance </strong> : {$customer->getNextFollowUpDate()|date_format:'%e %B %Y'} (si non exclu)
+		{/if}
+		<br/>
+		<br/>
 		<input type="checkbox" id="excludeFromFollowUp" name="excludeFromFollowUp" onchange="saveExcludeFromFollowUp()" {if $customer->excludeFromFollowUp}checked{/if}/>
 		Exclure de la relance automatique
 		<span id="excludeFromFollowUpStage" style="color:red;display:none">Une erreur s'est produite lors de la sauvegarde, contactez l'administrateur technique.</span>
 	</p>
+
+
 
     {if isset($customer->subscriptions) && count($customer->subscriptions)}
             <table  class="table media_list" cellspacing="0" cellpadding="0" >
