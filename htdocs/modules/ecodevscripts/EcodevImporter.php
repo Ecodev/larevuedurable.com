@@ -46,7 +46,7 @@ class EcodevAPIImporter
                     if ($this->debug2 == 2) {
                         echo $message;
                     }
-                    error_log($message . chr(10) . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/_api_import_error_log.txt');
+                    error_log($message . chr(10) . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../logs/importer_api.txt');
 
                 } catch (Exception $ex) {
                     $shortMsg = $user[EMAIL] . " (" . $user[ID] . ", " . $user[SOURCE]. ") - " . $ex->getMessage();
@@ -58,7 +58,7 @@ class EcodevAPIImporter
                     if ($this->debug2 == 2) {
                         echo $message;
                     }
-                    error_log($message . chr(10) . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/_api_import_error_log.txt');
+                    error_log($message . chr(10) . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../logs/importer_api.txt');
                 }
             }
             $row++;
