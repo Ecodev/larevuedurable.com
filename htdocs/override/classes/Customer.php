@@ -11,26 +11,23 @@ class Customer extends CustomerCore
     public $is_tierce = false;
     public $conditions = null;
 
-
     public function __construct($id = null)
     {
         $this->cresus_id = null;
-        $this->cresus_source = null;
         self::$definition['fields']['cresus_id'] = array('type' => self::TYPE_INT, 'validate' => 'isUnsignedId');
+
+        $this->cresus_source = null;
         self::$definition['fields']['cresus_source'] = array('type' => self::TYPE_STRING);
+
+        /*
+         * Require to execute : ./bin/execute-sql.sh "ALTER TABLE ps_customer ADD excludeFromFollowUp TINYINT(1) UNSIGNED NOT NULL"
+         */
+        $this->excludeFromFollowUp = null;
+        self::$definition['fields']['excludeFromFollowUp'] = array('type' => self::TYPE_BOOL, 'validate' => 'isBool');
+
         parent::__construct($id);
         $this->getConditions();
     }
-
-//    public function update($nullValues = false) {
-//        $saved = parent::update($nullValues);
-//
-//        if ($saved) {
-//            Tools::notifyCustomerChanged($this->id);
-//        }
-//
-//        return $saved;
-//    }
 
     /**
      *    Fonction très importante : Récupère tous les changements de status des commandes comportant un abonnement.
@@ -96,7 +93,7 @@ class Customer extends CustomerCore
         }
 
         $this->subscriptions = array();
-        if (count($subs) > 0 ) {
+        if (count($subs) > 0) {
             foreach ($subs as $sub) {
                 if (!in_array($sub, $this->subscriptions)) {
                     $this->subscriptions[] = $sub;
@@ -107,10 +104,8 @@ class Customer extends CustomerCore
         return $this->subscriptions;
     }
 
-
     /**
      *    Retourne les abonnements dont l'utilisateur courant bénéficie ou les siens
-     *
      * @param $type tierce pour avoir les abonnements qu'on lui offre ou 'himself' pour avoir les abonnements qu'il a lui même acheté.
      */
     public function getSubscriptionsByUserType($type)
@@ -140,11 +135,9 @@ class Customer extends CustomerCore
         return self::getSubscriptionsByUserID($this->id);
     }
 
-
     /**
      * Retourne les abonnements achetés par l'utilisateur demandé
-     *
-     * @param l'id de l'utilisateur qui a acheté les abonnements
+     * @param l 'id de l'utilisateur qui a acheté les abonnements
      */
     public static function getSubscriptionsByUserID($user_id)
     {
@@ -164,7 +157,6 @@ class Customer extends CustomerCore
 
         return $subscriptions;
     }
-
 
     /**
      *    Récupère toutes les commandes possédant des abonnements , des produits papier ou des paiements avec BVR
@@ -210,17 +202,14 @@ class Customer extends CustomerCore
         return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
     }
 
-
     /**
      * Ne garde que le premier état de l'historique de chaque commande (selon l'ordre défini dans la requette SQL)
-     *
      * @return Retourne une liste d'abonnements (objets Subscription)
      */
     private static function cleanExtraOrderStatus($subscriptions)
     {
         $final_subs = array();
         $orders = array();
-
 
         foreach ($subscriptions as $subscription) {
             if (!in_array($subscription['id_order'], $orders)) {
@@ -229,20 +218,13 @@ class Customer extends CustomerCore
             }
         }
 
-//        echo "<pre>";
-//        print_r($final_subs);
-//        echo "</pre>";
-//
-
         return $final_subs;
     }
-
 
     /**
      *    Récupère un seul et unique utilisateur ayant pu acheter un abonnement pour cette personne
      *    S'il en existe plusieurs, le permier qui est trouvé sera utilisé. Dans la mesure où l'utilisateur bénéficiaire n'a pas de droits sur l'abonnement, il n'importe pas de savoir de qui il le détient.
      *    Une mention est affichée dans la page abonnement si la personne bénéficie d'un abonnement tiers. la propriété ->is_tierce est là pour ca.
-     *
      * @return Retourne un tableau représentant la personne ayant acheté un abonnement pour lui
      */
     private function getInstituteBuyer()
@@ -274,17 +256,15 @@ class Customer extends CustomerCore
         return $this->verifyAccesses($acheteurs_tiers);
     }
 
-
     /**
      * Vérifie si le visiteur courant bénéficie d'avantages achetés par qqn d'autre
-     *
      * @param Une liste des personnes ayant acheté des abonnements Insituts
      * @return bool
      */
     private function verifyAccesses($institute_users)
     {
         foreach ($institute_users as $acheteur) {
-            foreach($acheteur['conditions'] as $condition){
+            foreach ($acheteur['conditions'] as $condition) {
 
                 if ($condition && ($this->verifyAccount($condition) || $this->verifyIP($condition) || $this->verifyDomain($condition))) {
                     return $acheteur;
@@ -294,7 +274,6 @@ class Customer extends CustomerCore
 
         return false;
     }
-
 
     /**
      *    Vérifie les droits des abonnements "pro", qui ont droit à 3 comptes
@@ -307,7 +286,6 @@ class Customer extends CustomerCore
             return true;
         }
     }
-
 
     /**
      *    Vérifie que les ip qui sont insérées dans les notes du client dans le BO de prestashop sont strictement égales à l'ip du visiteur courant
@@ -371,8 +349,10 @@ class Customer extends CustomerCore
         $conditions = null;
         if (!empty($acheteur['note'])) {
             $conditions = explode("\n", $acheteur['note']);
-        } else if (strlen($acheteur['emails']) > 0) {
-            $conditions = explode(',', $acheteur['emails']);
+        } else {
+            if (strlen($acheteur['emails']) > 0) {
+                $conditions = explode(',', $acheteur['emails']);
+            }
         }
 
         if (isset($conditions) && sizeof($conditions) > 0) // && strpos($conditions[0],'@')
@@ -381,9 +361,8 @@ class Customer extends CustomerCore
         }
     }
 
-
     /**
-    Abonne l'utilisateur au groupe Abonnés
+     * Abonne l'utilisateur au groupe Abonnés
      */
     public function subscribe()
     {
@@ -401,7 +380,6 @@ class Customer extends CustomerCore
         }
     }
 
-
     /*
     Retire l'utilisateur du groupe abonnés afin qu'il ai les droits habituels
     */
@@ -412,7 +390,6 @@ class Customer extends CustomerCore
             Customer::setDefaultGroup($this->id, _PS_DEFAULT_CUSTOMER_GROUP_);
         }
     }
-
 
     public static function setDefaultGroup($id_customer, $group_id)
     {
@@ -429,7 +406,6 @@ class Customer extends CustomerCore
         return true;
     }
 
-
     public function getCurrentSubscription()
     {
         return $this->current_subscription;
@@ -440,11 +416,10 @@ class Customer extends CustomerCore
         return $this->user_subscriptions[0];
     }
 
-
     /**
      *    Récupère tous les bénéficiaires d'un abonnement (une commande comportant un abonnement doit être valide)
      */
-    public static function getAllSubscribers($includeBigInstitutes = false, $dateStart = null, $dateEnd = null)
+    public static function getAllSubscribers($includeBigInstitutes = false, $dateStart = null, $dateEnd = null, $excludeFromFollowUp = false)
     {
         // récupère toutes les personnes ayant acheté un abonnement institut
         $sql = '
@@ -464,8 +439,7 @@ class Customer extends CustomerCore
 				od.product_id =' . _ABONNEMENT_PARTICULIER_ . ' OR
 				od.product_id =' . _ABONNEMENT_INSTITUT_ . ' OR
 				od.product_id =' . _ABONNEMENT_SOLIDARITE_ . ' OR
-				od.product_id = ' . _ABONNEMENT_MOOC_;
-        ;
+				od.product_id = ' . _ABONNEMENT_MOOC_;;
 
         if ($includeBigInstitutes) {
             $sql .= Product::getInstituteProductsAsSql();
@@ -479,9 +453,19 @@ class Customer extends CustomerCore
             $sql .= ' AND o.date_add < "' . $dateEnd->format(_DATE_FORMAT_SHORT_) . ' 00:00:00"';
         }
 
+        // Don't return users that will be followed up manually
+        if ($excludeFromFollowUp) {
+            $sql .= ' AND c.excludeFromFollowUp = 0';
+
+        }
+
         $sql .= ' GROUP BY c.id_customer';
 
         return Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
+    }
+
+    public static function getAllSubscribersForFollowUp() {
+        return self::getAllSubscribers(false, null, null, true);
     }
 
 
