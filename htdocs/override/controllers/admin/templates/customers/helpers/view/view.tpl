@@ -52,6 +52,27 @@
 				}
 			});
 		}
+
+		function saveExcludeFromFollowUp()
+		{
+			var el = $('#excludeFromFollowUp');
+			var val = el.is(':checked');
+			el.attr('disabled', true);
+			$('#excludeFromFollowUpStage').hide();
+
+			$.ajax({
+				type: "POST",
+				url: "index.php",
+				data: "token={getAdminToken tab='AdminCustomers'}&tab=AdminCustomers&ajax=1&action=updateCustomerExclusionFromFollowUp&id_customer={$customer->id}&excludeFromFollowUp=" + (val ? 1 : 0) ,
+				async : true,
+				success: function(r) {
+					el.removeAttr('disabled');
+					if (r != 'ok') {
+						$('#excludeFromFollowUpStage').show();
+					}
+				}
+			});
+		}
 	</script>
 
 <div id="container-customer">
@@ -116,8 +137,13 @@
 		<a href="index.php?controller=AdminSubscriptions&customer={$customer->id}&token={Tools::getAdminTokenLite('AdminSubscriptions')}" class="button" title="Modifier" style="margin-left:20px;font-size:12px;font-weight:normal">
 			<img src="../img/admin/themes.gif" alt="Voir"> Voir graphiquement
 		</a>
-
 	</h2>
+
+	<p>
+		<input type="checkbox" id="excludeFromFollowUp" name="excludeFromFollowUp" onchange="saveExcludeFromFollowUp()" {if $customer->excludeFromFollowUp}checked{/if}/>
+		Exclure de la relance automatique
+		<span id="excludeFromFollowUpStage" style="color:red;display:none">Une erreur s'est produite lors de la sauvegarde, contactez l'administrateur technique.</span>
+	</p>
 
     {if isset($customer->subscriptions) && count($customer->subscriptions)}
             <table  class="table media_list" cellspacing="0" cellpadding="0" >
