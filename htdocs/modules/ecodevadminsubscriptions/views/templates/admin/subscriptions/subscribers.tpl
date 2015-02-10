@@ -83,8 +83,37 @@
          <div class="reference web paper underscored"></div> Web + Papier
       </div>
 
+      <div class="legend">
+
+         <div class="element header">
+            Actions  :
+         </div>
+
+         <div class="elementNotStyled">
+            <a href class="button" id="seeFollowup">Voir prochains relancés</a>
+         </div>
+         <div class="elementNotStyled">
+            <a href class="button" id="seeAll">Voir tous</a>
+         </div>
+      </div>
+
    </div>
 
+
+   <script>
+
+      $(document).ready( function(){
+         $('#seeFollowup').on('click', function(e) {
+            e.preventDefault();
+            $('.customer:not(.followup), .customer:not(.followup) + .row').hide();
+         });
+
+         $('#seeAll').on('click', function(e) {
+            e.preventDefault();
+            $('.customer, .row').show();
+         });
+      });
+   </script>
 
    <br/>
 
@@ -137,12 +166,20 @@
 
 
       {foreach $customers as $customer}
-         <div class="row">
+         <div class="row customer {if $customer->getNextFollowUpDate() == $nextFollowUpDate} followup{/if}{if $customer->excludeFromFollowUp} excluded{/if}">
             <div class="leftheader">
                <a href="index.php?controller=AdminCustomers&amp;id_customer={$customer->id}&amp;viewcustomer&amp;token={Tools::getAdminTokenLite('AdminCustomers')}" class="edit" title="Modifier">
                   <img src="../img/admin/edit.gif" alt="Modifier">
                </a>
                {$customer->id}. {$customer->email}
+
+               <span style="font-size:11px;font-weight:normal">
+               {if !$customer->excludeFromFollowUp}
+                  ({$customer->getNextFollowUpDate()|date_format:'%e %B %Y'})
+               {else}
+                  (relance manuellement)
+               {/if}
+               </span>
             </div>
 
             <div class="subscriptionsContainer" style="width:{$subsWidth}px;">

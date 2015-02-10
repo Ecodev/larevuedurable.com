@@ -39,6 +39,12 @@
     border-radius:4px;
 }
 
+.legend .elementNotStyled {
+    display:inline-block;
+    vertical-align: top;
+    padding:5px 0;
+}
+
 .legend .element.header{
     font-weight:bold;
     color:#333;
@@ -64,10 +70,14 @@
     border-bottom:1px solid #ccc;
     clear:both;
 }
-.adminsubs .row:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+
+.adminsubs .row.followup{
+    background: #daefff;
 }
 
+.adminsubs .row.followup.excluded{
+    background: #efefef;
+}
 
 /* years / nums */
 .adminsubs .row.years{
