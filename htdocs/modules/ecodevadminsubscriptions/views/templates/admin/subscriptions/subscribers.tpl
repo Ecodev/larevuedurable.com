@@ -37,8 +37,6 @@
       <div class="element">
          <div class="reference next chronologyAlert"></div> Problème de chronologie
       </div>
-
-
    </div>
 
    <div class="legend">
@@ -83,21 +81,32 @@
          <div class="reference web paper underscored"></div> Web + Papier
       </div>
 
-      <div class="legend">
+   </div>
 
-         <div class="element header">
-            Actions  :
-         </div>
+   <div class="legend">
 
-         <div class="elementNotStyled">
-            <a href class="button" id="seeFollowup">Voir prochains relancés</a>
-         </div>
-         <div class="elementNotStyled">
-            <a href class="button" id="seeAll">Voir tous</a>
-         </div>
+      <div class="element header">
+         Prochaine relance :
+      </div>
+      <div class="element">
+         <strong>{$nextFollowUpDate|date_format:'%e %B %Y'}</strong>
+      </div>
+      <div class="element">
+         <div class="reference followup"></div> Concerné par la relance
+      </div>
+      <div class="element">
+         <div class="reference followup excluded"></div> Exclu de la relance
+      </div>
+
+      <div class="elementNotStyled">
+         <a href class="button" id="seeFollowup">Voir les concernés par la relance</a>
+      </div>
+      <div class="elementNotStyled">
+         <a href class="button" id="seeAll">Voir tous</a>
       </div>
 
    </div>
+
 
 
    <script>
@@ -120,8 +129,7 @@
    <div style="width:{$subsWidth + 410}px">
 
       {capture name = "years"}
-            <div class="leftheader">
-               Prochaine relance : {$nextFollowUpDate|date_format:'%e %B %Y'}
+            <div class="leftheader">&nbsp;
             </div>
 
             {foreach $magazines as $mag}
@@ -166,7 +174,8 @@
 
 
       {foreach $customers as $customer}
-         <div class="row customer {if $customer->getNextFollowUpDate() == $nextFollowUpDate} followup{/if}{if $customer->excludeFromFollowUp} excluded{/if}">
+         {assign "customerFollowupDate" $customer->getNextFollowUpDate()}
+         <div class="row customer {if $customerFollowupDate == $nextFollowUpDate} followup{/if}{if $customer->excludeFromFollowUp} excluded{/if}">
             <div class="leftheader">
                <a href="index.php?controller=AdminCustomers&amp;id_customer={$customer->id}&amp;viewcustomer&amp;token={Tools::getAdminTokenLite('AdminCustomers')}" class="edit" title="Modifier">
                   <img src="../img/admin/edit.gif" alt="Modifier">
@@ -175,9 +184,9 @@
 
                <span style="font-size:11px;font-weight:normal">
                {if !$customer->excludeFromFollowUp}
-                  ({$customer->getNextFollowUpDate()|date_format:'%e %B %Y'})
+                  {$customerFollowupDate|date_format:'%e %B %Y'}
                {else}
-                  (relance manuellement)
+                  relance manuellement
                {/if}
                </span>
             </div>

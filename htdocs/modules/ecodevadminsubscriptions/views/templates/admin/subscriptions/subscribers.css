@@ -23,7 +23,7 @@
 }
 
 .legend {
-    margin: 5px;
+    margin:10px 5px;
     font-size: 13px;
     color:#555
 }
@@ -71,12 +71,12 @@
     clear:both;
 }
 
-.adminsubs .row.followup{
-    background: #daefff;
+.adminsubs .followup{
+    background: #fff2de;
 }
 
-.adminsubs .row.followup.excluded{
-    background: #efefef;
+.adminsubs .followup.excluded{
+    background: #e9e9e9;
 }
 
 /* years / nums */
