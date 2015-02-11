@@ -107,23 +107,6 @@
 
    </div>
 
-
-
-   <script>
-
-      $(document).ready( function(){
-         $('#seeFollowup').on('click', function(e) {
-            e.preventDefault();
-            $('.customer:not(.followup), .customer:not(.followup) + .row').hide();
-         });
-
-         $('#seeAll').on('click', function(e) {
-            e.preventDefault();
-            $('.customer, .row').show();
-         });
-      });
-   </script>
-
    <br/>
 
    <div style="width:{$subsWidth + 410}px">
@@ -168,7 +151,7 @@
             {/for}
          {/capture}
 
-      <div class="row years">
+      <div class="row years main"  style="width:{$subsWidth + 410}px">
          {$smarty.capture.years}
       </div>
 

@@ -15,7 +15,7 @@ class AdminSubscriptionsController extends ModuleAdminController
         $templatePath = 'ecodevadminsubscriptions/views/templates/admin/subscriptions/';
         $this->context->controller->addCSS(_MODULE_DIR_.$templatePath.'subscribers.css');
         $this->context->controller->addCSS(_MODULE_DIR_.$templatePath.'colors.css');
-        // $this->context->controller->addJS(_MODULE_DIR_.$templatePath.'form.js');
+         $this->context->controller->addJS(_MODULE_DIR_.$templatePath.'default.js');
 
         if (isset($_REQUEST['customer'])) {
             $ids = explode(',', $_REQUEST['customer']);
