@@ -150,7 +150,8 @@ class Customer extends CustomerCore
 			WHERE o.valid = 1 AND o.id_customer = ' . (int) $user_id . ' AND os.logable = 1 AND ';
 
         $sql .= '(od.product_id = ' . _ABONNEMENT_PARTICULIER_ . ' OR od.product_id = ' . _ABONNEMENT_INSTITUT_ . ' OR od.product_id = ' . _ABONNEMENT_SOLIDARITE_ . ' OR od.product_id = ' . _ABONNEMENT_MOOC_ . Product::getInstituteProductsAsSql() . ') ';
-        $sql .= 'ORDER BY invoice_date desc, date_add asc';
+//        $sql .= 'ORDER BY invoice_date desc, date_add asc'; // remplacé car se base sur la date de facture, hors les imports ne génèrent pas de facture, ce tri cause donc des soucis
+        $sql .= 'ORDER BY o.date_add desc, oh.date_add asc';
 
         $subscriptions = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
         $subscriptions = Customer::cleanExtraOrderStatus($subscriptions);

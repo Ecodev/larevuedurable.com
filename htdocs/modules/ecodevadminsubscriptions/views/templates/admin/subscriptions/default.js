@@ -44,4 +44,4 @@ var fixScroll = function() {
             //$('.row.years.main').removeClass('fixed').css('left', 0).parent().css('padding-top', 0);
         }
     });
-}
+};

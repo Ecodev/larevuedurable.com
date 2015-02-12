@@ -89,7 +89,7 @@
          Prochaine relance :
       </div>
       <div class="element">
-         <strong>{$nextFollowUpDate|date_format:'%e %B %Y'}</strong>
+         <strong>{$nextFollowUpDate|date_format:'d.m.Y'}</strong>
       </div>
       <div class="element">
          <div class="reference followup"></div> Concerné par la relance
@@ -167,7 +167,7 @@
 
                <span style="font-size:11px;font-weight:normal">
                {if !$customer->excludeFromFollowUp}
-                  {$customerFollowupDate|date_format:'%e %B %Y'}
+                  {$customerFollowupDate|date_format:'d.m.Y'}
                {else}
                   relance manuellement
                {/if}
