@@ -143,7 +143,7 @@ class Customer extends CustomerCore
     {
 
         $sql = '
-			SELECT o.id_order, o.id_customer, oh.date_add, od.product_attribute_id, oh.id_order_history, od.product_name  FROM ps_orders o
+			SELECT o.id_order, o.id_customer, oh.date_add, od.product_attribute_id, oh.id_order_history, od.product_name, od.product_id FROM ps_orders o
 				LEFT JOIN ps_order_detail od ON o.id_order = od.id_order
 				LEFT JOIN ps_order_history oh ON o.id_order = oh.id_order
 				LEFT JOIN ps_order_state os on oh.id_order_state = os.id_order_state

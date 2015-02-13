@@ -13,6 +13,7 @@ class Subscription
     public $id_order;
     public $id_order_history;
     public $product_attribute_id;
+    public $product_id;
 
     /**
      * @var boolean
@@ -34,8 +35,6 @@ class Subscription
      */
     public $is_paper;
 
-    public $type;
-
     // related objects
     public $order_history;
     public $order;
@@ -52,6 +51,8 @@ class Subscription
 
         // Récupère les information de durée de l'abonnement
         $this->product_attribute_id = $abonnement['product_attribute_id'];
+        $this->product_id = $abonnement['product_id'];
+
         $combination = new Combination($this->product_attribute_id);
         $attributs = $combination->getWsProductOptionValues();
 

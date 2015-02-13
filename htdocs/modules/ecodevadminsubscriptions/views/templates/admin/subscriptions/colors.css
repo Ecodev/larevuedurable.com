@@ -1,7 +1,18 @@
 /** Legend */
 
-.legend .web, .legend .paper {
+.legend .web, .legend .paper, .legend .active {
     border:1px solid #ccc;
+}
+
+.legend .subType{
+    background:#eeeeee
+}
+
+.legend .subType.active{
+    background:white;
+    border-left-width:10px;
+    width:10px;
+    border-color:rgb(92, 184, 92);
 }
 
 .legend .underscored {
@@ -19,9 +30,15 @@
     width: 20px;
 }
 
+.actualMarker{
+    background-color: #c8e7c8;
+}
+
 /* Number on headers */
-.adminsubs .num.active {
+.adminsubs .active {
     border-color: white;
+    background-color: rgb(92, 184, 92);
+    color:white;
 }
 
 .adminsubs .next {
@@ -30,11 +47,13 @@
     color: white;
 }
 
-.adminsubs .archive {
-    background: #eeeeee;
-    border-color: #999999;
-    color: #777777;
-}
+/*.adminsubs .archive {*/
+    /*background: #eeeeee;*/
+    /*border-color: #999999;*/
+    /*color: #777777;*/
+/*}*/
+
+
 
 .adminsubs .unpublished {
     border-color: #cccccc;
@@ -61,34 +80,56 @@
     border-color: rgb(0, 121, 202);
 }
 
-.adminsubs .active {
-    background-color: rgb(92, 184, 92);
-    color: #ffffff;
+.adminsubs .sub{
+    background: #eeeeee;
+    white-space: nowrap;
 }
+
+.adminsubs .subType8{
+    background-color:#7fc77f;
+    color:white;
+}
+
+.adminsubs .subType31{
+    background-color: #ff9092;
+    color:white;
+}
+.adminsubs .subType32{
+    background-color: #a9cbde;
+}
+.adminsubs .subType32,
+.adminsubs .subType32 * {
+    color: #0079CA;
+}
+
+
+/*.adminsubs .active {*/
+    /*background-color: rgb(92, 184, 92);*/
+    /*color: #ffffff;*/
+/*}*/
 
 .adminsubs .sub.imported {
-    background-image: url(import.png);
-}
-
-.adminsubs .sub.active.imported {
     background-image: url(import2.png);
 }
 
-.adminsubs .future {
-    background-color: rgba(175, 234, 175, 0.80);
-    color: #008f00;
-}
 
-.adminsubs .archive {
-    background-color: #dddddd;
-    color: #555555;
+.adminsubs .sub.active{
+    border-left:10px solid rgb(92, 184, 92);
 }
+/*.adminsubs .sub.future {*/
+    /*border-left:15px solid rgba(175, 234, 175, 0.80);*/
+/*}*/
 
-.adminsubs .tierce {
-    background-color: rgba(44, 153, 222, 0.50);
-    color: #004883;
-}
+/*.adminsubs .sub.archive {*/
+    /*border-left:15px solid #dddddd;*/
+/*}*/
 
-.adminsubs .tierce * {
-    color: #004883;
-}
+
+/*.adminsubs .tierce {*/
+    /*background-color: rgba(44, 153, 222, 0.50);*/
+    /*color: #004883;*/
+/*}*/
+
+/*.adminsubs .tierce * {*/
+    /*color: #004883;*/
+/*}*/

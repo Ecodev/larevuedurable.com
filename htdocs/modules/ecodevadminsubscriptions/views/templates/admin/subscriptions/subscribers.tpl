@@ -44,26 +44,30 @@
       <div class="element header">
          Abonnements :
       </div>
-
-      <div class="element">
-         <div class="reference archive"></div> Echu
-      </div>
       
       <div class="element">
-         <div class="reference active"></div> Actif
+         <div class="reference subType active"></div> Actif
       </div>
 
       <div class="element">
-         <div class="reference future"></div> Futur
+         <div class="reference subType"></div> Spécial
       </div>
 
       <div class="element">
-         <div class="reference active"></div> <div class="reference future"></div> Possédé (parti,soli,insti)
+         <div class="reference subType8"></div> Standard
       </div>
 
       <div class="element">
-         <div class="reference tierce"></div> Reçu
+         <div class="reference subType31"></div> Solidarité
       </div>
+
+      <div class="element">
+         <div class="reference subType32"></div> Institutionnel
+      </div>
+
+      {*<div class="element">*}
+         {*<div class="reference tierce"></div> Reçu*}
+      {*</div>*}
 
       <div class="element">
          <div class="reference imported"></div> Importé
@@ -177,8 +181,10 @@
             <div class="subscriptionsContainer" style="width:{$subsWidth}px;">
                {if !empty($customer->user_subscriptions)}
                   <div class="subscriptions">
+                     <div class="actualMarker" style="left:{($actual - $min) * $numWidth + 1}px;"></div>
+
                      {foreach $customer->user_subscriptions as $sub}
-                        <div class="sub sub{$sub->number_of_editions/4}{if $sub->is_active} active{/if}{if $sub->is_future} future{/if}{if $sub->last_edition < $actual} archive{/if}{if $sub->order_history->id_order_state == $imported_order_state} imported{/if}{if $sub->is_archive} web{/if}{if $sub->is_paper} paper{/if}"
+                        <div class="sub sub{$sub->number_of_editions/4} subType{$sub->product_id}{if $sub->is_active} active{/if}{if $sub->is_future} future{/if}{if $sub->last_edition < $actual} archive{/if}{if $sub->order_history->id_order_state == $imported_order_state} imported{/if}{if $sub->is_archive} web{/if}{if $sub->is_paper} paper{/if}"
                              style="left:{($sub->first_edition - $min) * $numWidth + 1}px;right:{($max - $sub->last_edition) * $numWidth}px">
 
                            <a href="index.php?controller=AdminOrders&id_order={$sub->order->id}&vieworder&token={Tools::getAdminTokenLite('AdminOrders')}" class="edit" title="Modifier">
@@ -194,7 +200,7 @@
                {if !empty($customer->tierce_subscriptions)}
                   <div class="subscriptions tierces">
                      {foreach $customer->tierce_subscriptions as $sub}
-                        <div class="sub tierce sub{$sub->number_of_editions/4}{if $sub->is_active} active{/if}{if $sub->is_future} future{/if}{if $sub->last_edition < $actual} archive{/if}{if $sub->order_history->id_order_state == $imported_order_state} imported{/if}{if $sub->is_archive} web{/if}{if $sub->is_paper} paper{/if}"
+                        <div class="sub tierce sub{$sub->number_of_editions/4}  subType{$sub->product_id}{if $sub->is_active} active{/if}{if $sub->is_future} future{/if}{if $sub->last_edition < $actual} archive{/if}{if $sub->order_history->id_order_state == $imported_order_state} imported{/if}{if $sub->is_archive} web{/if}{if $sub->is_paper} paper{/if}"
                              style="left:{($sub->first_edition - $min) * $numWidth}px;right:{($max - $sub->last_edition) * $numWidth}px">
 
                            <a href="index.php?controller=AdminOrders&id_order={$sub->order->id}&vieworder&token={Tools::getAdminTokenLite('AdminOrders')}" class="edit" title="Modifier">
