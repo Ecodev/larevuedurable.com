@@ -283,7 +283,7 @@ class Customer extends CustomerCore
     private function verifyAccount($cond)
     {
         $cond = trim($cond, ' ');
-        if (!empty($cond) && $cond == $this->email) {
+        if (!empty($cond) && strtolower($cond) == strtolower($this->email)) {
             return true;
         }
     }
