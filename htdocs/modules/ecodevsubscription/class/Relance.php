@@ -147,7 +147,8 @@ class Relance
     private function reporteErreur($msg, $exit = false)
     {
         $msg = date(_DATE_FORMAT_) . ' - RELANCES -  ' . $msg . "\r\n" ;
-        error_log($msg, 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/cron_log.txt');
+
+        error_log($msg, 3, dirname(__FILE__) . '../../../../../logs/cron_log.txt');
 
         echo $msg;
 
