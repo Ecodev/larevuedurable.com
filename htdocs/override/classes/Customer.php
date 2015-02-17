@@ -421,7 +421,7 @@ class Customer extends CustomerCore
     {
         $current_subscription = $this->getLastSubscription();
         if ($current_subscription) {
-            $date_dernier_numero = Product::getParutionDateByRef($current_subscription->last_edition -1);
+            $date_dernier_numero = Product::getParutionDateByRef($current_subscription->last_edition);
             if ($date_dernier_numero) {
                 $date_dernier_numero = new DateTime($date_dernier_numero);
                 $date_relance = $date_dernier_numero->modify('-10 day');
