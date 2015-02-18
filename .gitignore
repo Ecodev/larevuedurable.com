@@ -30,8 +30,22 @@ htdocs/config/*
 htdocs/classes/*
 !htdocs/classes/Subscription.php
 
+!htdocs/administrator/
+htdocs/administrator/*
+!htdocs/administrator/themes/
+htdocs/administrator/themes/*
+!htdocs/administrator/themes/default/
+htdocs/administrator/themes/default/*
+!htdocs/administrator/themes/default/template/
+htdocs/administrator/themes/default/template/*
+!htdocs/administrator/themes/default/template/helpers/
+htdocs/administrator/themes/default/template/helpers/*
+!htdocs/administrator/themes/default/template/helpers/list/
+htdocs/administrator/themes/default/template/helpers/list/*
+!htdocs/administrator/themes/default/template/helpers/list/list_header.tpl.bck
+!htdocs/administrator/themes/default/template/helpers/list/list_header.tpl
+
 !htdocs/modules/
-htdocs/modules/ecodevscripts/tests/*
 htdocs/modules/prestablog/themes/*/up-img/*
 htdocs/modules/prestablog/themes/default/up-img/*
 htdocs/modules/homeslider/images/*
@@ -43,7 +57,6 @@ htdocs/modules/ecodevscripts/pour_cresus/*
 !htdocs/override/
 
 !htdocs/manuel/
-htdocs/manuel/sources/videos/*
 
 !htdocs/themes/
 htdocs/themes/*
