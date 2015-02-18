@@ -36,6 +36,11 @@ class Customer extends CustomerCore
      */
     public function manageSubscriptions()
     {
+
+        if (!$this->id) {
+            return;
+        }
+
         // cache, on ne récupère pas deux fois les infos.
         if (is_array($this->subscriptions)) {
             return $this->subscriptions;
@@ -114,13 +119,20 @@ class Customer extends CustomerCore
             $institute_user = $this->getInstituteBuyer();
             if ($institute_user) {
                 $subscriptions = Customer::getSubscriptionsByUserID($institute_user['id_customer']);
+                $subscriptions = Subscription::manageConflicts($subscriptions);
+
+                $subs = array();
                 foreach ($subscriptions as $sub) {
                     if ($sub->is_active) {
                         $this->is_tierce = true;
                     }
+
+                    if ($sub->is_archive) {
+                        $subs[] = $sub;
+                    }
                 }
 
-                return $subscriptions;
+                return $subs;
             }
         } elseif ($type = 'himself') {
             $subscriptions = Customer::getSubscriptionsByUserID($this->id);
@@ -240,7 +252,7 @@ class Customer extends CustomerCore
 			LEFT JOIN ps_cart ca ON ca.id_cart = o.id_cart
 			LEFT JOIN ps_customization cu ON cu.id_cart = ca.id_cart
 			LEFT JOIN ps_customized_data cud ON cud.id_customization = cu.id_customization
-		WHERE o.valid=1 AND (1=0 ' . Product::getInstituteProductsAsSql() . ') GROUP BY c.id_customer';
+		WHERE o.valid=1 AND (1=0 ' . Product::getInstituteProductsAsSql() . ') AND c.id_customer <> ' . $this->id . ' GROUP BY c.id_customer';
 
         $acheteurs_tiers = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
 
@@ -414,7 +426,11 @@ class Customer extends CustomerCore
 
     public function getLastSubscription()
     {
-        return $this->user_subscriptions[0];
+        if (count($this->user_subscriptions)) {
+            return $this->user_subscriptions[0];
+        }
+
+        return null;
     }
 
     public function getNextFollowUpDate()

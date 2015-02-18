@@ -15,6 +15,9 @@
     border-color:rgb(92, 184, 92);
 }
 
+.legend .archive {
+    background-color:#d5d5d5;
+}
 .legend .underscored {
     border-width: 1px 1px 7px 1px !important;
     line-height: 7px !important;
@@ -23,11 +26,13 @@
     border-bottom-style: solid;
 }
 
-
-
 .legend .element .reference.imported {
     background: url(import.png) center center no-repeat;
     width: 20px;
+}
+
+.adminsubs .tierces {
+    background-color: #eee1f4;
 }
 
 .actualMarker{

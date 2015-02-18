@@ -62,18 +62,23 @@
     font-size: 11px;
 }
 
+.legend .element .reference.square{
+    border-radius:0
+}
+
 .actualMarker{
     position:absolute;
     z-index:0;
-    top:-15px;
-    height:200px;
+    top:-5px;
+    height:70px;
     width:49px;
 }
+
 
 /* row */
 .adminsubs .row {
     position:relative;
-    padding: 15px 0;
+    padding: 5px 0;
     border-bottom:1px solid #ccc;
     clear:both;
 }
@@ -125,6 +130,15 @@
     text-indent:-99999em;
 }
 
+.adminsubs .row.customer .subscriptionsContainer .subscriptions{
+    padding:10px 0;
+}
+
+.adminsubs .row.customer .leftheader, .adminsubs .row.customer .subscriptionsContainer{
+    float:none;
+    display:inline-block;
+    vertical-align:middle;
+}
 
 .adminsubs .num .infobox{
     display:none;
@@ -205,20 +219,24 @@
 .adminsubs .subscriptions {
     position:relative;
     height:40px;
+}
 
+.adminsubs .subSeparator{
+    margin:5px 0;
+    border-top:1px dotted #ccc;
 }
 
 .adminsubs .subscriptions.tierces {
-    margin-top:5px;
-    padding-top:5px;
-    border-top:1px dotted #ccc;
+    /*margin-top:5px;*/
+    /*padding-top:5px;*/
+    /*border-top:1px dotted #ccc;*/
 }
 
 
 /* single subs */
 .adminsubs .sub {
     position:absolute;
-    top:5px;
+    /*top:5px;*/
     overflow-x:scroll;
     overflow-y:hidden;
     padding:0 5px;
@@ -233,7 +251,7 @@
 }
 
 .adminsubs .subscriptionsContainer .subscriptions:first-child .sub {
-    top:0px;
+    /*top:0px;*/
 }
 
 .adminsubs .sub.imported {

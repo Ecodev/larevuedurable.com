@@ -65,9 +65,9 @@
          <div class="reference subType32"></div> Institutionnel
       </div>
 
-      {*<div class="element">*}
-         {*<div class="reference tierce"></div> Reçu*}
-      {*</div>*}
+      <div class="element">
+         <div class="reference tierces square"></div> Reçus
+      </div>
 
       <div class="element">
          <div class="reference imported"></div> Importé
@@ -176,9 +176,9 @@
                   relance manuellement
                {/if}
                </span>
-            </div>
+            </div><!--
 
-            <div class="subscriptionsContainer" style="width:{$subsWidth}px;">
+            --><div class="subscriptionsContainer" style="width:{$subsWidth}px;">
                {if !empty($customer->user_subscriptions)}
                   <div class="subscriptions">
                      <div class="actualMarker" style="left:{($actual - $min) * $numWidth + 1}px;"></div>
@@ -197,11 +197,16 @@
                      {/foreach}
                   </div>
                {/if}
+               {if !empty($customer->user_subscriptions) && !empty($customer->tierce_subscriptions)}
+                  <div class="subSeparator"></div>
+               {/if}
                {if !empty($customer->tierce_subscriptions)}
                   <div class="subscriptions tierces">
+                     <div class="actualMarker" style="left:{($actual - $min) * $numWidth + 1}px;"></div>
+
                      {foreach $customer->tierce_subscriptions as $sub}
                         <div class="sub tierce sub{$sub->number_of_editions/4}  subType{$sub->product_id}{if $sub->is_active} active{/if}{if $sub->is_future} future{/if}{if $sub->last_edition < $actual} archive{/if}{if $sub->order_history->id_order_state == $imported_order_state} imported{/if}{if $sub->is_archive} web{/if}{if $sub->is_paper} paper{/if}"
-                             style="left:{($sub->first_edition - $min) * $numWidth}px;right:{($max - $sub->last_edition) * $numWidth}px">
+                             style="left:{($sub->first_edition - $min) * $numWidth + 1}px;right:{($max - $sub->last_edition) * $numWidth}px">
 
                            <a href="index.php?controller=AdminOrders&id_order={$sub->order->id}&vieworder&token={Tools::getAdminTokenLite('AdminOrders')}" class="edit" title="Modifier">
                               <img src="../img/admin/edit.gif" alt="Modifier">
@@ -210,7 +215,7 @@
                            {$sub->order->reference}
 
                            (<a href="index.php?controller=AdminCustomers&amp;id_customer={$sub->customer->id}&amp;viewcustomer&amp;token={Tools::getAdminTokenLite('AdminCustomers')}" class="edit" title="Modifier">
-                              {$sub->customer->email} <img src="../img/admin/edit.gif" alt="Modifier">
+                              {$sub->customer->email}
                            </a>)
 
                         </div>
@@ -221,7 +226,7 @@
             <div class="clearfix"></div>
          </div>
 
-         <div class="row years mini">{$smarty.capture.years}</div>
+         <div class="row years mini"></div>
 
       {/foreach}
 
