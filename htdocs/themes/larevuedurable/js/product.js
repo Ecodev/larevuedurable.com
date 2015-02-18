@@ -495,6 +495,17 @@ function refreshProductImages(id_product_attribute)
 	serialScrollFixLock('', '', '', '', 0);// SerialScroll Bug on goto 0 ?
 }
 
+function updateCustomizedFieldsVisibility () {
+	var val = $('#group_' + _ATTRIBUTE_VERSION_).val();
+	var selector = '#idTab10,#tab10';
+
+	if (val == _PAPIER_) {
+		$(selector).hide();
+	} else if (val == _PAPIER_ET_WEB_ || val == _WEB_) {
+		$(selector).show();
+	}
+}
+
 //To do after loading HTML
 $(document).ready(function()
 {
@@ -574,6 +585,13 @@ $(document).ready(function()
 //		'transitionIn'	: 'elastic',
 //		'transitionOut'	: 'elastic'
 //	});
+
+	updateCustomizedFieldsVisibility();
+	$('#group_' + _ATTRIBUTE_VERSION_).bind('change', function(e){
+		updateCustomizedFieldsVisibility();
+	});
+
+
 });
 
 function saveCustomization()

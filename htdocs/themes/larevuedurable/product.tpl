@@ -45,6 +45,11 @@
 <script type="text/javascript">
 // <![CDATA[
 
+var _ATTRIBUTE_VERSION_ = {$_ATTRIBUTE_VERSION_};
+var _PAPIER_ET_WEB_ = {$_PAPIER_ET_WEB_};
+var _PAPIER_ = {$_PAPIER_};
+var _WEB_ = {$_WEB_};
+
 // PrestaShop internal settings
 var currencySign = '{$currencySign|html_entity_decode:2:"UTF-8"}';
 var currencyRate = '{$currencyRate|floatval}';
@@ -174,7 +179,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 </script>
 
 {include file="$tpl_dir./breadcrumb.tpl"}
-<div id="primary_block" class="clearfix">
+<div id="primary_block" class="clearfix" data-productid="{$product->id}">
 
 	{if isset($adminActionDisplay) && $adminActionDisplay}
 	<div id="admin-action">
@@ -557,7 +562,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 {if (isset($product) && $product->description) || (isset($features) && $features) || (isset($accessories) && $accessories) || (isset($HOOK_PRODUCT_TAB) && $HOOK_PRODUCT_TAB) || (isset($attachments) && $attachments) || isset($product) && $product->customizable}
 <div id="more_info_block" class="clear">
 	<ul id="more_info_tabs" class="idTabs idTabsShort clearfix">
-		{if isset($product) && $product->customizable}<li><a href="#idTab10">{l s='Comptes autorisés'}</a></li>{/if}
+		{if isset($product) && $product->customizable}<li id='tab10'><a href="#idTab10">{l s='Comptes autorisés'}</a></li>{/if}
 		{if isset($accessories) AND $accessories}<li><a href="#idTab4">{l s='Articles liés'}</a></li>{/if}
 		{if $features}<li><a id="more_info_tab_data_sheet" href="#idTab2">{l s='Auteurs'}</a></li>{/if}
 		{if $attachments}<li><a id="more_info_tab_attachments" href="#idTab9">{l s='Download'}</a></li>{/if}
@@ -637,6 +642,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 				{if $product->text_fields|intval}
 				<div class="customizableProductsText">
 					<h3>{l s='Text'}</h3>
+					<p class="clear required"><sup>*</sup> {l s='required fields'}</p>
 					<ul id="text_fields">
 					{counter start=0 assign='customizationField'}
 					{foreach from=$customizationFields item='field' name='customizationFields'}
@@ -658,7 +664,6 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 					<span id="ajax-loader" style="display:none"><img src="{$img_ps_dir}loader.gif" alt="loader" /></span>
 				</p>
 			</form>
-			<p class="clear required"><sup>*</sup> {l s='required fields'}</p>
 		</div>
 	{/if}
 

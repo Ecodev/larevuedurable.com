@@ -530,10 +530,8 @@ ul#uploadable_files,ul#text_fields li{
 	background: none; 
 	width: 200px;
 }
-.customizableProductsFile,.customizableProductsText {
-	margin-bottom:20px;
-	padding-bottom:10px;
-	border-bottom:1px dotted #ccc;
+.customizableProductsText #text_fields {
+	margin-bottom:0
 }
 
 .customizationUploadLine {
@@ -556,7 +554,9 @@ ul#uploadable_files,ul#text_fields li{
 }
 
 #customizedDatas {
-	float:right;
+	/*float:right;*/
+	text-align:right;
+	width:410px;
 }
 
 .accessories_block div ul {

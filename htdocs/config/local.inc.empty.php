@@ -54,6 +54,7 @@ define('_TROIS_ANS_', 40);
 define('_QUATRE_ANS_', 41);
 define('_CINQ_ANS_', 42);
 
+define('_ATTRIBUTE_VERSION_', 6);
 define('_PAPIER_', 26);
 define('_WEB_', 27);
 define('_PAPIER_ET_WEB_', 28);

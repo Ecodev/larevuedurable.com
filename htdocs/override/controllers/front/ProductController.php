@@ -15,6 +15,10 @@ class ProductController extends ProductControllerCore
             '_ABONNEMENT_INSTITUT_'    => _ABONNEMENT_INSTITUT_,
             '_ABONNEMENT_SOLIDARITE_'  => _ABONNEMENT_SOLIDARITE_,
             '_ABONNEMENT_MOOC_'  => _ABONNEMENT_MOOC_,
+            '_PAPIER_' => _PAPIER_,
+            '_WEB_' => _WEB_,
+            '_PAPIER_ET_WEB_' => _PAPIER_ET_WEB_,
+            '_ATTRIBUTE_VERSION_' => _ATTRIBUTE_VERSION_,
             'subs'                     => $subs,
             'nbPresentOrFutureActives' => $customer->nbPresentOrFutureActives,
             'current_sub'              => $customer->getCurrentSubscription()
