@@ -11,6 +11,13 @@
 		<true/>
 	</dict>
 	<dict>
+               	<string>logs</string>
+               	<key>permissions</key>
+               	<string>0775</string>
+               	<key>recursive</key>
+               	<true/>
+       	</dict>
+	<dict>
 		<key>path</key>
 		<string>htdocs/administrator/backups</string>
 		<key>permissions</key>
@@ -51,8 +58,8 @@
 		<true/>
 	</dict>
 	<dict>
-    <key>owner</key>
-    <string>larevuedurablecom-www</string>
+	   	<key>owner</key>
+    		<string>larevuedurablecom-www</string>
 		<key>path</key>
 		<string>htdocs/themes/larevuedurable/cache</string>
 		<key>permissions</key>
