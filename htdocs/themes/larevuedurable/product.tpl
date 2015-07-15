@@ -250,6 +250,22 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 	<div id="pb-left-column" class='mceContentBody'>
 		<h1>{$product->name|escape:'htmlall':'UTF-8'}</h1>
 
+        {assign "hash" ProductDownload::getFilenameFromIdProduct($product->id)}
+        {assign "filename" ProductDownload::getFilenameFromFilename($hash)}
+        {assign "orders" Order::getByProductIds($product->id)}
+        {assign "customer" Context::getContext()->customer}
+
+        <p>
+            {if $customer->current_subscription && $customer->current_subscription->is_archive}
+                {assign "free" true}
+                <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "pkey={$hash|escape:'htmlall':'UTF-8'}")}"> Télécharger produit (votre abonnement vous donne accès)</a>
+            {elseif $orders|count > 0}
+
+                {assign "free" true}
+                <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "key={$hash|escape:'htmlall':'UTF-8'}-{$orders[0].download_hash|escape:'htmlall':'UTF-8'}&id_order={$orders[0].id_order}&secure_key={$orders[0].secure_key}")}">  Télécharger produit (vous l'avez déjà acheté)</a>
+            {/if}
+        </p>
+
 		{if ($product->id == $_ABONNEMENT_PARTICULIER_ || $product->id == $_ABONNEMENT_INSTITUT_ || $product->id == $_ABONNEMENT_MOOC_ || $product->id == $_ABONNEMENT_SOLIDARITE_) && $subs|count > 0}
 		<p><strong>{l s='Vous avez déjà au moins un abonnement actif'} : </strong> </p>
 
@@ -423,90 +439,95 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
             <p class="warning_inline" id="last_quantities"{if ($product->quantity > $last_qties OR $product->quantity <= 0) OR $allow_oosp OR !$product->available_for_order OR $PS_CATALOG_MODE} style="display: none"{/if} >{l s='Warning: Last items in stock!'}</p>
 		</div>
 
-		<div class="content_prices clearfix">
-			<!-- prices -->
-			{if $product->show_price AND !isset($restricted_country_mode) AND !$PS_CATALOG_MODE}
+        <div class="content_prices clearfix">
 
-			{if $product->online_only}
-			<p class="online_only">{l s='Online only'}</p>
-			{/if}
+            {if !isset($free)}
 
-			<div class="price">
-				<p class="our_price_display">
-				{if $priceDisplay >= 0 && $priceDisplay <= 2}
-					<span id="our_price_display">{convertPrice price=$productPrice}</span>
-					<!--{if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) OR !isset($display_tax_label))}
-						{if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}
-					{/if}-->
-				{/if}
-				</p>
+                <!-- prices -->
+                {if $product->show_price AND !isset($restricted_country_mode) AND !$PS_CATALOG_MODE}
 
-				{if $product->on_sale}
-					<img src="{$img_dir}onsale_{$lang_iso}.gif" alt="{l s='On sale'}" class="on_sale_img"/>
-					<span class="on_sale">{l s='On sale!'}</span>
-				{elseif $product->specificPrice AND $product->specificPrice.reduction AND $productPriceWithoutReduction > $productPrice}
-					<span class="discount">{l s='Reduced price!'}</span>
-				{/if}
-				{if $priceDisplay == 2}
-					<br />
-					<span id="pretaxe_price"><span id="pretaxe_price_display">{convertPrice price=$product->getPrice(false, $smarty.const.NULL)}</span>&nbsp;{l s='tax excl.'}</span>
-				{/if}
-			</div>
-			<p id="reduction_percent" {if !$product->specificPrice OR $product->specificPrice.reduction_type != 'percentage'} style="display:none;"{/if}><span id="reduction_percent_display">{if $product->specificPrice AND $product->specificPrice.reduction_type == 'percentage'}-{$product->specificPrice.reduction*100}%{/if}</span></p>
-			<p id="reduction_amount" {if !$product->specificPrice OR $product->specificPrice.reduction_type != 'amount' || $product->specificPrice.reduction|intval ==0} style="display:none"{/if}>
-				<span id="reduction_amount_display">
-				{if $product->specificPrice AND $product->specificPrice.reduction_type == 'amount' AND $product->specificPrice.reduction|intval !=0}
-					-{convertPrice price=$productPriceWithoutReduction-$productPrice|floatval}
-				{/if}
-				</span>
-			</p>
-			{if $product->specificPrice AND $product->specificPrice.reduction && $product->specificPrice.reduction > 0}
-				<p id="old_price"><span class="bold">
-				{if $priceDisplay >= 0 && $priceDisplay <= 2}
-					{if $productPriceWithoutReduction > $productPrice}
-						<span id="old_price_display">{convertPrice price=$productPriceWithoutReduction}</span>
-						<!-- {if $tax_enabled && $display_tax_label == 1}
-							{if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}
-						{/if} -->
-					{/if}
-				{/if}
-				</span>
-				</p>
-			{/if}
-			{if $packItems|@count && $productPrice < $product->getNoPackPrice()}
-				<p class="pack_price">{l s='Instead of'} <span style="text-decoration: line-through;">{convertPrice price=$product->getNoPackPrice()}</span></p>
-				<br class="clear" />
-			{/if}
-			{if $product->ecotax != 0}
-				<p class="price-ecotax">{l s='Include'} <span id="ecotax_price_display">{if $priceDisplay == 2}{$ecotax_tax_exc|convertAndFormatPrice}{else}{$ecotax_tax_inc|convertAndFormatPrice}{/if}</span> {l s='For green tax'}
-					{if $product->specificPrice AND $product->specificPrice.reduction}
-					<br />{l s='(not impacted by the discount)'}
-					{/if}
-				</p>
-			{/if}
-			{if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
-				 {math equation="pprice / punit_price"  pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
-				<p class="unit-price"><span id="unit_price_display">{convertPrice price=$unit_price}</span> {l s='per'} {$product->unity|escape:'htmlall':'UTF-8'}</p>
-			{/if}
-			{*close if for show price*}
-			{/if}
-			{if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
-				<span class="exclusive">
-					<span></span>
-					{if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_) || $nbPresentOrFutureActives == 0}
-						{l s='Add to cart'}
-					{elseif $nbPresentOrFutureActives == 1}
-						{l s='Renouveler selon options sélectionnées'}
-					{/if}
-				</span>
-			{else}
-				<p id="add_to_cart" class="buttons_bottom_block">
-					<input type="submit" name="Submit" value="{if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_)|| $nbPresentOrFutureActives == 0}{l s='Add to cart'}{elseif $nbPresentOrFutureActives == 1}{l s='Renouveler selon options sélectionnées'}{/if}" class="exclusive" />
-				</p>
-                {if $productPrice <= 0 && !$product->isGift()}
-                    <p class='clear'>Votre abonnement numérique vous donne libre accès à tous les pdfs disponibles sur le site. Pour accéder à chaque pdf, vous devez ajouter le produit désiré au panier, accepter les conditions générales de vente et confirmer la commande. Vous trouverez les documents à télécharger dans le détail de votre historique d’achats.</p>
+                    {if $product->online_only}
+                    <p class="online_only">{l s='Online only'}</p>
+                    {/if}
+
+                    <div class="price">
+                        <p class="our_price_display">
+                        {if $priceDisplay >= 0 && $priceDisplay <= 2}
+                            <span id="our_price_display">{convertPrice price=$productPrice}</span>
+                            <!--{if $tax_enabled  && ((isset($display_tax_label) && $display_tax_label == 1) OR !isset($display_tax_label))}
+                                {if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}
+                            {/if}-->
+                        {/if}
+                        </p>
+
+                        {if $product->on_sale}
+                            <img src="{$img_dir}onsale_{$lang_iso}.gif" alt="{l s='On sale'}" class="on_sale_img"/>
+                            <span class="on_sale">{l s='On sale!'}</span>
+                        {elseif $product->specificPrice AND $product->specificPrice.reduction AND $productPriceWithoutReduction > $productPrice}
+                            <span class="discount">{l s='Reduced price!'}</span>
+                        {/if}
+                        {if $priceDisplay == 2}
+                            <br />
+                            <span id="pretaxe_price"><span id="pretaxe_price_display">{convertPrice price=$product->getPrice(false, $smarty.const.NULL)}</span>&nbsp;{l s='tax excl.'}</span>
+                        {/if}
+                    </div>
+                    <p id="reduction_percent" {if !$product->specificPrice OR $product->specificPrice.reduction_type != 'percentage'} style="display:none;"{/if}><span id="reduction_percent_display">{if $product->specificPrice AND $product->specificPrice.reduction_type == 'percentage'}-{$product->specificPrice.reduction*100}%{/if}</span></p>
+                    <p id="reduction_amount" {if !$product->specificPrice OR $product->specificPrice.reduction_type != 'amount' || $product->specificPrice.reduction|intval ==0} style="display:none"{/if}>
+                        <span id="reduction_amount_display">
+                        {if $product->specificPrice AND $product->specificPrice.reduction_type == 'amount' AND $product->specificPrice.reduction|intval !=0}
+                            -{convertPrice price=$productPriceWithoutReduction-$productPrice|floatval}
+                        {/if}
+                        </span>
+                    </p>
+                    {if $product->specificPrice AND $product->specificPrice.reduction && $product->specificPrice.reduction > 0}
+                        <p id="old_price"><span class="bold">
+                        {if $priceDisplay >= 0 && $priceDisplay <= 2}
+                            {if $productPriceWithoutReduction > $productPrice}
+                                <span id="old_price_display">{convertPrice price=$productPriceWithoutReduction}</span>
+                                <!-- {if $tax_enabled && $display_tax_label == 1}
+                                    {if $priceDisplay == 1}{l s='tax excl.'}{else}{l s='tax incl.'}{/if}
+                                {/if} -->
+                            {/if}
+                        {/if}
+                        </span>
+                        </p>
+                    {/if}
+                    {if $packItems|@count && $productPrice < $product->getNoPackPrice()}
+                        <p class="pack_price">{l s='Instead of'} <span style="text-decoration: line-through;">{convertPrice price=$product->getNoPackPrice()}</span></p>
+                        <br class="clear" />
+                    {/if}
+                    {if $product->ecotax != 0}
+                        <p class="price-ecotax">{l s='Include'} <span id="ecotax_price_display">{if $priceDisplay == 2}{$ecotax_tax_exc|convertAndFormatPrice}{else}{$ecotax_tax_inc|convertAndFormatPrice}{/if}</span> {l s='For green tax'}
+                            {if $product->specificPrice AND $product->specificPrice.reduction}
+                            <br />{l s='(not impacted by the discount)'}
+                            {/if}
+                        </p>
+                    {/if}
+                    {if !empty($product->unity) && $product->unit_price_ratio > 0.000000}
+                         {math equation="pprice / punit_price"  pprice=$productPrice  punit_price=$product->unit_price_ratio assign=unit_price}
+                        <p class="unit-price"><span id="unit_price_display">{convertPrice price=$unit_price}</span> {l s='per'} {$product->unity|escape:'htmlall':'UTF-8'}</p>
+                    {/if}
+                {*close if for show price*}
                 {/if}
-			{/if}
+
+                {if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
+                    <span class="exclusive">
+                        <span></span>
+                        {if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_) || $nbPresentOrFutureActives == 0}
+                            {l s='Add to cart'}
+                        {elseif $nbPresentOrFutureActives == 1}
+                            {l s='Renouveler selon options sélectionnées'}
+                        {/if}
+                    </span>
+                {else}
+                    <p id="add_to_cart" class="buttons_bottom_block">
+                        <input type="submit" name="Submit" value="{if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_)|| $nbPresentOrFutureActives == 0}{l s='Add to cart'}{elseif $nbPresentOrFutureActives == 1}{l s='Renouveler selon options sélectionnées'}{/if}" class="exclusive" />
+                    </p>
+                    {if $productPrice <= 0 && !$product->isGift()}
+                        <p class='clear'>Votre abonnement numérique vous donne libre accès à tous les pdfs disponibles sur le site. Pour accéder à chaque pdf, vous devez ajouter le produit désiré au panier, accepter les conditions générales de vente et confirmer la commande. Vous trouverez les documents à télécharger dans le détail de votre historique d’achats.</p>
+                    {/if}
+                {/if}
+            {/if}
 			{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
 			<div class="clear"></div>
 		</div>

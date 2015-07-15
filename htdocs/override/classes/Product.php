@@ -231,7 +231,7 @@ class Product extends ProductCore
 
 			return $custom_price;
 		}
-		
+
 		return $normalPrice;
 	}
 }

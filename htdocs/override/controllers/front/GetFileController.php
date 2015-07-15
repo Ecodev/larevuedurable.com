@@ -58,6 +58,27 @@ class GetFileController extends GetFileControllerCore
 			if (!file_exists($file))
 				Tools::redirect('index.php');
 		}
+
+        /**
+         * If the key is valid (corresponds to a filename on server) and if the product is virtual and customer has active subscription with archive access, allow dowload.
+         * This condition test new pkey argument that bypass usual test to access virtual product download file
+         */
+        else if ($key = Tools::getValue('pkey'))
+        {
+            if (!file_exists(_PS_DOWNLOAD_DIR_ . $key)) {
+                $this->displayCustomError('This file no longer exists.');
+            }
+
+            $customer = Context::getContext()->customer;
+            $customer->manageSubscriptions();
+
+            if (!$customer->current_subscription || $customer->current_subscription && !$customer->current_subscription->is_archive) {
+                $this->displayCustomError('No active subscription with archive access.');
+            }
+
+            $file = _PS_DOWNLOAD_DIR_.$key;
+            $filename = ProductDownload::getFilenameFromFilename($key);
+        }
 		else
 		{
 			if (!($key = Tools::getValue('key')))

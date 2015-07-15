@@ -6,6 +6,10 @@ class Customer extends CustomerCore
     public $subscriptions = null;
     public $user_subscriptions = null;
     public $tierce_subscriptions = null;
+
+    /**
+     * @var Subscription
+     */
     public $current_subscription = null;
     public $nbPresentOrFutureActives = 0;
     public $is_tierce = false;
