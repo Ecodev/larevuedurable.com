@@ -44,15 +44,18 @@ class Relance
         $unsubscribed = is_array($unsubscribed['data']) ? $unsubscribed['data'] : [];
 
         $email_list = array();
-        foreach ($subscribed as $sub) {
+        foreach ($subscribed as $sub)
+        {
             array_push($email_list, $sub['email']);
         }
 
-        foreach ($unsubscribed as $sub) {
+        foreach ($unsubscribed as $sub)
+        {
             array_push($email_list, $sub['email']);
         }
 
-        if (sizeof($email_list)) {
+        if (sizeof($email_list))
+        {
             $this->api->listBatchUnsubscribe(_MC_SUBSCRIBERS_LIST_, $email_list, true, false, false);
         }
     }
@@ -65,27 +68,31 @@ class Relance
     {
         $array_newsletter = Customer::getAllSubscribersForFollowUp();
 
-
         $relances = [];
 
-        foreach ($array_newsletter as $key => $user) {
+        foreach ($array_newsletter as $key => $user)
+        {
             $customer = new Customer($user['ID']);
 
             // ajout de la date d'expiration
             $customer->manageSubscriptions();
             $current_subscription = $customer->getLastSubscription();
 
-            if ($current_subscription != null && (!$num || $num && $num == $current_subscription->last_edition)) {
+            if ($current_subscription != null && (!$num || $num && $num == $current_subscription->last_edition))
+            {
                 $date_dernier_numero = Product::getParutionDateByRef($current_subscription->last_edition - 1);
-                if ($date_dernier_numero) {
+                if ($date_dernier_numero)
+                {
                     $date_dernier_numero = new DateTime($date_dernier_numero);
                     $date_relance = $date_dernier_numero->modify('-10 day');
-                    if ($num || $this->execution_date->format(_DATE_FORMAT_SHORT_) == $date_relance->format(_DATE_FORMAT_SHORT_)) {
+                    if ($num || $this->execution_date->format(_DATE_FORMAT_SHORT_) == $date_relance->format(_DATE_FORMAT_SHORT_))
+                    {
                         $user['ECHEANCE'] = $current_subscription->last_edition;
 
                         // ajout de l'adresse
                         $adresses = $customer->getAddresses(1);
-                        if (count($adresses)) {
+                        if (count($adresses))
+                        {
                             $user['NPA'] = $adresses[0]['postcode'];
                         }
 
@@ -109,11 +116,14 @@ class Relance
     {
         $campaign = $this->api->campaignReplicate(_MC_RELANCE_CAMPAIGN_);
 
-        if ($this->api->errorCode) {
+        if ($this->api->errorCode)
+        {
             $message = "Unable to Replicate Campaign - Code = " . $this->api->errorCode . " - Msg = " . $this->api->errorMessage . "\n";
             $this->reporteErreur($message, 1);
 
-        } else {
+        }
+        else
+        {
             $campagne = $this->api->campaignUpdate($campaign, 'title', 'Relance du ' . $this->execution_date->format(_DATE_FORMAT_));
             Configuration::updateValue('SUBSCRIPTION_LAST_CAMPAIGN', $campagne);
 
@@ -124,37 +134,45 @@ class Relance
     private function envoiCampagne($campagne, $relances)
     {
         $nbRelances = count($relances);
-        $relances = array_map(function ($relance) {
+        $relances = array_map(function ($relance)
+        {
             return $relance['ECHEANCE'] . ' - ' . $relance['ID'] . ' - ' . $relance['EMAIL'];
         }, $relances);
 
         $msg = "Campagne envoyée avec succès à $nbRelances personnes : \n";
         $msg .= implode("\n\t", $relances);
 
-        if (!_PS_MODE_DEV_) {
+        if (!_PS_MODE_DEV_)
+        {
             $this->api->campaignSendNow($campagne);
 
-            if ($this->api->errorCode) {
+            if ($this->api->errorCode)
+            {
                 $message = "Unable to send Campaign - Code = " . $this->api->errorCode . " - Msg = " . $this->api->errorMessage . "\n";
                 $this->reporteErreur($message, 1);
-            } else {
+            }
+            else
+            {
                 $this->reporteErreur($msg);
             }
 
-        } else {
+        }
+        else
+        {
             $this->reporteErreur('DEV : ' . $msg);
         }
     }
 
     private function reporteErreur($msg, $exit = false)
     {
-        $msg = date(_DATE_FORMAT_) . ' - RELANCES -  ' . $msg . "\r\n" ;
+        $msg = date(_DATE_FORMAT_) . ' - RELANCES -  ' . $msg . "\r\n";
 
         error_log($msg, 3, dirname(__FILE__) . '../../../../../logs/cron_log.txt');
 
         echo $msg;
 
-        if ($exit) {
+        if ($exit)
+        {
             exit();
         }
     }
