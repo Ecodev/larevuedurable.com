@@ -115,7 +115,7 @@ class Relance
 
     private function dupliqueCampagne()
     {
-        $campaign = $this->api->campaignReplicate(_MC_RELANCE_CAMPAIGN_);
+        $campaignId = $this->api->campaignReplicate(_MC_RELANCE_CAMPAIGN_);
 
         if ($this->api->errorCode)
         {
@@ -125,10 +125,13 @@ class Relance
         }
         else
         {
-            $campagne = $this->api->campaignUpdate($campaign, 'title', 'Relance du ' . $this->execution_date->format(_DATE_FORMAT_));
-            Configuration::updateValue('SUBSCRIPTION_LAST_CAMPAIGN', $campagne);
+            if ($this->api->campaignUpdate($campaignId, 'title', 'Relance du ' . $this->execution_date->format(_DATE_FORMAT_)) ) {
+                Configuration::updateValue('SUBSCRIPTION_LAST_CAMPAIGN', $campaignId);
+                return $campaignId;
+            } else {
+                $this->reporteErreur("La campagne a été dupliquée mais n'a pas pu être mise à jour.", 1);
+            }
 
-            return $campagne;
         }
     }
 
@@ -170,7 +173,7 @@ class Relance
 
         error_log($msg, 3, dirname(__FILE__) . '../../../../../logs/cron_log.txt');
 
-        echo $msg;
+        echo $msg . "<br/>";
 
         if ($exit)
         {
