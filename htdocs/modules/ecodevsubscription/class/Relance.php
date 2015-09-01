@@ -65,6 +65,7 @@ class Relance
     {
         $array_newsletter = Customer::getAllSubscribersForFollowUp();
 
+
         $relances = [];
 
         foreach ($array_newsletter as $key => $user) {
@@ -94,9 +95,10 @@ class Relance
             }
         }
 
-        if (count($relances) === 0) {
-            $this->reporteErreur('Aucun utilisateur à relancer', 1);
-        } else {
+        $this->reporteErreur(count($relances) . " abonnés à relancer");
+
+        if (count($relances))
+        {
             $this->api->listBatchSubscribe(_MC_SUBSCRIBERS_LIST_, $relances, false, true, false);
 
             return $relances;
