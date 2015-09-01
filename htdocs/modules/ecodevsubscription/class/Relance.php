@@ -16,6 +16,7 @@ class Relance
 
     public function relancer($num = null)
     {
+        $this->reporteErreur('Execution du script de relance');
         $this->videListe();
         $relances = $this->importeAbonnes($num);
         $campagne = $this->dupliqueCampagne();
