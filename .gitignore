@@ -53,6 +53,7 @@ htdocs/modules/ecodevscripts/de_cresus/*
 !htdocs/modules/ecodevscripts/de_cresus/.gitkeep
 htdocs/modules/ecodevscripts/pour_cresus/*
 !htdocs/modules/ecodevscripts/pour_cresus/.gitkeep
+htdocs/modules/ecodevsubscription/cron_log.txt
 
 !htdocs/override/
 

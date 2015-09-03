@@ -19,8 +19,11 @@ class Relance
         $this->reporteErreur('Execution du script de relance');
         $this->videListe();
         $relances = $this->importeAbonnes($num);
-        $campagne = $this->dupliqueCampagne();
-        $this->envoiCampagne($campagne, $relances);
+        if (count($relances))
+        {
+            $campagne = $this->dupliqueCampagne();
+            $this->envoiCampagne($campagne, $relances);
+        }
     }
 
     /**
@@ -38,10 +41,10 @@ class Relance
 
     private function videListe()
     {
-        $subscribed = $this->api->listMembers(_MC_SUBSCRIBERS_LIST_, 'subscribed');
+        $subscribed = $this->api->listMembers(_MC_SUBSCRIBERS_LIST_, 'subscribed', null, 0, 15000);
         $subscribed = is_array($subscribed['data']) ? $subscribed['data'] : [];
 
-        $unsubscribed = $this->api->listMembers(_MC_SUBSCRIBERS_LIST_, 'unsubscribed');
+        $unsubscribed = $this->api->listMembers(_MC_SUBSCRIBERS_LIST_, 'unsubscribed', null, 0, 15000);
         $unsubscribed = is_array($unsubscribed['data']) ? $unsubscribed['data'] : [];
 
         $email_list = array();
@@ -171,9 +174,9 @@ class Relance
     {
         $msg = date(_DATE_FORMAT_) . ' - RELANCES -  ' . $msg . "\r\n";
 
-        error_log($msg, 3, dirname(__FILE__) . '../../../../../logs/cron_log.txt');
+        error_log($msg, 3, dirname(__FILE__) . '/../cron_log.txt');
 
-        echo $msg . "<br/>";
+        echo "<br/>" . $msg ;
 
         if ($exit)
         {
