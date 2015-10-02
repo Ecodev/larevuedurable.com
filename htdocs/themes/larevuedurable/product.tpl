@@ -255,15 +255,17 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
         {assign "orders" Order::getByProductIds($product->id)}
         {assign "customer" Context::getContext()->customer}
 
-        <p>
-            {if $customer->current_subscription && $customer->current_subscription->is_archive && $product->is_virtual}
-                {assign "free" true}
-                <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "pkey={$hash|escape:'htmlall':'UTF-8'}")}"> Télécharger (votre abonnement vous donne accès)</a>
-            {elseif $orders|count > 0 && $product->is_virtual}
-                {assign "free" true}
-                <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "key={$hash|escape:'htmlall':'UTF-8'}-{$orders[0].download_hash|escape:'htmlall':'UTF-8'}&id_order={$orders[0].id_order}&secure_key={$orders[0].secure_key}")}">  Télécharger (vous l'avez déjà acheté)</a>
-            {/if}
-        </p>
+        {if !((!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE)}
+            <p>
+                {if $customer->current_subscription && $customer->current_subscription->is_archive && $product->is_virtual}
+                    {assign "free" true}
+                    <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "pkey={$hash|escape:'htmlall':'UTF-8'}")}"> Télécharger (votre abonnement vous donne accès)</a>
+                {elseif $orders|count > 0 && $product->is_virtual}
+                    {assign "free" true}
+                    <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "key={$hash|escape:'htmlall':'UTF-8'}-{$orders[0].download_hash|escape:'htmlall':'UTF-8'}&id_order={$orders[0].id_order}&secure_key={$orders[0].secure_key}")}">  Télécharger (vous l'avez déjà acheté)</a>
+                {/if}
+            </p>
+        {/if}
 
 		{if ($product->id == $_ABONNEMENT_PARTICULIER_ || $product->id == $_ABONNEMENT_INSTITUT_ || $product->id == $_ABONNEMENT_MOOC_ || $product->id == $_ABONNEMENT_SOLIDARITE_) && $subs|count > 0}
 		<p><strong>{l s='Vous avez déjà au moins un abonnement actif'} : </strong> </p>
@@ -511,7 +513,6 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 
                 {if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
                     <span class="exclusive">
-                        <span></span>
                         {if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_) || $nbPresentOrFutureActives == 0}
                             {l s='Add to cart'}
                         {elseif $nbPresentOrFutureActives == 1}
@@ -526,7 +527,8 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
                         <p class='clear'>Votre abonnement numérique vous donne libre accès à tous les pdfs disponibles sur le site. Pour accéder à chaque pdf, vous devez ajouter le produit désiré au panier, accepter les conditions générales de vente et confirmer la commande. Vous trouverez les documents à télécharger dans le détail de votre historique d’achats.</p>
                     {/if}
                 {/if}
-            {/if}
+            {/if} {* end of if $free *}
+
 			{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
 			<div class="clear"></div>
 		</div>
