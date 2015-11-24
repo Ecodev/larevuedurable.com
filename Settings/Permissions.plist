@@ -141,47 +141,5 @@
 		<key>recursive</key>
 		<true/>
 	</dict>
-	<dict>
-		<key>path</key>
-		<string>bin/create-data.sh</string>
-		<key>permissions</key>
-		<string>0755</string>
-	</dict>
-	<dict>
-		<key>path</key>
-		<string>bin/deploy.sh</string>
-		<key>permissions</key>
-		<string>0755</string>
-	</dict>
-	<dict>
-		<key>path</key>
-		<string>bin/download.sh</string>
-		<key>permissions</key>
-		<string>0755</string>
-	</dict>
-	<dict>
-		<key>path</key>
-		<string>bin/empty-cache.sh</string>
-		<key>permissions</key>
-		<string>0755</string>
-	</dict>
-	<dict>
-		<key>path</key>
-		<string>bin/execute-sql.sh</string>
-		<key>permissions</key>
-		<string>0755</string>
-	</dict>
-	<dict>
-		<key>path</key>
-		<string>bin/load-data.sh</string>
-		<key>permissions</key>
-		<string>0755</string>
-	</dict>
-	<dict>
-		<key>path</key>
-		<string>bin/load-remote-data.sh</string>
-		<key>permissions</key>
-		<string>0755</string>
-	</dict>
 </array>
 </plist>
