@@ -60,7 +60,7 @@ class EcodevAdminSubscriptions extends Module
 
         $tab = new Tab();
         $tab->name[1] = 'Tous les abonnés';
-        $tab->class_name = 'AdminSubscriptions';
+        $tab->class_name = 'AdminSubscriptionsAll';
         $tab->id_parent = $newTab->id;
         $tab->module = $this->name;
         $tab->add();
@@ -71,6 +71,8 @@ class EcodevAdminSubscriptions extends Module
     public function uninstall()
     {
         $tab = new Tab((int)Tab::getIdFromClassName('AdminSubscriptions'));
+        $tab->delete();
+        $tab = new Tab((int)Tab::getIdFromClassName('AdminSubscriptionsAll'));
         $tab->delete();
         return parent::uninstall();
     }
