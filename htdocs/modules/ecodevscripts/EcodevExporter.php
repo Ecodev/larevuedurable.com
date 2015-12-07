@@ -7,8 +7,8 @@ class EcodevExporter
     {
         $time = new DateTime();
         $time = $time->format('Y-m-d-H\hi\ms\s');
-        $filename = __DIR__.'/pour_cresus/'.$time.'.csv';
-        $filename_link = '/modules/ecodevscripts/pour_cresus/'.$time.'.csv';
+        $filename = __DIR__.'/data/files/pour_cresus/'.$time.'.csv';
+        $filename_link = '/modules/ecodevscripts/data/files/pour_cresus/'.$time.'.csv';
         file_put_contents($filename, '');
         $file = fopen($filename, 'w');
 

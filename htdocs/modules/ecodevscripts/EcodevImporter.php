@@ -78,8 +78,7 @@ class EcodevAPIImporter
             if (!in_array($extension, $extensions)) {
                 return -4;
             }
-            $destination_path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-            $target_path = $destination_path . 'de_cresus' . DIRECTORY_SEPARATOR . date('Y-m-d_H-i-s') . '.csv';
+            $target_path = dirname(__FILE__) . '/data/files/de_cresus/' . date('Y-m-d_H-i-s') . '.csv';
             if (!move_uploaded_file($_FILES['fichierCresus']['tmp_name'], $target_path)) {
                 return -1;
             }

@@ -49,10 +49,10 @@ htdocs/administrator/themes/default/template/helpers/list/*
 htdocs/modules/prestablog/themes/*/up-img/*
 htdocs/modules/prestablog/themes/default/up-img/*
 htdocs/modules/homeslider/images/*
-htdocs/modules/ecodevscripts/de_cresus/*
-!htdocs/modules/ecodevscripts/de_cresus/.gitkeep
-htdocs/modules/ecodevscripts/pour_cresus/*
-!htdocs/modules/ecodevscripts/pour_cresus/.gitkeep
+htdocs/modules/ecodevscripts/data/files/de_cresus/*
+!htdocs/modules/ecodevscripts/data/files/de_cresus/.gitkeep
+htdocs/modules/ecodevscripts/data/files/pour_cresus/*
+!htdocs/modules/ecodevscripts/data/files/pour_cresus/.gitkeep
 htdocs/modules/ecodevsubscription/cron_log.txt
 
 !htdocs/override/

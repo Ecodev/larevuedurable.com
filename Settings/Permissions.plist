@@ -141,5 +141,13 @@
 		<key>recursive</key>
 		<true/>
 	</dict>
+	<dict>
+		<key>path</key>
+		<string>htdocs/modules/ecodevscripts/data/files</string>
+		<key>permissions</key>
+		<string>0775</string>
+		<key>recursive</key>
+		<true/>
+	</dict>
 </array>
 </plist>
