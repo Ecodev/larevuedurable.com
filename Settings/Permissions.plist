@@ -107,6 +107,14 @@
 		<key>recursive</key>
 		<true/>
 	</dict>
+        <dict>
+                <key>path</key>
+                <string>htdocs/themes/larevuedurable/mails</string>
+                <key>permissions</key>
+                <string>0775</string>
+                <key>recursive</key>
+                <true/>
+        </dict>
 	<dict>
 		<key>path</key>
 		<string>htdocs/log</string>
