@@ -5,6 +5,7 @@
 
 # Ignore everything in the root except modules, themes and override.
 .idea
+.bash_history
 
 *.gz
 
@@ -58,6 +59,7 @@ htdocs/modules/ecodevsubscription/cron_log.txt
 !htdocs/override/
 
 !htdocs/manuel/
+htdocs/manuel/sources/videos/*
 
 !htdocs/themes/
 htdocs/themes/*
