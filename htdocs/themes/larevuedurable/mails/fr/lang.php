@@ -20,12 +20,5 @@ $_LANGMAIL['Your new password'] = 'Votre nouveau mot de passe';
 $_LANGMAIL['Password query confirmation'] = 'Confirmation de demande de mot de passe';
 $_LANGMAIL['An answer to your message is available #ct%1$s #tc%2$s'] = 'Une réponse à votre message est disponible #ct%1$s #tc%2$s';
 $_LANGMAIL['New voucher regarding your order %s'] = 'Nouveau bon de réduction concernant votre commande %s';
-$_LANGMAIL['Your cart and your discount'] = 'Votre panier et votre bon de réduction';
-$_LANGMAIL['Thanks for your order'] = 'Merci pour votre commande';
-$_LANGMAIL['You are one of our best customers'] = 'Vous êtes l\'un de nos meilleurs clients';
-$_LANGMAIL['We miss you'] = 'Vous nous manquez';
-$_LANGMAIL['Error reporting from your PayPal module'] = '';
-$_LANGMAIL['Congratulations!'] = 'Bravo !';
-$_LANGMAIL['%1$s sent you a link to %2$s'] = '%1$s vous a envoyé un lien vers %2$s';
 
 ?>

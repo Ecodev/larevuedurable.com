@@ -3,7 +3,7 @@ Le client {firstname} {lastname} a changé sa fiche ou une adresse.
 Client : {email}
 Identifiant : {id}
 
-Détail des commandes :</td>
+Détail des commandes :
 
 Identifiants : {order_ids}
 Références : {order_refs}
