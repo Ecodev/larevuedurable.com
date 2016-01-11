@@ -1,6 +1,6 @@
 <?php
 
-class AdminSubscriptionsController extends ModuleAdminController
+class AdminSubscriptionsAllController extends ModuleAdminController
 {
     public function __construct()
     {
@@ -12,7 +12,7 @@ class AdminSubscriptionsController extends ModuleAdminController
 
     public function initContent()
     {
-        $templatePath = 'ecodevadminsubscriptions/views/templates/admin/subscriptions/';
+        $templatePath = 'ecodevadminsubscriptions/views/templates/admin/subscriptions_all/';
         $this->context->controller->addCSS(_MODULE_DIR_.$templatePath.'subscribers.css');
         $this->context->controller->addCSS(_MODULE_DIR_.$templatePath.'colors.css');
          $this->context->controller->addJS(_MODULE_DIR_.$templatePath.'default.js');

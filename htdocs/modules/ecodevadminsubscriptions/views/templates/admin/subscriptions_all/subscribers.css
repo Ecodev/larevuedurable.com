@@ -237,8 +237,7 @@
 .adminsubs .sub {
     position:absolute;
     /*top:5px;*/
-    overflow-x:scroll;
-    overflow-y:hidden;
+    overflow:hidden;
     padding:0 5px;
     height: 30px;
     line-height: 35px;
