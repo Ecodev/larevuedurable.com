@@ -84,7 +84,7 @@ class Relance
 
             if ($current_subscription != null && (!$num || $num && $num == $current_subscription->last_edition))
             {
-                $date_dernier_numero = Product::getParutionDateByRef($current_subscription->last_edition - 1);
+                $date_dernier_numero = Product::getParutionDateByRef($current_subscription->last_edition);
                 if ($date_dernier_numero)
                 {
                     $date_dernier_numero = new DateTime($date_dernier_numero);
