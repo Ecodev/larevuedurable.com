@@ -31,7 +31,7 @@
 		{
 			$('#note_feedback').html('<img src="../img/loader.gif" alt="" />').show();
 			var noteContent = $('#noteContent').val();
-	
+
 			$.ajax({
 				type: "POST",
 				url: "index.php",
@@ -96,7 +96,7 @@
 		{if $count_better_customers != '-'}{l s='Rank: #'} {$count_better_customers}<br />{/if}
 		{if $shop_is_feature_active}{l s='Shop:'} {$name_shop}<br />{/if}
 	</div>
-	
+
 	<div class="info-customer-right">
 		<div style="float: right">
 			<a href="{$current}&updatecustomer&id_customer={$customer->id}&token={$token}">
@@ -109,7 +109,7 @@
 		{l s='Age:'} {$customer_stats['age']} {if isset($customer->birthday['age'])}({$customer_birthday}){else}{l s='Unknown'}{/if}<br /><br />
 		{l s='Last update:'} {$last_update}<br />
 		{l s='Status:'} {if $customer->active}<img src="../img/admin/enabled.gif" />{else}<img src="../img/admin/disabled.gif" />{/if}
-	
+
 		{if $customer->isGuest()}
 			<div>
 				{l s='This customer is registered as.'} <b>{l s='Guest'}</b>
@@ -134,7 +134,7 @@
 <div>
     <h2>
 		{l s='Abonnements en cours'}
-		<a href="index.php?controller=AdminSubscriptions&customer={$customer->id}&token={Tools::getAdminTokenLite('AdminSubscriptions')}" class="button" title="Modifier" style="margin-left:20px;font-size:12px;font-weight:normal">
+		<a href="index.php?controller=AdminSubscriptionsAll&customer={$customer->id}&token={Tools::getAdminTokenLite('AdminSubscriptionsAll')}" class="button" title="Modifier" style="margin-left:20px;font-size:12px;font-weight:normal">
 			<img src="../img/admin/themes.gif" alt="Voir"> Voir graphiquement
 		</a>
 	</h2>
@@ -200,7 +200,7 @@
 
 <div class="clear"></div>
 <div class="separation"></div>
-	
+
 	<div>
 		<h2>
 			<img src="../img/admin/cms.gif" /> {l s='Add a private note'}
@@ -214,7 +214,7 @@
 	</div>
 	<div class="clear"></div>
 	<div class="separation"></div>
-	
+
 	<div style="width:50%;float:left;">
 		<h2>{l s='Messages'} ({count($messages)})</h2>
 		{if count($messages)}
@@ -241,7 +241,7 @@
 			{l s='%1$s %2$s has never contacted you' sprintf=[$customer->firstname, $customer->lastname]}
 		{/if}
 	</div>
-	
+
 	<div style="width:50%;float:left;">
 		<div style="margin-left:15px;"
 			<h2>{l s='Vouchers'} ({count($discounts)})</h2>
@@ -277,9 +277,9 @@
 
     {* display hook specified to this page : AdminCustomers *}
 	<div>{hook h="displayAdminCustomers" id_customer=$customer->id}</div>
-	
+
 	<div class="clear">&nbsp;</div>
-	
+
 	<div style="width:50%;float:left;">
 	<h2>{l s='Orders'} ({count($orders)})</h2>
 	{if $orders AND count($orders)}
@@ -363,7 +363,7 @@
 		{l s='%1$s %2$s has not placed any orders yet' sprintf=[$customer->firstname, $customer->lastname]}
 	{/if}
 	</div>
-	
+
 	<div style="float:left;width:50%">
 		<div style="margin-left:15px;">
 			<h2>{l s='Carts'} ({count($carts)})</h2>
@@ -399,7 +399,7 @@
 		</div>
 	</div>
 
-	<div class="clear">&nbsp;</div>	
+	<div class="clear">&nbsp;</div>
 	{if $products AND count($products)}
 	<div class="clear">&nbsp;</div>
 		<h2>{l s='Products:'} ({count($products)})</h2>
@@ -583,5 +583,5 @@
 		</div>
 	</div>
 {/block}
-</div>	
+</div>
 <div class="clear">&nbsp;</div>
