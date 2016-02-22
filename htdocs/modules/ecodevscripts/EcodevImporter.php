@@ -297,7 +297,7 @@ class EcodevAPIImporter
             $xml = $this->webService->get(array('url' => $this->siteurl . '/api/carts?schema=synopsis'));
 
             $duration = empty($user[DURATION]) ? 2 : $user[DURATION];
-            $type = empty($user[TYPE]) ? 1 : $user[TYPE];
+            $type = empty($user[TYPE]) ? 'w' : $user[TYPE];
             $productId = empty($user[ABONNEMENT]) ? 8 : $user[ABONNEMENT];
 
             if ($user[SOURCE]=='EUR') {
@@ -453,10 +453,12 @@ class EcodevAPIImporter
             $attribute_duration = _DEUX_ANS_;
         }
 
-        if ($type == 1) {
+        if ($type == 'w') {
             $attribute_version = _WEB_;
-        } else if ($type == 2) {
+        } else if ($type == 'wp' || $type == 'pw') {
             $attribute_version = _PAPIER_ET_WEB_;
+        } else if ($type == 'p') {
+            $attribute_version = _PAPIER_;
         } else {
             $attribute_version = _WEB_;
         }
