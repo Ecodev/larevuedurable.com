@@ -359,7 +359,9 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 							{if ($group.group_type == 'select')}
 								<select name="{$groupName}" id="group_{$id_attribute_group|intval}" class="attribute_select" onchange="findCombination();getProductAttribute();">
 									{foreach from=$group.attributes key=id_attribute item=group_attribute}
-										<option value="{$id_attribute|intval}"{if (isset($smarty.get.$groupName) && $smarty.get.$groupName|intval == $id_attribute) || $group.default == $id_attribute} selected="selected"{/if} title="{$group_attribute|escape:'htmlall':'UTF-8'}">{$group_attribute|escape:'htmlall':'UTF-8'}</option>
+										{if $id_attribute_group != 4 || $id_attribute != 24}
+											<option value="{$id_attribute|intval}"{if (isset($smarty.get.$groupName) && $smarty.get.$groupName|intval == $id_attribute) || $group.default == $id_attribute} selected="selected"{/if} title="{$group_attribute|escape:'htmlall':'UTF-8'}">{$group_attribute|escape:'htmlall':'UTF-8'}</option>
+										{/if}
 									{/foreach}
 								</select>
 							{elseif ($group.group_type == 'color')}
