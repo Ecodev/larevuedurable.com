@@ -210,7 +210,7 @@ class Customer extends CustomerCore
 
     /**
      * Ne garde que le premier état de l'historique de chaque commande (selon l'ordre défini dans la requette SQL)
-     * @return Retourne une liste d'abonnements (objets Subscription)
+     * @return array Retourne une liste d'abonnements (objets Subscription)
      */
     private static function cleanExtraOrderStatus($subscriptions)
     {
