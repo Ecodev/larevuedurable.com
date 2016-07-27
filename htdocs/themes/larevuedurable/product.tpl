@@ -45,10 +45,17 @@
 <script type="text/javascript">
 // <![CDATA[
 
+{if isset($_ABONNEMENT_PARTICULIER_)}
 var _ATTRIBUTE_VERSION_ = {$_ATTRIBUTE_VERSION_};
 var _PAPIER_ET_WEB_ = {$_PAPIER_ET_WEB_};
 var _PAPIER_ = {$_PAPIER_};
 var _WEB_ = {$_WEB_};
+{else}
+var _ATTRIBUTE_VERSION_ = null;
+var _PAPIER_ET_WEB_ = null;
+var _PAPIER_ = null;
+var _WEB_ = null;
+{/if}
 
 // PrestaShop internal settings
 var currencySign = '{$currencySign|html_entity_decode:2:"UTF-8"}';
@@ -257,7 +264,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 
         {if !((!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE)}
             <p>
-                {if $customer->current_subscription && $customer->current_subscription->is_archive && $product->is_virtual}
+                {if isset($customer->current_subscription) && $customer->current_subscription && $customer->current_subscription->is_archive && $product->is_virtual}
                     {assign "free" true}
                     <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "pkey={$hash|escape:'htmlall':'UTF-8'}")}"> Télécharger (votre abonnement vous donne accès)</a>
                 {elseif $orders|count > 0 && $product->is_virtual}
@@ -267,23 +274,24 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
             </p>
         {/if}
 
-		{if ($product->id == $_ABONNEMENT_PARTICULIER_ || $product->id == $_ABONNEMENT_INSTITUT_ || $product->id == $_ABONNEMENT_MOOC_ || $product->id == $_ABONNEMENT_SOLIDARITE_) && $subs|count > 0}
-		<p><strong>{l s='Vous avez déjà au moins un abonnement actif'} : </strong> </p>
+		{if isset($_ABONNEMENT_PARTICULIER_)}
+			{if ($product->id == $_ABONNEMENT_PARTICULIER_ || $product->id == $_ABONNEMENT_INSTITUT_ || $product->id == $_ABONNEMENT_MOOC_ || $product->id == $_ABONNEMENT_SOLIDARITE_) && $subs|count > 0}
+			<p><strong>{l s='Vous avez déjà au moins un abonnement actif'} : </strong> </p>
 
-			<ul id='productSubscriptions'>
-			{foreach from=$subs item=sub}
+				<ul id='productSubscriptions'>
+				{foreach from=$subs item=sub}
 
-				{if $sub->is_active || $sub->is_future}
-				<li class='{if $sub->is_active}active{/if}{if $sub->is_future}future{/if}'>
-					{if $sub->is_active}Actif - Dernier numéro : {$sub->last_edition}{/if}
-					{if $sub->is_future}En attente - Premier numéro : {$sub->first_edition}{/if}
-					<br/>{$sub->product_attributes_name}
-				</li>
-				{/if}
-			{/foreach}
-			</ul>
+					{if $sub->is_active || $sub->is_future}
+					<li class='{if $sub->is_active}active{/if}{if $sub->is_future}future{/if}'>
+						{if $sub->is_active}Actif - Dernier numéro : {$sub->last_edition}{/if}
+						{if $sub->is_future}En attente - Premier numéro : {$sub->first_edition}{/if}
+						<br/>{$sub->product_attributes_name}
+					</li>
+					{/if}
+				{/foreach}
+				</ul>
+			{/if}
 		{/if}
-
 
 		{if $product->description_short OR $packItems|@count > 0}
 		<div id="short_description_block">
@@ -307,23 +315,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 		</div>
 		{/if}
 
-{if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_  && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_) || $nbPresentOrFutureActives <=1}
-
-
-		{*{if isset($colors) && $colors}
-		<!-- colors -->
-		<div id="color_picker">
-			<p>{l s='Pick a color:' js=1}</p>
-			<div class="clear"></div>
-			<ul id="color_to_pick_list" class="clearfix">
-			{foreach from=$colors key='id_attribute' item='color'}
-				<li><a id="color_{$id_attribute|intval}" class="color_pick" style="background: {$color.value};" onclick="updateColorSelect({$id_attribute|intval});$('#wrapResetImages').show('slow');" title="{$color.name}">{if file_exists($col_img_dir|cat:$id_attribute|cat:'.jpg')}<img src="{$img_col_dir}{$id_attribute}.jpg" alt="{$color.name}" width="20" height="20" />{/if}</a></li>
-			{/foreach}
-			</ul>
-			<div class="clear"></div>
-		</div>
-		{/if}*}
-
+		{if !isset($_ABONNEMENT_PARTICULIER_) || (isset($_ABONNEMENT_PARTICULIER_) && $product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_  && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_) || isset($nbPresentOrFutureActives) && $nbPresentOrFutureActives <=1}
 
 
 		{if ($product->show_price AND !isset($restricted_country_mode)) OR isset($groups) OR $product->reference OR (isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS)}
@@ -515,7 +507,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 
                 {if (!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE}
                     <span class="exclusive">
-                        {if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_) || $nbPresentOrFutureActives == 0}
+                        {if !isset($_ABONNEMENT_PARTICULIER_) || (isset($_ABONNEMENT_PARTICULIER_) && $product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_) || isset($nbPresentOrFutureActives) && $nbPresentOrFutureActives == 0}
                             {l s='Add to cart'}
                         {elseif $nbPresentOrFutureActives == 1}
                             {l s='Renouveler selon options sélectionnées'}
@@ -523,13 +515,13 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
                     </span>
                 {else}
                     <p id="add_to_cart" class="buttons_bottom_block">
-                        <input type="submit" name="Submit" value="{if ($product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_)|| $nbPresentOrFutureActives == 0}{l s='Add to cart'}{elseif $nbPresentOrFutureActives == 1}{l s='Renouveler selon options sélectionnées'}{/if}" class="exclusive" />
+                        <input type="submit" name="Submit" value="{if !isset($_ABONNEMENT_PARTICULIER_) || (isset($_ABONNEMENT_PARTICULIER_) && $product->id != $_ABONNEMENT_PARTICULIER_ && $product->id != $_ABONNEMENT_INSTITUT_ && $product->id != $_ABONNEMENT_MOOC_ && $product->id != $_ABONNEMENT_SOLIDARITE_)|| isset($nbPresentOrFutureActives) && $nbPresentOrFutureActives == 0}{l s='Add to cart'}{elseif isset($nbPresentOrFutureActives) && $nbPresentOrFutureActives == 1}{l s='Renouveler'}{/if}" class="exclusive" />
                     </p>
                     {if $productPrice <= 0 && !$product->isGift()}
                         <p class='clear'>Votre abonnement numérique vous donne libre accès à tous les pdfs disponibles sur le site. Pour accéder à chaque pdf, vous devez ajouter le produit désiré au panier, accepter les conditions générales de vente et confirmer la commande. Vous trouverez les documents à télécharger dans le détail de votre historique d’achats.</p>
                     {/if}
                 {/if}
-            {/if} {* end of if $free *}
+            {/if}
 
 			{if isset($HOOK_PRODUCT_ACTIONS) && $HOOK_PRODUCT_ACTIONS}{$HOOK_PRODUCT_ACTIONS}{/if}
 			<div class="clear"></div>

@@ -30,7 +30,8 @@
 			<a href="{$link->getPageLink('my-account', true)}" title="{l s='View my customer account' mod='blockuserinfo'}" class="account" rel="nofollow"><span>{$cookie->customer_lastname}</span></a>
 		</li>
 	{/if*}
-	<li><a href="{$link->getPageLink('my-subscription', true)}">mon abonnement</a></li>
+
+	{hook h="displayUserInfoStart"}
 	<li><a title="{l s='My prepaid account' mod='prepayment'}" href="{$link->getModuleLink('prepayment', 'account', array(), true)}">{l s='mon crédit' mod='prepayment'}</a></li>
 	<li><a href="{$link->getPageLink('my-account', true)}">{l s='mon compte' mod='blockuserinfo'}</a></li>
 	<li><a href="{$link->getPageLink('history', true)}">{l s='mes achats' mod='blockuserinfo'}</a></li>
@@ -62,6 +63,6 @@
 		</a>
 	</li>
 	{/if}
-	
+
 
 <!-- /Block user information module HEADER -->

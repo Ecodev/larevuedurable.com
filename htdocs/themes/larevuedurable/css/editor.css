@@ -1,8 +1,7 @@
-@import url(http://fonts.googleapis.com/css?family=Asap:400,700,700italic,400italic);
 
 
 body.mceContentBody{
-	
+
 	padding: 20px 50px 50px 50px !important;
 	line-height:1.9em;
 	color:#666;
@@ -29,7 +28,7 @@ body.mceContentBody{
 
 
 h1, h1 a, .mceContentBody h1 a{
-	
+
 	margin: 0 0 1em 0 ;
 	font-size: 24px;
 	line-height: 22px;
@@ -81,18 +80,18 @@ h4, h4 a, .mceContentBody h4 a{
 
 
 .mceContentBody h2:first-child{
-	margin-top: 0; 
+	margin-top: 0;
 }
 
 
 
 .mceContentBody blockquote,
-.mceContentBody p, 
-.mceContentBody ul, 
+.mceContentBody p,
+.mceContentBody ul,
 .mceContentBody ol,
-.mceContentBody dl, 
-.mceContentBody form, 
-.mceContentBody div.applycms, 
+.mceContentBody dl,
+.mceContentBody form,
+.mceContentBody div.applycms,
 .mceContentBody td,
 .mceContentBody th,
 .mceContentBody caption
@@ -168,7 +167,7 @@ h4, h4 a, .mceContentBody h4 a{
 	text-align:center;
 }
 .mceContentBody .tabulaire tr{
-	
+
 }
 
 .mceContentBody td,.mceContentBody th{

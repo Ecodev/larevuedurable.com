@@ -1,0 +1,3 @@
+num_depart	durée	type	abonnement	id	source	Titre	Nom	Prénom	Titre	Nom	Prénom	TélEmail	Firme	Adresse	Adresse2	NPA	Localité	Pays	PaysAbréviation	LivrTitre	LivrNom	LivrPrénom	LivrFirme	LivrAdresse	LivrNPostal	LivrLocalité2	LivrPays	Coche
+57	1	pw	8	140500	CHF	Monsieur			Monsieur	McClane	John	test@ecodev.ch		Serre 11		2000	Neuchâtel	Suisse	CH									
+57	1	pw	32	140501	CHF	Monsieur			Monsieur	Baptista	Samuel	samuel.baptista@ecodev.ch		Industrie 2		2300	Châtonnaye	Suisse	CH									

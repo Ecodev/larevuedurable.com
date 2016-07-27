@@ -51,9 +51,9 @@
 			var priceDisplayMethod = {$priceDisplay};
 			var roundMode = {$roundMode};
 		</script>
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
+
 {if isset($css_files)}
 	{foreach from=$css_files key=css_uri item=media}
 	<link href="{$css_uri}" rel="stylesheet" type="text/css" media="{$media}" />
@@ -66,7 +66,7 @@
 {/if}
 		{$HOOK_HEADER}
 	</head>
-	
+
 	<body {if isset($page_name)}id="{$page_name|escape:'htmlall':'UTF-8'}"{/if} class="{if $hide_left_column}hide-left-column{/if} {if $hide_right_column}hide-right-column{/if} {if $content_only} content_only {/if} {$currentController}">
 		<div id='body'> <!-- cette balise est nécessaire pour pouvoir forcer le footer à rester en bas de page si la page est trop courte. Elle a un padding-botttom de la taille du footer qui lui est en absolute -->
 	{if !$content_only}
@@ -78,18 +78,18 @@
 
 
 		<!-- Header -->
-					
+
 		<div id="header" class="alpha omega">
-			
+
 			<div id='headerTop'>
 				<div class='container_9'>
-					
+
 					{$HOOK_TOP_TOP}
-					
+
 					<a id='topbuttonContact' href='/fr/contactez-nous'>nous contacter</a>
 				</div>
 			</div>
-			
+
 			<div id='headerMid'>
 				<div class='container_9'>
 
@@ -104,16 +104,16 @@
 					</ul>
 				</div>
 			</div>
-			
+
 			<div id='headerBot'>
 				<div id='headerBotBg'>
 					<div class='container_9'>
-						
+
 						<a id="header_logo" href="{$base_dir}" title="{$shop_name|escape:'htmlall':'UTF-8'}">
 							<img class="logo" src="{$logo_url}" alt="{$shop_name|escape:'htmlall':'UTF-8'}" {if $logo_image_width}width="{$logo_image_width}"{/if} {if $logo_image_height}height="{$logo_image_height}" {/if} />
 						</a>
 						<div id='slogan'>Pour s’informer et s’engager sur l’écologie</div>
-							
+
 						<div id="header_right" class="omega">
 							{$HOOK_MENU}
 						</div>
@@ -121,5 +121,5 @@
 				</div>
 			</div>
 		</div>
-		
+
 	{/if}

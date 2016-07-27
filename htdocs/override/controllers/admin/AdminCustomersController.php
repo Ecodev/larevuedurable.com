@@ -1,4 +1,5 @@
 <?php
+
 /*
 * 2007-2013 PrestaShop
 *
@@ -27,47 +28,27 @@
 class AdminCustomersController extends AdminCustomersControllerCore
 {
 
-	public function renderView()
-	{
-		if (!($customer = $this->loadObject()))
-			return;
 
-		$customer->manageSubscriptions();
-//
-//
-//		$this->tpl_view_vars = array(
-//			'followUpDate' => $customer->getNextFollowUpDate()
-//		);
+    /**
+     * Update the customer exclusion from follow up
+     * @return void
+     */
 
-        return parent::renderView();
-	}
 
-	/**
-	 * Update the customer exclusion from follow up
-	 * @return void
-	 */
-	public function ajaxProcessUpdateCustomerExclusionFromFollowUp()
-	{
-		if ($this->tabAccess['edit'] === '1') {
-			$val = (int) Tools::getValue('excludeFromFollowUp');
 
-			$customer = new Customer((int) Tools::getValue('id_customer'));
 
-			if (!Validate::isLoadedObject($customer)) {
-				die ('error:update');
-			}
-			if ($val !== 0 && $val !== 1) {
-				die ('error:validation');
-			}
+    /**
+     * Update the customer exclusion from follow up
+     * @return void
+     */
 
-			$customer->excludeFromFollowUp = $val;
 
-			if (!$customer->update()) {
-				die ('error:update');
-			}
 
-			die('ok');
-		}
-	}
+
+    /**
+     * Update the customer exclusion from follow up
+     * @return void
+     */
+
 
 }

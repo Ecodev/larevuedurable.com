@@ -126,7 +126,7 @@ function findCombination(firstTime)
 
 			//get available_date for combination product
 			selectedCombination['available_date'] = combinations[combination]['available_date'];
-			
+
 			//update the display
 			updateDisplay();
 
@@ -161,7 +161,7 @@ function updateDisplay()
 
 		//hide the hook out of stock
 		$('#oosHook').hide();
-		
+
 		$('#availability_date').fadeOut();
 
 		//availability value management
@@ -295,7 +295,7 @@ function updateDisplay()
 		var priceTaxExclWithoutGroupReduction = '';
 
 		// retrieve price without group_reduction in order to compute the group reduction after
-		// the specific price discount (done in the JS in order to keep backward compatibility)		
+		// the specific price discount (done in the JS in order to keep backward compatibility)
 		priceTaxExclWithoutGroupReduction = ps_round(productPriceTaxExcluded, 6) * (1 / group_reduction);
 
 		var tax = (taxRate / 100) + 1;
@@ -398,7 +398,7 @@ function updateDisplay()
 		else
 			productPricePretaxed = productPriceDisplay;
 		$('#pretaxe_price_display').text(formatCurrency(productPricePretaxed, currencyFormat, currencySign, currencyBlank));
-		// Unit price 
+		// Unit price
 		productUnitPriceRatio = parseFloat(productUnitPriceRatio);
 		if (productUnitPriceRatio > 0 )
 		{
@@ -496,13 +496,15 @@ function refreshProductImages(id_product_attribute)
 }
 
 function updateCustomizedFieldsVisibility () {
-	var val = $('#group_' + _ATTRIBUTE_VERSION_).val();
-	var selector = '#idTab10,#tab10';
+	if (_ATTRIBUTE_VERSION_) {
+		var val = $('#group_' + _ATTRIBUTE_VERSION_).val();
+		var selector = '#idTab10,#tab10';
 
-	if (val == _PAPIER_) {
-		$(selector).hide();
-	} else if (val == _PAPIER_ET_WEB_ || val == _WEB_) {
-		$(selector).show();
+		if (val == _PAPIER_) {
+			$(selector).hide();
+		} else if (val == _PAPIER_ET_WEB_ || val == _WEB_) {
+			$(selector).show();
+		}
 	}
 }
 
@@ -612,8 +614,8 @@ function submitPublishProduct(url, redirect, token)
 	$.ajaxSetup({async: false});
 	$.post(url + '/index.php', {
 		action:'publishProduct',
-		id_product: id_product, 
-		status: 1, 
+		id_product: id_product,
+		status: 1,
 		redirect: redirect,
 		ajax: 1,
 		tab: 'AdminProducts',
