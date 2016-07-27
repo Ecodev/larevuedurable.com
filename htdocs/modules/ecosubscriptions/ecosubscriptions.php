@@ -26,7 +26,16 @@ class EcoSubscriptions extends EcoHooks
     public function install()
     {
 
-        $ecoInstaller = new EcoInstaller($this);
+        // Uninstall modules that are replaced by this new one
+        $modules = ['ecodevadminsubscriptions', 'ecodevadminsubscriptionstools', 'ecodevproductsorting', 'ecodevsamenumber', 'ecodevsubscription', 'ecodevscripts'];
+        foreach($modules as $module) {
+            /** @var $module ModuleCore */
+            $module = Module::getInstanceByName($module);
+
+            if ($module && $module->active) {
+                $module->uninstall();
+            }
+        }
 
         if (!parent::install()) {
             $this->context->controller->errors[] = "Prestashop n'a pas pu installer le module correctement";
@@ -37,6 +46,8 @@ class EcoSubscriptions extends EcoHooks
             return false;
         }
 
+        $ecoInstaller = new EcoInstaller($this);
+
         if (!$ecoInstaller->install()) {
             $this->context->controller->errors[] = "EcoInstaller n'a pas pu installer le module correctement";
             $this->context->controller->errors = array_merge($this->context->controller->errors, $ecoInstaller->errors);
@@ -46,17 +57,6 @@ class EcoSubscriptions extends EcoHooks
             $this->uninstall();
 
             return false;
-        }
-
-        // Uninstall modules that are replaced by this new one
-        $modules = ['ecodevadminsubscriptions', 'ecodevadminsubscriptionstools', 'ecodevproductsorting', 'ecodevsamenumber', 'ecodevsubscription', 'ecodevscripts'];
-        foreach($modules as $module) {
-            /** @var $module ModuleCore */
-            $module = Module::getInstanceByName($module);
-
-            if ($module && $module->active) {
-                $module->uninstall();
-            }
         }
 
         return true;
