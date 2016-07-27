@@ -26,7 +26,7 @@
 
 require_once(_PS_TOOL_DIR_.'tcpdf/config/lang/eng.php');
 require_once(_PS_TOOL_DIR_.'tcpdf/tcpdf.php');
-
+require_once(_PS_MODULE_DIR_.'ecosubscriptions/autoload.php');
 
 class GetFileController extends GetFileControllerCore
 {
