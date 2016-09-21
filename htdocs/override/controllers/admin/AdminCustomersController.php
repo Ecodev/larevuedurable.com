@@ -51,4 +51,57 @@ class AdminCustomersController extends AdminCustomersControllerCore
      */
 
 
+
+    public function renderView()
+    {
+        if (!($customer = $this->loadObject())) {
+            return;
+        }
+
+        $customer->manageSubscriptions();
+
+        return parent::renderView();
+    }
+
+    /**
+     * Update the customer exclusion from follow up
+     * @return void
+     */
+    public function ajaxProcessUpdateCustomerExclusionFromRemind()
+    {
+        if ($this->tabAccess['edit'] === '1') {
+            $val = (int) Tools::getValue('excludeFromRemind');
+
+            $customer = new Customer((int) Tools::getValue('id_customer'));
+
+            if (!Validate::isLoadedObject($customer)) {
+                die ('error:update');
+            }
+            if ($val !== 0 && $val !== 1) {
+                die ('error:validation');
+            }
+
+            $customer->excludeFromRemind = $val;
+
+            if (!$customer->update()) {
+                die ('error:update');
+            }
+
+            die('ok');
+        }
+    }
+
+    public function ajaxProcessIgnoreSubscription() {
+        $ignore = (bool) Tools::getValue('ignore');
+        $order = new Order((int) Tools::getValue('order'));
+        $order->ignore_sub = $ignore;
+        $result = $order->save();
+
+        if (!$result) {
+            die ('ko');
+        }
+
+        die('ok');
+    }
+
 }
