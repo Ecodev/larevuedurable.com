@@ -116,8 +116,7 @@ class Link extends LinkCore
             $shop = new Shop($id_shop);
 
         $url = ($this->ssl_enable) ? Tools::getShopDomainSsl(true) : Tools::getShopDomain(true);
-
-        $url .= $url.$shop->domain.$shop->getBaseURI().$this->getLangLink($id_lang);
+        $url .= $shop->getBaseURI().$this->getLangLink($id_lang);        
 
         if (!is_object($product))
         {
