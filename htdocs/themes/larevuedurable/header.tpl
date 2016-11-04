@@ -1,4 +1,4 @@
-fonts{*
+{*
 * 2007-2013 PrestaShop
 *
 * NOTICE OF LICENSE
