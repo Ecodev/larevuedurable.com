@@ -103,6 +103,118 @@ class Link extends LinkCore
         return $url.Dispatcher::getInstance()->createUrl('cms_category_rule', $id_lang, $params, $this->allow);
     }
 
+    public function getProductLink($product, $alias = null, $category = null, $ean13 = null, $id_lang = null, $id_shop = null, $ipa = 0, $force_routes = false)
+    {
+        $dispatcher = Dispatcher::getInstance();
 
+        if (!$id_lang)
+            $id_lang = Context::getContext()->language->id;
+
+        if (!$id_shop)
+            $shop = Context::getContext()->shop;
+        else
+            $shop = new Shop($id_shop);
+
+        $url = ($this->ssl_enable) ? Tools::getShopDomainSsl(true) : Tools::getShopDomain(true);
+
+        $url .= $url.$shop->domain.$shop->getBaseURI().$this->getLangLink($id_lang);
+
+        if (!is_object($product))
+        {
+            if (is_array($product) && isset($product['id_product']))
+                $product = new Product($product['id_product'], false, $id_lang);
+            else if (is_numeric($product) || !$product)
+                $product = new Product($product, false, $id_lang);
+            else
+                throw new PrestaShopException('Invalid product vars');
+        }
+
+        // Set available keywords
+        $params = array();
+        $params['id'] = $product->id;
+        $params['rewrite'] = (!$alias) ? $product->getFieldByLang('link_rewrite') : $alias;
+        $params['ean13'] = (!$ean13) ? $product->ean13 : $ean13;
+        $params['meta_keywords'] =	Tools::str2url($product->getFieldByLang('meta_keywords'));
+        $params['meta_title'] = Tools::str2url($product->getFieldByLang('meta_title'));
+
+        if ($dispatcher->hasKeyword('product_rule', $id_lang, 'manufacturer'))
+            $params['manufacturer'] = Tools::str2url($product->isFullyLoaded ? $product->manufacturer_name : Manufacturer::getNameById($product->id_manufacturer));
+
+        if ($dispatcher->hasKeyword('product_rule', $id_lang, 'supplier'))
+            $params['supplier'] = Tools::str2url($product->isFullyLoaded ? $product->supplier_name : Supplier::getNameById($product->id_supplier));
+
+        if ($dispatcher->hasKeyword('product_rule', $id_lang, 'price'))
+            $params['price'] = $product->isFullyLoaded ? $product->price : Product::getPriceStatic($product->id, false, null, 6, null, false, true, 1, false, null, null, null, $product->specificPrice);
+
+        if ($dispatcher->hasKeyword('product_rule', $id_lang, 'tags'))
+            $params['tags'] = Tools::str2url($product->getTags($id_lang));
+
+        if ($dispatcher->hasKeyword('product_rule', $id_lang, 'category'))
+            $params['category'] = Tools::str2url($product->category);
+
+        if ($dispatcher->hasKeyword('product_rule', $id_lang, 'reference'))
+            $params['reference'] = Tools::str2url($product->reference);
+
+        if ($dispatcher->hasKeyword('product_rule', $id_lang, 'categories'))
+        {
+            $params['category'] = (!$category) ? $product->category : $category;
+            $cats = array();
+            foreach ($product->getParentCategories() as $cat)
+                if (!in_array($cat['id_category'], Link::$category_disable_rewrite))//remove root and home category from the URL
+                    $cats[] = $cat['link_rewrite'];
+            $params['categories'] = implode('/', $cats);
+        }
+        $anchor = $ipa ? $product->getAnchor($ipa) : '';
+
+        return $url.$dispatcher->createUrl('product_rule', $id_lang, $params, $force_routes, $anchor);
+    }
+
+    public function getCMSLink($cms, $alias = null, $ssl = false, $id_lang = null)
+    {
+        $base = (($this->ssl_enable) ? _PS_BASE_URL_SSL_ : _PS_BASE_URL_);
+
+        if (!$id_lang)
+            $id_lang = Context::getContext()->language->id;
+        $url = $base.__PS_BASE_URI__.$this->getLangLink($id_lang);
+
+        if (!is_object($cms))
+            $cms = new CMS($cms, $id_lang);
+
+        // Set available keywords
+        $params = array();
+        $params['id'] = $cms->id;
+        $params['rewrite'] = (!$alias) ? (is_array($cms->link_rewrite) ? $cms->link_rewrite[(int)$id_lang] : $cms->link_rewrite) : $alias;
+
+        if (isset($cms->meta_keywords) && !empty($cms->meta_keywords))
+            $params['meta_keywords'] = is_array($cms->meta_keywords) ?  Tools::str2url($cms->meta_keywords[(int)$id_lang]) :  Tools::str2url($cms->meta_keywords);
+        else
+            $params['meta_keywords'] = '';
+
+        if (isset($cms->meta_title) && !empty($cms->meta_title))
+            $params['meta_title'] = is_array($cms->meta_title) ? Tools::str2url($cms->meta_title[(int)$id_lang]) : Tools::str2url($cms->meta_title);
+        else
+            $params['meta_title'] = '';
+
+        return $url.Dispatcher::getInstance()->createUrl('cms_rule', $id_lang, $params, $this->allow);
+    }
+
+    public function getModuleLink($module, $controller = 'default', array $params = array(), $ssl = false, $id_lang = null)
+    {
+        $base = (($this->ssl_enable) ? _PS_BASE_URL_SSL_ : _PS_BASE_URL_);
+
+        if (!$id_lang)
+            $id_lang = Context::getContext()->language->id;
+        $url = $base.__PS_BASE_URI__.$this->getLangLink($id_lang);
+
+        // Set available keywords
+        $params['module'] = $module;
+        $params['controller'] = $controller ? $controller : 'default';
+
+        // If the module has its own route ... just use it !
+        if (Dispatcher::getInstance()->hasRoute('module-'.$module.'-'.$controller, $id_lang))
+            return $this->getPageLink('module-'.$module.'-'.$controller, $ssl, $id_lang, $params);
+        else
+            return $url.Dispatcher::getInstance()->createUrl('module', $id_lang, $params, $this->allow);
+    }
 }
 
