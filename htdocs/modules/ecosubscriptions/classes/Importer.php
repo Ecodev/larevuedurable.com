@@ -68,7 +68,8 @@ class Importer
                 return -1;
             }
 
-            $this->siteurl = 'http://' . Configuration::get('PS_SHOP_DOMAIN');
+            $protocol = Configuration::get('PS_SSL_ENABLED') ? 'https://' : 'http://';
+            $this->siteurl = $protocol . Configuration::get('PS_SHOP_DOMAIN');
             $this->apikey = _PS_IMPORT_FROM_CRESUS_API_KEY_;
 
             $this->webService = new PrestaShopWebservice($this->siteurl, $this->apikey, $this->debug);
