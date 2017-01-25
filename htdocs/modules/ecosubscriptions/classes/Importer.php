@@ -390,7 +390,9 @@ class Importer
     public function getStartDate($user)
     {
         try {
-            $startUserNumber = (int) $user[$this->config['premier_num']];
+            $endCresusNumber = (int) $this->config['dernier_num'];
+            $startUserNumber = $endCresusNumber - ((int) $this->config['duration'] * 4) + 1;
+
             $lastNumber = Product::getLastMagazineUntil($startUserNumber);
 
             if ($startUserNumber > (int) $lastNumber['reference']) {

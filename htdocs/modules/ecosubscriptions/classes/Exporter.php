@@ -34,7 +34,9 @@ class Exporter
             Configuration::updateValue('ECODEV_LAST_EXPORT_DATE', $date_end->modify('-1 day')->format(_DATE_FORMAT_SHORT_));
         }
 
-        $data[$config['premier_num']] = '';
+
+        $data = [];
+        $data[$config['dernier_num']] = '';
         $data[$config['duration']] = '';
         $data[$config['type']] = '';
         $data[$config['abonnement']] = '';
@@ -86,7 +88,7 @@ class Exporter
             }
 
             // empty fields for export
-            $data[$config['premier_num']] = '';
+            $data[$config['dernier_num']] = '';
             $data[$config['duration']] = '';
             $data[$config['type']] = '';
             $data[$config['abonnement']] = '';
