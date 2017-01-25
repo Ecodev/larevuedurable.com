@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <module>
+            <name>ecotools</name>
+            <displayName><![CDATA[EcoTools]]></displayName>
+            <version><![CDATA[1.5.4]]></version>
+            <description><![CDATA[Installe des outils destin&eacute;s au d&eacute;veloppement]]></description>
+            <author><![CDATA[Samuel Baptista]]></author>
+            <tab><![CDATA[]]></tab>
+	<confirmUninstall>La désinstallation va supprimer certains fichiers et répertoires. Êtes-vous sur de vouloir continuer ?</confirmUninstall>
+            <is_configurable>0</is_configurable>
+            <need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+        </module>

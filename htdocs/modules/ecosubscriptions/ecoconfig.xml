@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <composer>true</composer>
+    <confs>
+        <conf>
+            <name>ABONNEMENTS</name>
+            <value>8, 31, 32</value>
+        </conf>
+        <conf>
+            <name>LAST_EXPORT_DATE</name>
+            <value>2015-09-17</value>
+        </conf>
+        <conf>
+            <name>REMINDER_ACTIVE</name>
+            <value>0</value>
+        </conf>
+    </confs>
+    <hooks>
+        <!--hook optionnal="1" first="1">displayRightColumn</hook-->
+        <hook>displayHeader</hook>
+        <hook>displayProductTabContent</hook>
+        <hook>displayProductTab</hook>
+        <hook>actionOrderStatusPostUpdate</hook>
+        <hook>actionProductAdd</hook>
+        <hook>actionProductSave</hook>
+        <hook>actionProductListOverride</hook>
+        <hook first="1">displayAdminCustomers</hook>
+        <hook first="1">displayAdminOrder</hook>
+        <hook>displayUserInfoStart</hook>
+
+        <!-- do nothing, but module class is called and it's autoloader too, and we need the autolaoder -->
+        <hook>displayBackOfficeHeader</hook>
+        <hook>newOrder</hook>
+    </hooks>
+    <tabs>
+        <tab main="1">
+            <class>AdminSubscriptions</class>
+            <!--<icon>f021</icon>-->
+            <langs>
+                <lang iso="fr">Abonnements</lang>
+            </langs>
+        </tab>
+        <tab>
+            <class>AdminSubscriptionsSubscribers</class>
+            <langs>
+                <lang iso="fr">Abonnés</lang>
+            </langs>
+        </tab>
+        <tab>
+            <class>AdminSubscriptionsTools</class>
+            <langs>
+                <lang iso="fr">Outils</lang>
+            </langs>
+        </tab>
+        <tab>
+            <class>AdminSubscriptionsReminder</class>
+            <langs>
+                <lang iso="fr">Relances</lang>
+            </langs>
+        </tab>
+        <tab>
+            <class>AdminSubscriptionsTransfer</class>
+            <langs>
+                <lang iso="fr">Importation / Exportation</lang>
+            </langs>
+        </tab>
+    </tabs>
+    <sql></sql>
+    <metas></metas>
+    <quicks></quicks>
+    <folders></folders>
+    <files></files>
+    <database>
+        <!--table uninstall="0">test2</table-->
+        <column uninstall="0">
+            <table>orders</table>
+            <name>ignore_sub</name>
+            <type>tinyint(1) unsigned NOT NULL DEFAULT '0'</type>
+        </column>
+        <column uninstall="0">
+            <table>product</table>
+            <name>date_parution</name>
+            <type>date</type>
+        </column>
+        <column uninstall="0">
+            <table>product</table>
+            <name>numero</name>
+            <type>smallint(6)</type>
+        </column>
+        <column uninstall="0">
+            <table>product</table>
+            <name>page</name>
+            <type>smallint(6)</type>
+        </column>
+        <column uninstall="0">
+            <table>customer</table>
+            <name>excludeFromRemind</name>
+            <type>tinyint(1) unsigned NOT NULL DEFAULT '0'</type>
+        </column>
+        <column uninstall="0">
+            <table>customer</table>
+            <name>cresus_id</name>
+            <type>smallint(6)</type>
+        </column>
+        <column uninstall="0">
+            <table>customer</table>
+            <name>cresus_source</name>
+            <type>varchar(3)s</type>
+        </column>
+    </database>
+</configuration>

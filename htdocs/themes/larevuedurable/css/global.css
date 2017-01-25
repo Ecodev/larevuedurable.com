@@ -149,7 +149,7 @@ a, a:active, a:visited {
 }
 a:hover {text-decoration:none;color:#067EB1}
 
-	
+
 /* HACK IOS ipad, iphone */
 input[type="text"], input[type="email"], input[type="search"], input[type="password"], input[type="submit"], input[type="image"] {
 	-webkit-appearance:none;
@@ -159,7 +159,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 	-moz-border-radius:0px !important;
 	border-radius:0px !important;
 }
-	
+
 /*buttons ************************************************************************************** */
 input.button_mini, input.button_small, input.button, input.button_large,
 input.button_mini_disabled, input.button_small_disabled, input.button_disabled, input.button_large_disabled,
@@ -180,7 +180,7 @@ span.exclusive_mini, span.exclusive_small, span.exclusive, span.exclusive_large,
 	color:#fff !important;
 	border:none;
 	text-decoration:none;
-	background:#067EB1;	
+	background:#067EB1;
 	box-shadow: 			0px 1px 2px rgba(0,0,0,0.5);
 	-moz-box-shadow: 		0px 1px 2px rgba(0,0,0,0.5);
 	-webkit-box-shadow: 	0px 1px 2px rgba(0,0,0,0.5);
@@ -320,8 +320,8 @@ table.std.active.is_conflict th{
 	font-size: 14px;
 }
 #tierceSubsActive p{
-	background: #8cc642;	
-	padding: 15px 20px; 
+	background: #8cc642;
+	padding: 15px 20px;
 	margin: 1em 0 1.5em 0;
 	font-size: 20px;
 	color: white;
@@ -332,7 +332,7 @@ table.std.active.is_conflict th{
 	text-align: center;
 }
 table.std.inactive.future th{
-	background:#e6bd72;
+	background:#067EB1;
 	font-size: 14px;
 }
 
@@ -343,7 +343,7 @@ table.std.inactive.nofuture th{
 
 table.std.inactive td p,
 table.std.active td p{
-	padding-bottom: 0; 
+	padding-bottom: 0;
 }
 
 table.std  .last_item  td ,table.std  th {border-bottom:1px solid #999}
@@ -680,7 +680,7 @@ div.star_hover a, div.star a:hover { background-position: 0 -32px }
 
 }
 
-	
+
 #headerMid a:hover{
 	color:#C7B299;
 }
@@ -702,7 +702,7 @@ div.star_hover a, div.star a:hover { background-position: 0 -32px }
 #headerMid #creeCompteHeader{
 	position:relative;
 	top:-5px;
-	float:left;	
+	float:left;
 	margin-left:0;
 	padding-left:0;
 }
@@ -726,12 +726,12 @@ div.star_hover a, div.star a:hover { background-position: 0 -32px }
 /*#header{
 	position: fixed;
 	width: 100%;
-	top: 0; 
+	top: 0;
 
 }
 #headerBot{
 	background-color: transparent;
-	 
+
 }
 #headerBotBg{
 	background: white;
@@ -742,8 +742,8 @@ div.star_hover a, div.star a:hover { background-position: 0 -32px }
 }
 
 #body{
-	
-	padding-top: 246px; 
+
+	padding-top: 246px;
 }*/
 
 /* ************************************************************************************************
@@ -2106,14 +2106,14 @@ div.star_hover a, div.star a:hover { background-position: 0 -12px }
 			color:#333;
 			background:url(../../../modules/blockcategories/img/arrow_right_2.png) no-repeat 10px 10px transparent
 		}
-		
+
 	#categories_block_left  li ul {margin-left:30px}
 		#categories_block_left  li ul li {border:none}
 			#categories_block_left  li ul li a {
 				padding-left:0;
 				background:none
 			}
-		
+
 #categories_block_left li .OPEN,
 #categories_block_left li .CLOSE {
 	display:block;
@@ -2161,9 +2161,9 @@ div.star_hover a, div.star a:hover { background-position: 0 -12px }
 	padding:7px 11px 5px 22px;
 	color:#333;
 	background:url(../../../modules/blockcms/img/arrow_right_2.png) no-repeat 10px 10px transparent;
-		
+
 }
-    
+
 tr.subitem > td:first-child + td {
     padding-left: 10px;
 }
@@ -2238,7 +2238,7 @@ tr.subitem > td:first-child + td {
 		background:url(../../../modules/blockrss/img/arrow_right_2.png) no-repeat 10px 10px transparent
 	}
 
-	
+
 /*************** Block SOCIAL ***************/
 #social_block {padding:15px 10px;}
 #social_block li {padding-left:38px !important;}
@@ -2249,12 +2249,12 @@ tr.subitem > td:first-child + td {
 
 /*************** Block STORE ***************/
 .blockstore img { margin: 10px 0 0 0}
-.blockstore p { 
+.blockstore p {
 	padding-bottom:0;
 	font-weight:bold;
 	text-align: right
 }
-.blockstore p.store_image { 
+.blockstore p.store_image {
 	padding-bottom:10px;
 	text-align:center
 }
@@ -2414,7 +2414,7 @@ tr.subitem > td:first-child + td {
 	font-size:12px;
 	display:block;
 	-webkit-border-radius: 	30px;
-	-khtml-border-radius: 	30px;	
+	-khtml-border-radius: 	30px;
 	-moz-border-radius: 	30px;
 	border-radius: 			30px;
 	border:none;
@@ -2444,22 +2444,22 @@ tr.subitem > td:first-child + td {
 .OrderOpcController #cart_summary a
 {
 	color: #666;
-	 
+
 }
 .OrderOpcController #cart_summary a:hover
 {
 	color: #666;
 	border: none;
 	top: 0;
-	 
+
 }
 
 
 .AuthController .title_block{
-	padding-bottom: 0; 
+	padding-bottom: 0;
 }
 .AuthController h3{
-	margin-top: 0 !important; 
+	margin-top: 0 !important;
 }
 
 
@@ -2470,7 +2470,7 @@ tr.subitem > td:first-child + td {
 
 #categoryTopHook
 {
-	margin-bottom: 20px;	
+	margin-bottom: 20px;
 }
 
 

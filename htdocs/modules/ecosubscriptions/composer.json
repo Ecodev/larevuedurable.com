@@ -1,0 +1,12 @@
+{
+    "name": "sam/ecodevsubscriptions",
+    "authors": [
+        {
+            "name": "Samuel Baptista",
+            "email": "samuel.baptista@ecodev.ch"
+        }
+    ],
+    "require": {
+        "drewm/mailchimp-api": "^2.1"
+    }
+}

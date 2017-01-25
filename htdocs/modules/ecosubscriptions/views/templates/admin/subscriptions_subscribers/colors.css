@@ -1,0 +1,120 @@
+/** Legend */
+
+.legend .web, .legend .paper, .legend .active {
+    border:1px solid #ccc;
+}
+
+.legend .subType{
+    background:#eeeeee
+}
+
+.legend .archive {
+    background-color:#d5d5d5;
+}
+.legend .underscored {
+    border-width: 1px 1px 7px 1px !important;
+    line-height: 7px !important;
+    height: 7px !important;
+    border-bottom-width: 10px;
+    border-bottom-style: solid;
+}
+
+.legend .element .reference.imported {
+    background: url(import.png) center center no-repeat;
+    width: 20px;
+}
+
+.adminsubs .tierces {
+    background-color: #eee1f4;
+}
+
+.adminsubs .ignored {
+    background-color: #eee;
+}
+
+.actualMarker{
+    background-color: #c8e7c8;
+}
+
+/* Number on headers */
+.adminsubs .active {
+    border-color: white;
+    background-color: rgb(92, 184, 92);
+    color:white;
+}
+.num.active .infobox:after {
+    border-bottom-color:rgb(92, 184, 92);
+}
+
+.adminsubs .next {
+    background: #067EB1;
+    border-color: white;
+    color: white;
+}
+.num.next .infobox:after {
+    border-bottom-color:#067EB1;
+}
+
+
+.adminsubs .unpublished {
+    border-color: #cccccc;
+}
+
+.adminsubs .nonexistent {
+    border-color: red;
+}
+
+.adminsubs .invisible {
+    border-color: orange;
+}
+
+/* subscriptions */
+.adminsubs .web {
+    border-color: rgb(255, 177, 59);
+}
+
+.adminsubs .paper {
+    border-color: rgb(0, 130, 0);
+}
+
+.adminsubs .web.paper {
+    border-color: rgb(0, 121, 202);
+}
+
+.adminsubs .sub{
+    background: #eeeeee;
+    white-space: nowrap;
+}
+
+.adminsubs .subType8{
+    background-color:#7fc77f;
+    color:white;
+}
+
+.adminsubs .subType31{
+    background-color: #ff9092;
+    color:white;
+}
+.adminsubs .subType32{
+    background-color: #a9cbde;
+}
+.adminsubs .subType32,
+.adminsubs .subType32 * {
+    color: #0079CA;
+}
+
+.adminsubs .remind{
+    background: #e6fff1;
+}
+
+.adminsubs .excluded{
+    background: #ffe4e3;
+}
+
+.adminsubs .sub.imported {
+    background-image: url(import2.png);
+}
+
+.adminsubs .sub.active{
+    /*box-shadow:0 2px 2px rgba(0,0,0,0.3);*/
+}

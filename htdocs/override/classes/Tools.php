@@ -3,15 +3,21 @@
 class Tools extends ToolsCore
 {
 
+    /**
+     * @Deprecated, Kepts for compatibility purpose, but prefer user EcoTools
+     * @param $hook
+     * @param string $message
+     * @return bool
+     */
 	public static function createHookIfNoExist( $hook, $message='' )
-	{		
+	{
 		try{
 			$request = "
 			SELECT name
 			FROM "._DB_PREFIX_."hook 
 			WHERE "._DB_PREFIX_."hook.name LIKE '".$hook."'";
 			$result = Db::getInstance()->ExecuteS($request);
-		
+
 			if( !$result ) {
 				$request = "INSERT INTO "._DB_PREFIX_."hook (name, title) VALUES ('".$hook."', 'Net-lead : ".$message.".') ";
 				$result2 = Db::getInstance()->ExecuteS($request);
@@ -20,7 +26,7 @@ class Tools extends ToolsCore
 			return false;
 		}
 		return true;
-				
+
 	}
 
 	public static function date_to_timestamp ($date) {
@@ -29,10 +35,6 @@ class Tools extends ToolsCore
 	           : 0;
 	}
 
-	public static function date_diff ($date_recent, $date_old) {
-	   return Tools::date_to_timestamp($date_recent) - Tools::date_to_timestamp($date_old);
-	}
-	
 	public static function arrayToString($array, $deep=0)
 	{
 		$string = '';
@@ -43,17 +45,16 @@ class Tools extends ToolsCore
 		}
 		foreach($array as $key => $arr)
 		{
-			if(is_array($arr)) 
+			if(is_array($arr))
 				$string.= $tab.$key." => \n".Tools::arrayToString($arr, $deep+1);
-			else 
+			else
 				$string.= $tab.$key.' => '.$arr.",\n";
 		}
 		return $string;
 	}
-	
-	
-	
-	
+
+
+
 	// public static function ps_round($value, $precision = 0)
 	// {
 	// 	static $method = null;
@@ -121,7 +122,7 @@ class Tools extends ToolsCore
 	                '{order_ids}' => $orders[0]['ids'],
 	                '{order_refs}' => $orders[0]['refs'],
 	            );
-	
+
 	            Mail::send(Context::getContext()->language->id, 'customer_notification', $subject, $vars, explode(',', _CUSTOMER_CHANGE_NOTIFICATION_), null, null, null, null, null);
 	       	}
         }

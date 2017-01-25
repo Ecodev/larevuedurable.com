@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <confs>
+        <!--conf>
+            <name>NEGATIVE_ENABLED</name>
+            <value>0</value>
+        </conf-->
+    </confs>
+    <hooks>
+        <hook optionnal="1" first="1">actionEmailAddAfterContent</hook>
+    </hooks>
+    <tabs></tabs>
+    <sql></sql>
+    <metas></metas>
+    <quicks></quicks>
+
+    <!-- relative htdocs dir -->
+    <folders>
+        <folder>../logs/emails</folder>
+    </folders>
+
+    <!-- relative htdocs dir -->
+    <files>
+        <file location="../logs/emails/.gitkeep"/>
+        <file location="config/version.inc.php" remove="true"><![CDATA[<?php
+    define('_PS_VERSION_', '1.6.1.0');]]>
+        </file>
+        <file location="config/local.inc.php" remove="true"><![CDATA[<?php
+    define('_PS_MODE_DEV_', false);
+    define('_OVERRIDE_EMAIL_', '');]]>
+        </file>
+        <file location="config/config.inc.php" prepend="true"><![CDATA[
+    if (file_exists(dirname(__FILE__).'/version.inc.php'))
+    {
+        require_once(dirname(__FILE__) . '/version.inc.php');
+    }
+
+    if (file_exists(dirname(__FILE__).'/local.inc.php'))
+    {
+        require_once(dirname(__FILE__) . '/local.inc.php');
+    }]]>
+        </file>
+    </files>
+</configuration>

@@ -26,16 +26,6 @@ class EcodevProductSorting extends Module
         return true;
     }
 
-    public function uninstall()
-    {
-        if ( !parent::uninstall() || !$this->uninstallDB() ) {
-            return false;
-        }
-
-        return true;
-    }
-
-
     private function installDB()
     {
 
@@ -72,15 +62,6 @@ class EcodevProductSorting extends Module
         }
         return true;
     }
-
-    private function uninstallDB()
-    {
-        DB::getInstance()->execute('ALTER TABLE '._DB_PREFIX_.'product DROP COLUMN page');
-        DB::getInstance()->execute('ALTER TABLE '._DB_PREFIX_.'product DROP COLUMN numero');
-
-        return true;
-    }
-
 
     public function hookActionProductAdd($params)
     {
