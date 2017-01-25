@@ -59,6 +59,8 @@ htdocs/modules/ecosubscriptions/data/files/import/from_cresus/*
 !htdocs/modules/ecosubscriptions/data/files/import/from_cresus/.gitkeep
 htdocs/modules/ecosubscriptions/data/files/import/to_cresus/*
 !htdocs/modules/ecosubscriptions/data/files/import/to_cresus/.gitkeep
+htdocs/modules/ecosubscriptions/data/files/tva/*
+!htdocs/modules/ecosubscriptions/data/files/tva/.gitkeep
 
 !htdocs/override/
 
