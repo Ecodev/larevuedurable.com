@@ -93,4 +93,9 @@ return [
         'permissions' => '0775',
         'recursive' => true,
     ],
+    [
+        'path' => 'logs',
+        'permissions' => '0775',
+        'recursive' => true,
+    ],
 ];
