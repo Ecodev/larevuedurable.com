@@ -62,7 +62,7 @@ class AdminSubscriptionsTransferController extends AbstractAdminSubscriptionsCon
     public function getConfig()
     {
         $config = [
-            'premier_num',
+            'dernier_num',
             'duration',
             'type',
             'abonnement',
