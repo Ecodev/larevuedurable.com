@@ -54,6 +54,10 @@ htdocs/modules/ecodevscripts/data/files/de_cresus/*
 !htdocs/modules/ecodevscripts/data/files/de_cresus/.gitkeep
 htdocs/modules/ecodevscripts/data/files/pour_cresus/*
 !htdocs/modules/ecodevscripts/data/files/pour_cresus/.gitkeep
+htdocs/modules/ecosubscriptions/data/files/import/from_cresus/*
+!htdocs/modules/ecosubscriptions/data/files/import/from_cresus/.gitkeep
+htdocs/modules/ecosubscriptions/data/files/import/to_cresus/*
+!htdocs/modules/ecosubscriptions/data/files/import/to_cresus/.gitkeep
 htdocs/modules/ecodevsubscription/cron_log.txt
 
 !htdocs/override/
