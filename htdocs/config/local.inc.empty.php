@@ -47,6 +47,7 @@ define('_PS_SUBSCRIBER_INSTITUTE_', 4);
  *	- Web : attribut 27
  *	- web et papier : attribut 28
  */
+define('_UN_NUMERO_', 47);
 define('_SIX_MOIS_', 46);
 define('_UN_AN_', 23);
 define('_DEUX_ANS_', 24);
@@ -64,6 +65,7 @@ define('_ABONNEMENT_PARTICULIER_', 8);
 define('_ABONNEMENT_INSTITUT_', 32);
 define('_ABONNEMENT_SOLIDARITE_', 31);
 define('_ABONNEMENT_MOOC_', 971);
+define('_ABONNEMENT_1_EDITION_', 1163);
 
 // Permet d'identifier un produit institutionnel, qui peut être utilisé par qqch d'autre, ne l'ayant pas acheté
 define('_MANUFACTURE_INSTITUTE_', 3);
