@@ -25,6 +25,7 @@ class EcoSubscriptions extends EcoHooks
 
     public function install()
     {
+
         // Uninstall modules that are replaced by this new one
         $modules = ['ecodevadminsubscriptions', 'ecodevadminsubscriptionstools', 'ecodevproductsorting', 'ecodevsamenumber', 'ecodevsubscription', 'ecodevscripts'];
         foreach($modules as $module) {
@@ -38,6 +39,7 @@ class EcoSubscriptions extends EcoHooks
 
         if (!parent::install()) {
             $this->context->controller->errors[] = "Prestashop n'a pas pu installer le module correctement";
+            $this->context->controller->errors = array_merge($this->context->controller->errors, $ecoInstaller->errors);
 
             // $this->_errors[] = $msg; // ps 1.6 ?
 
