@@ -30,57 +30,6 @@ require_once(_PS_MODULE_DIR_.'ecosubscriptions/autoload.php');
 
 class GetFileController extends GetFileControllerCore
 {
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/**
-	 * Display an error message with js
-	 * and redirect using js function
-	 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/**
-	 * Display an error message with js
-	 * and redirect using js function
-	 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/**
-	 * Display an error message with js
-	 * and redirect using js function
-	 */
 	protected $display_header = false;
 	protected $display_footer = false;
 

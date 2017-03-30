@@ -25,7 +25,7 @@
 <!-- block seach mobile -->
 {if isset($hook_mobile)}
 <div class="input_search" data-role="fieldcontain">
-	<form method="get" action="{$link->getPageLink('search')}" id="searchbox">
+	<form method="get" action="{$link->getPageLink('search', true)}" id="searchbox">
 		<input type="hidden" name="controller" value="search" />
 		<input type="hidden" name="orderby" value="position" />
 		<input type="hidden" name="orderway" value="desc" />
@@ -47,7 +47,7 @@
 			<input type="submit" name="submit_search" value="{l s='Search' mod='blocksearch'}" id='submit_search' />
 		</p>
 	</form>
-	
+
 
 
 </div>

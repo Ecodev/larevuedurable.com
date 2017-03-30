@@ -22,6 +22,8 @@ Livraison
 	Adresse de facturation :
 	{invoice_block_txt}
 
+Les commandes « papier » hors Suisse ne sont livrées qu’après réception du paiement ou d’une preuve de paiement. Celui-ci doit nous parvenir jusqu’au jour précédant les envois mensuels dont les dates figurent sur la page d’accueil de notre site.
+
 Vous pouvez accéder au suivi de votre commande et télécharger votre facture dans "Historique des commandes" de la rubrique "Mon compte" sur notre site.
 Si vous avez un compte invité, vous pouvez suivre votre commande à cette adresse : {guest_tracking_url}
 

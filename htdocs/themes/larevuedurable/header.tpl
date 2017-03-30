@@ -52,7 +52,7 @@
 			var roundMode = {$roundMode};
 		</script>
 
-		<link href='http://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Asap:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
 {if isset($css_files)}
 	{foreach from=$css_files key=css_uri item=media}
@@ -109,7 +109,7 @@
 				<div id='headerBotBg'>
 					<div class='container_9'>
 
-						<a id="header_logo" href="{$base_dir}" title="{$shop_name|escape:'htmlall':'UTF-8'}">
+						<a id="header_logo" href="/" title="{$shop_name|escape:'htmlall':'UTF-8'}">
 							<img class="logo" src="{$logo_url}" alt="{$shop_name|escape:'htmlall':'UTF-8'}" {if $logo_image_width}width="{$logo_image_width}"{/if} {if $logo_image_height}height="{$logo_image_height}" {/if} />
 						</a>
 						<div id='slogan'>Pour s’informer et s’engager sur l’écologie</div>

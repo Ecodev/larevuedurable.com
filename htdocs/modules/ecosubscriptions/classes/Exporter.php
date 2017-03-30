@@ -35,7 +35,6 @@ class Exporter
         }
 
 
-        $data = [];
         $data[$config['dernier_num']] = '';
         $data[$config['duration']] = '';
         $data[$config['type']] = '';

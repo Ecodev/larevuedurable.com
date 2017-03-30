@@ -2,6 +2,8 @@ Bonjour {firstname} {lastname},
 
 Le paiement pour votre commande ayant pour référence {order_name} a été accepté.
 
+Votre commande est jointe aux envois mensuels dont les dates figurent sur la page d’accueil de notre site. Les renouvellements d’abonnement et les commandes d’articles web uniquement ne sont pas concernés par cette mention.
+
 Vous pouvez accéder à tout moment au suivi de votre commande dans "Historique des commandes" de la rubrique "Mon compte" sur notre site.
 Si vous avez un compte invité, vous pouvez suivre votre commande à cette adresse : {guest_tracking_url}
 

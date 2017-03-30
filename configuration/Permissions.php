@@ -2,6 +2,7 @@
 
 return [
     [
+<<<<<<< HEAD
         'owner' => 'larevuedurablecom-www',
         'path' => 'htdocs/themes/larevuedurable/cache',
         'permissions' => '0775',
@@ -13,6 +14,8 @@ return [
         'recursive' => true,
     ],
     [
+=======
+>>>>>>> master
         'path' => 'htdocs/sitemap.xml',
         'permissions' => '0775',
         'recursive' => true,
@@ -47,6 +50,15 @@ return [
         'recursive' => true,
     ],
     [
+<<<<<<< HEAD
+=======
+        'owner' => 'larevuedurablecom-www',
+        'path' => 'htdocs/themes/larevuedurable/cache',
+        'permissions' => '0775',
+        'recursive' => true,
+    ],
+    [
+>>>>>>> master
         'path' => 'htdocs/modules',
         'permissions' => '0775',
         'recursive' => true,
