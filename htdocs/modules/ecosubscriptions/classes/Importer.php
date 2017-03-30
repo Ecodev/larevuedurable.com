@@ -34,7 +34,7 @@ class Importer
                     $message = "Erreur Web service : \n";
                     $message .= '<pre>' . $shortMsg . '</pre>';
                     $message .= "\nTrace : \n\n " . $ex->getTraceAsString();
-                    error_log($message . chr(10) . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../logs/importer_api.txt');
+                    error_log($message . chr(10) . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/importer_api.txt');
 
                 } catch (Exception $ex) {
                     $shortMsg = $user[$config['email']] . " (" . $user[$config['id']] . ", " . $user[$config['source']] . ") - " . $ex->getMessage();
@@ -43,7 +43,7 @@ class Importer
                     $message = "Erreur Générale : \n";
                     $message .= '<pre>' . $shortMsg . '</pre>';
                     $message .= "\nTrace : \n\n " . $ex->getTraceAsString();
-                    error_log($message . chr(10) . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../logs/importer_api.txt');
+                    error_log($message . chr(10) . __LINE__ . ", " . __FILE__ . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/log/importer_api.txt');
                 }
             }
             $row++;
@@ -390,6 +390,7 @@ class Importer
     public function getStartDate($user)
     {
         try {
+
             $endCresusNumber = (int) $user[$this->config['dernier_num']];
             $startUserNumber = $endCresusNumber - ((int) $user[$this->config['dernier_num']] * 4) + 1;
             $lastNumber = Product::getLastMagazineUntil($startUserNumber);

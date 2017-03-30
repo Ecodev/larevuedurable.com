@@ -29,7 +29,7 @@ class LocalSubscriptionsController
      */
     public function header()
     {
-        if (!in_array(get_class($this->ctrl), $this->excludedModules)) {
+        if (!in_array(get_class($this->ctrl), $this->excludedModules) && method_exists($this->context->customer, 'manageSubscriptions')) {
             $this->context->customer->manageSubscriptions();
         }
     }
