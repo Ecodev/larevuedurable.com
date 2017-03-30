@@ -60,6 +60,8 @@ class Subscription
                 $this->number_of_editions = 4;
             } elseif ($attribut['id'] == _DEUX_ANS_) {
                 $this->number_of_editions = 8;
+            } elseif ($attribut['id'] == _UN_NUMERO_) { // Un numéro, pas mois, pas années
+                $this->number_of_editions = 1;
             } elseif ($attribut['id'] == _SIX_MOIS_) { // ! mois, pas années
                 $this->number_of_editions = 2;
             } elseif ($attribut['id'] == _TROIS_ANS_) {

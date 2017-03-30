@@ -51,6 +51,7 @@ class Customer extends CustomerCore
 //            return $this->user_subscriptions;
 //        }
 
+
         // Split ignored and considered subscriptions
         $this->user_subscriptions = $this->getOwnSubscriptions(false);
         $this->user_ignored_subscriptions = $this->getOwnSubscriptions(true);
@@ -146,7 +147,7 @@ class Customer extends CustomerCore
         if ($instituteAndArchiveOnly) {
             $sql .= '(od.product_id = ' . _ABONNEMENT_MOOC_ . Product::getInstituteProductsAsSql() . ') ';
         } else {
-            $sql .= '(od.product_id = ' . _ABONNEMENT_PARTICULIER_ . ' OR od.product_id = ' . _ABONNEMENT_SOLIDARITE_ . ' OR od.product_id = ' . _ABONNEMENT_MOOC_ . Product::getInstituteProductsAsSql() . ') ';
+            $sql .= '(od.product_id = ' . _ABONNEMENT_PARTICULIER_ . ' OR od.product_id = ' . _ABONNEMENT_SOLIDARITE_ . ' OR od.product_id = ' . _ABONNEMENT_1_EDITION_ . ' OR od.product_id = ' . _ABONNEMENT_MOOC_ . Product::getInstituteProductsAsSql() . ') ';
         }
 
         if ($ignored !== null) {

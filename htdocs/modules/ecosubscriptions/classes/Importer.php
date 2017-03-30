@@ -421,12 +421,10 @@ class Importer
 
         if ($duration == 1) {
             $attribute_duration = _UN_AN_;
-        } else {
-            if ($duration == 2) {
-                $attribute_duration = _DEUX_ANS_;
-            } else {
-                $attribute_duration = _DEUX_ANS_;
-            }
+        } else if ($duration == 2) {
+            $attribute_duration = _DEUX_ANS_;
+        } else if ($duration == '1numero') {
+            $attribute_duration = _UN_NUMERO_;
         }
 
         if ($type == 'w') {
