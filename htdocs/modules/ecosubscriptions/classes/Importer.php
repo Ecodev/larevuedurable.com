@@ -392,7 +392,12 @@ class Importer
         try {
 
             $endCresusNumber = (int) $user[$this->config['dernier_num']];
-            $startUserNumber = $endCresusNumber - ((int) $user[$this->config['dernier_num']] * 4) + 1;
+            if ($user[$this->config['duration']] === '1numero') {
+                $startUserNumber = $endCresusNumber;
+            } else {
+                $startUserNumber = $endCresusNumber - ((int) $user[$this->config['duration']] * 4) + 1;
+            }
+
             $lastNumber = Product::getLastMagazineUntil($startUserNumber);
 
             if ($startUserNumber > (int) $lastNumber['reference']) {
@@ -420,26 +425,24 @@ class Importer
     public function getCombinationId($product_id, $duration, $type)
     {
 
-        if ($duration == 1) {
+        if ($duration === 1) {
             $attribute_duration = _UN_AN_;
-        } else if ($duration == 2) {
+        } else if ($duration === 2) {
             $attribute_duration = _DEUX_ANS_;
-        } else if ($duration == '1numero') {
+        } else if ($duration === '1numero') {
             $attribute_duration = _UN_NUMERO_;
+        } else {
+            $attribute_duration = _UN_AN_;
         }
 
         if ($type == 'w') {
             $attribute_version = _WEB_;
+        } else if ($type == 'wp' || $type == 'pw') {
+            $attribute_version = _PAPIER_ET_WEB_;
+        } else if ($type == 'p') {
+            $attribute_version = _PAPIER_;
         } else {
-            if ($type == 'wp' || $type == 'pw') {
-                $attribute_version = _PAPIER_ET_WEB_;
-            } else {
-                if ($type == 'p') {
-                    $attribute_version = _PAPIER_;
-                } else {
-                    $attribute_version = _WEB_;
-                }
-            }
+            $attribute_version = _WEB_;
         }
 
         $product_id = empty($product_id) ? 8 : $product_id;
@@ -448,7 +451,6 @@ class Importer
                 FROM ps_product_attribute pa
                     INNER JOIN ps_product_attribute_combination pac ON pac.id_product_attribute = pa.id_product_attribute
                     INNER JOIN ps_attribute a ON pac.id_attribute = a.id_attribute
-
                 WHERE pac.id_attribute in (" . $attribute_duration . ", " . $attribute_version . ", 39) and pa.id_product = " . $product_id . "
                 GROUP BY pa.id_product_attribute
                 HAVING COUNT(DISTINCT a.id_attribute) = 3;
