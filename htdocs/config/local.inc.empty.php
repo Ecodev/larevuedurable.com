@@ -65,7 +65,7 @@ define('_ABONNEMENT_PARTICULIER_', 8);
 define('_ABONNEMENT_INSTITUT_', 32);
 define('_ABONNEMENT_SOLIDARITE_', 31);
 define('_ABONNEMENT_MOOC_', 971);
-define('_ABONNEMENT_1_EDITION_', 1163);
+define('_ABONNEMENT_1_EDITION_', 1163);  // !! Pas relancé, selon Customer::getAllSubscribers()
 
 // Permet d'identifier un produit institutionnel, qui peut être utilisé par qqch d'autre, ne l'ayant pas acheté
 define('_MANUFACTURE_INSTITUTE_', 3);
