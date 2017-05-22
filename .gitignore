@@ -18,6 +18,7 @@ logs/emails/*
 htdocs/*
 !htdocs/robots.txt
 !htdocs/.htaccess.sample
+!htdocs/logo.svg
 
 !htdocs/config/
 htdocs/config/*

@@ -110,7 +110,7 @@
 					<div class='container_9'>
 
 						<a id="header_logo" href="/" title="{$shop_name|escape:'htmlall':'UTF-8'}">
-							<img class="logo" src="{$logo_url}" alt="{$shop_name|escape:'htmlall':'UTF-8'}" {if $logo_image_width}width="{$logo_image_width}"{/if} {if $logo_image_height}height="{$logo_image_height}" {/if} />
+							<img class="logo" src="/logo.svg" alt="{$shop_name|escape:'htmlall':'UTF-8'}" {if $logo_image_width}width="{$logo_image_width}"{/if} {if $logo_image_height}height="{$logo_image_height}" {/if} />
 						</a>
 						<div id='slogan'>Pour s’informer et s’engager sur l’écologie</div>
 
