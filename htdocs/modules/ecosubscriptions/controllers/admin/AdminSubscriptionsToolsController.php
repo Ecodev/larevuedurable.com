@@ -222,4 +222,112 @@ class AdminSubscriptionsToolsController extends AbstractAdminSubscriptionsContro
         ));
     }
 
+    public function statistics()
+    {
+        // Test dataset
+        $subscribers = [
+            ['ID' => 69],
+            ['ID' => 1],
+            ['ID' => 2],
+            ['ID' => 95],
+            ['ID' => 96],
+            ['ID' => 125],
+            ['ID' => 687],
+            ['ID' => 380]
+        ];
+
+        // Comment to use the test dataset
+        $subscribers = Customer::getAllSubscribers();
+
+        $dataByProduct = [
+            'total' => []
+        ];
+        $dataByType = [
+            'total' => []
+        ];
+        $min = null;
+        $max = null;
+
+        foreach ($subscribers as $customer) {
+            $customer = new Customer($customer['ID']);
+            $customer->manageSubscriptions();
+
+            foreach ($customer->user_subscriptions as $sub) {
+
+                // Set min / Max
+                if (!$min || $sub->first_edition < $min) {
+                    $min = $sub->first_edition;
+                }
+
+                if (!$max || $sub->last_edition > $max) {
+                    $max = $sub->last_edition;
+                }
+
+                // Init dataset
+                if (!in_array($sub->product->id, [8, 31, 32])) {
+                    continue;
+                }
+
+                if (!isset($dataByProduct[$sub->product->id])) {
+                    $dataByProduct[$sub->product->id] = [];
+                }
+
+                // Fill data
+                for ($edition = $sub->first_edition; $edition <= $sub->last_edition; $edition++) {
+
+                    if (!isset($dataByProduct[$sub->product->id][$edition])) {
+                        $dataByProduct[$sub->product->id][$edition] = [];
+                    }
+
+                    if (!isset($dataByProduct[$sub->product->id][$edition])) {
+                        $dataByProduct[$sub->product->id][$edition] = [];
+                    }
+
+                    $dataByProduct[$sub->product->id][$edition][] = round($sub->getPriceByEdition());
+                    $dataByProduct['total'][$edition][] = round($sub->getPriceByEdition());
+
+                    if ($sub->is_archive && !$sub->is_paper) {
+                        $dataByType['w'][$edition][] = round($sub->getPriceByEdition());
+                    } elseif ($sub->is_archive && $sub->is_paper) {
+                            $dataByType['wp'][$edition][] = round($sub->getPriceByEdition());
+                    } elseif (!$sub->is_archive && $sub->is_paper) {
+                            $dataByType['p'][$edition][] = round($sub->getPriceByEdition());
+                    }
+                    $dataByType['total'][$edition][] = round($sub->getPriceByEdition());
+                }
+            }
+        }
+
+        $moyByProduct = [];
+        foreach ($dataByProduct as $key => $set) {
+            $moyByProduct[$key] = [];
+            for ($i = $min; $i <= $max; $i++) {
+                if (isset($set[$i])) {
+                    $moyByProduct[$key] = array_merge($moyByProduct[$key], $set[$i]);
+                }
+            }
+        }
+
+        $moyByType = [];
+        foreach ($dataByType as $key => $set) {
+            $moyByType[$key] = [];
+            for ($i = $min; $i <= $max; $i++) {
+                if (isset($set[$i])) {
+                    $moyByType[$key] = array_merge($moyByType[$key], $set[$i]);
+                }
+            }
+        }
+
+        $min = 50;
+        $max = 61;
+        $this->context->smarty->assign(array(
+            'statsComputed' => true,
+            'dataByProduct' => $dataByProduct,
+            'dataByType' => $dataByType,
+            'moyByProduct' => $moyByProduct,
+            'moyByType' => $moyByType,
+            'min' => $min,
+            'max' => $max
+        ));
+    }
 }

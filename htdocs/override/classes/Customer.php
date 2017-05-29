@@ -449,8 +449,9 @@ class Customer extends CustomerCore
 
     /**
      * Récupère tous les bénéficiaires d'un abonnement (une commande comportant un abonnement doit être valide)
+     * @param $attributesFilter null = aucun filtre ou un tableau avec l'id des attributs
      */
-    public static function getAllSubscribers($includeBigInstitutes = false, $dateStart = null, $dateEnd = null, $excludeFromRemind = false)
+    public static function getAllSubscribers($includeBigInstitutes = false, $dateStart = null, $dateEnd = null, $excludeFromRemind = false, $attributesFilter = null)
     {
         // récupère toutes les personnes ayant acheté un abonnement institut
         $sql = 'SELECT c.id_customer as ID, c.email as EMAIL , c.firstname as FNAME, c.lastname as LNAME';
