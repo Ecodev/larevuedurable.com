@@ -18,10 +18,6 @@ return [
         'recursive' => true,
     ],
     [
-        'permissions' => '0775',
-        'recursive' => true,
-    ],
-    [
         'path' => 'htdocs/administrator/backups',
         'permissions' => '0777',
         'recursive' => true,
