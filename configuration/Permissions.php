@@ -2,8 +2,19 @@
 
 return [
     [
+        'path' => 'htdocs/config',
+        'permissions' => '0775',
+        'recursive' => true,
+    ],
+    [
         'owner' => 'larevuedurablecom-www',
         'path' => 'htdocs/themes/larevuedurable/cache',
+        'permissions' => '0775',
+        'recursive' => true,
+    ],
+    [
+        'owner' => 'larevuedurablecom-www',
+        'path' => 'htdocs/cache',
         'permissions' => '0775',
         'recursive' => true,
     ],
@@ -14,26 +25,6 @@ return [
     ],
     [
         'path' => 'htdocs/sitemap.xml',
-        'permissions' => '0775',
-        'recursive' => true,
-    ],
-    [
-        'path' => 'htdocs/administrator/backups',
-        'permissions' => '0777',
-        'recursive' => true,
-    ],
-    [
-        'path' => 'htdocs/download',
-        'permissions' => '0775',
-        'recursive' => true,
-    ],
-    [
-        'path' => 'htdocs/download_tmp',
-        'permissions' => '0775',
-        'recursive' => true,
-    ],
-    [
-        'path' => 'htdocs/upload',
         'permissions' => '0775',
         'recursive' => true,
     ],
@@ -78,23 +69,27 @@ return [
         'recursive' => true,
     ],
     [
-        'path' => 'htdocs/config',
-        'permissions' => '0775',
-        'recursive' => true,
-    ],
-    [
-        'owner' => 'larevuedurablecom-www',
-        'path' => 'htdocs/cache',
-        'permissions' => '0775',
-        'recursive' => true,
-    ],
-    [
         'path' => 'htdocs/upload',
         'permissions' => '0775',
         'recursive' => true,
     ],
     [
         'path' => 'htdocs/modules/ecodevscripts/data/files',
+        'permissions' => '0775',
+        'recursive' => true,
+    ],
+    [
+        'path' => 'htdocs/administrator/backups',
+        'permissions' => '0777',
+        'recursive' => true,
+    ],
+    [
+        'path' => 'htdocs/download',
+        'permissions' => '0775',
+        'recursive' => true,
+    ],
+    [
+        'path' => 'htdocs/download_tmp',
         'permissions' => '0775',
         'recursive' => true,
     ],
