@@ -2,6 +2,54 @@
 
 class Subscription
 {
+
+    private $support = [
+        10 => [
+            86,
+            87,
+            94,
+            102,
+            103,
+            233,
+            249,
+            281,
+            282,
+            297,
+            303
+        ],
+        50 => [
+            88,
+            89,
+            96,
+            97,
+            104,
+            105,
+            235,
+            251,
+            283,
+            299,
+            300,
+            304
+        ],
+        100 => [
+            90,
+            91,
+            98,
+            99,
+            106,
+            107,
+            301,
+            305,
+            371
+        ],
+        250 => [
+            306,
+            372
+        ]
+    ];
+
+
+
     public $duration;
     public $first_edition;
     public $last_edition;
@@ -39,13 +87,12 @@ class Subscription
     public $order;
     public $order_detail;
     public $order_history;
-    public $combination;
 
     public function __construct($abonnement)
     {
         $this->product = new Product($abonnement['product_id']);
         $this->order = new Order($abonnement['id_order']);
-        $this->order_detail = new Order($abonnement['id_order_detail']);
+        $this->order_detail = new OrderDetail($abonnement['id_order_detail']);
         $this->order_history = new OrderHistory($abonnement['id_order_history']);
         $this->customer = new Customer($abonnement['id_customer']);
         $combination = new Combination($abonnement['product_attribute_id']);
@@ -166,6 +213,24 @@ class Subscription
         $magazine = Product::getLastMagazineReleased();
         $nextProductParutionDate = new DateTime(Product::getParutionDateByRef((int) $magazine['reference'] + 1));
         return $nextProductParutionDate->modify('-10 day');
+    }
+
+    public function getPriceByEdition()
+    {
+        return $this->getPrice() / $this->number_of_editions;
+    }
+
+    public function getPrice()
+    {
+        $finalPrice = ProductCore::getPriceStatic($this->product->id, true, $this->order_detail->product_attribute_id);
+
+        foreach($this->support as $donationAmount => $ids) {
+            if (in_array($this->order_detail->product_attribute_id, $ids)) {
+                $finalPrice = $finalPrice - $donationAmount;
+            }
+        }
+
+        return $finalPrice;
     }
 
 }

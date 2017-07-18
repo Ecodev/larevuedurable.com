@@ -98,3 +98,48 @@
 </fieldset>
 
 
+<br/>
+<fieldset>
+    <legend>Statistiques</legend>
+
+    <form method="post" action="{$currentIndex|escape}&amp;token={$currentTab->token|escape}&amp;">
+
+        <style>
+            #statTable {
+                border-top: 1px solid #ccc;
+                border-left: 1px solid #ccc;
+                width: 100%;
+                margin-bottom: 1em
+            }
+
+            #statTable td {
+                width: 50px;
+                border-bottom: 1px solid #ccc;
+                border-right: 1px solid #ccc;
+                margin: 0;
+                padding: 5px;
+                text-align: right;
+            }
+        </style>
+
+        {if isset($statsComputed)}
+            <h2>Chiffre d'affaire par édition</h2>
+            {include file="./tableCA.tpl" data=$dataByProduct array=[8,31,32,'total'] moy=$moyByProduct}
+            {include file="./tableCA.tpl" data=$dataByType array=['w', 'wp', 'p','total'] moy=$moyByType}
+
+            <h2>Nombre d'abonnés par édition</h2>
+            {include file="./tableCustomers.tpl" data=$dataByProduct array=[8,31,32,'total']}
+            {include file="./tableCustomers.tpl" data=$dataByType array=['w', 'wp', 'p','total']}
+
+            <h2>Chiffre d'affaire par édition et par personne</h2>
+            <p>Peut être considéré comme la somme que paie chaque utilisateur en moyenne pour un abonnement</p>
+            {include file="./tableCAPerCustomer.tpl" data=$dataByProduct array=[8,31,32,'total']}
+            {include file="./tableCAPerCustomer.tpl" data=$dataByType array=['w', 'wp', 'p','total']}
+
+        {/if}
+
+        <input type="hidden" name="action" value="statistics"/>
+        <input type="submit" class="button" value="Générer"/>
+    </form>
+
+</fieldset>
