@@ -264,7 +264,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
 
         {if !((!$allow_oosp && $product->quantity <= 0) OR !$product->available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE)}
             <p>
-                {if isset($customer->current_subscription) && $customer->current_subscription && $customer->current_subscription->is_archive && $product->is_virtual}
+                {if $customer->getActiveWebSubscription() !== null && $product->is_virtual}
                     {assign "free" true}
                     <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "pkey={$hash|escape:'htmlall':'UTF-8'}")}"> Télécharger (votre abonnement vous donne accès)</a>
                 {elseif $orders|count > 0 && $product->is_virtual}

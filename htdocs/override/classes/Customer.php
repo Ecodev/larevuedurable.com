@@ -38,8 +38,8 @@ class Customer extends CustomerCore
 
     /**
      * Fonction très importante : Récupère tous les changements de status des commandes comportant un abonnement.
-     * Tant qu'une commande a un statut actif ET qu'elle comporte un abonnement, ce dernier est actif à partir de la première date d'activation de la
-     * commande (statut 2 -> Paiement accepté) Un ajout de statut est irréversible.
+     * Tant qu'une commande a un statut actif ET qu'elle comporte un abonnement, ce dernier est actif à partir de la première date
+     * d'activation de la commande (statut 2 -> Paiement accepté) Un ajout de statut est irréversible.
      */
     public function manageSubscriptions()
     {
@@ -48,9 +48,9 @@ class Customer extends CustomerCore
         }
 
         // cache, on ne récupère pas deux fois les infos.
-//        if (is_array($this->user_subscriptions)) {
-//            return $this->user_subscriptions;
-//        }
+        //        if (is_array($this->user_subscriptions)) {
+        //            return $this->user_subscriptions;
+        //        }
 
         // Split ignored and considered subscriptions
         $this->user_subscriptions = $this->getOwnSubscriptions(false);
@@ -68,7 +68,7 @@ class Customer extends CustomerCore
         // identifie le nombre d'abonnements qui sont présentement actifs ou qui le seront à l'avenir
         // permet d'afficher le bouton "renouveler" quand le visiteur n'a qu'un seul visiteur
         // Permet de masquer le bouton "ajouter un abonnement" quand deux abonnements sont déjà empilés
-        if (sizeof($this->user_subscriptions) > 0) {
+        if (count($this->user_subscriptions) > 0) {
             $this->nbPresentOrFutureActives = 0;
             foreach ($this->user_subscriptions as $sub) {
                 if ($sub->is_active) {
@@ -83,9 +83,28 @@ class Customer extends CustomerCore
         $this->updateSubscribedState();
     }
 
+    public function getActiveWebSubscription()
+    {
+
+        $sub = $this->current_subscription;
+        if (!$sub) {
+            $sub = $this->tierce_subscription;
+        }
+
+        if (!$sub) {
+            return null;
+        }
+
+        if ($sub->is_archive && $sub->is_active) {
+            return $sub;
+        }
+
+        return null;
+    }
 
     /**
      * Retourne les abonnements dont l'utilisateur courant bénéficie ou les siens
+     *
      * @param $type tierce pour avoir les abonnements qu'on lui offre ou 'himself' pour avoir les abonnements qu'il a lui même acheté.
      */
     public function getTierceSubscription()
@@ -125,9 +144,11 @@ class Customer extends CustomerCore
 
     /**
      * Retourne les abonnements achetés par l'utilisateur demandé
+     *
      * @param $user_id
      * @param l 'id de l'utilisateur qui a acheté les abonnements
      * @param bool $instituteAndArchiveOnly
+     *
      * @return array
      */
     public static function getSubscriptionsByUserID($user_id, $ignored = null, $instituteAndArchiveOnly = false)
@@ -230,8 +251,9 @@ class Customer extends CustomerCore
 
     /**
      * Récupère un seul et unique utilisateur ayant pu acheter un abonnement pour cette personne
-     * S'il en existe plusieurs, le permier qui est trouvé sera utilisé. Dans la mesure où l'utilisateur bénéficiaire n'a pas de droits sur l'abonnement, il
-     * n'importe pas de savoir de qui il le détient. Une mention est affichée dans la page abonnement si la personne bénéficie d'un abonnement tiers.
+     * S'il en existe plusieurs, le permier qui est trouvé sera utilisé. Dans la mesure où l'utilisateur bénéficiaire n'a pas de droits sur
+     * l'abonnement, il n'importe pas de savoir de qui il le détient. Une mention est affichée dans la page abonnement si la personne
+     * bénéficie d'un abonnement tiers.
      * @return Retourne un tableau représentant la personne ayant acheté un abonnement pour lui
      */
     private function getInstituteBuyer()
@@ -265,7 +287,9 @@ class Customer extends CustomerCore
 
     /**
      * Vérifie si le visiteur courant bénéficie d'avantages achetés par qqn d'autre
+     *
      * @param Une liste des personnes ayant acheté des abonnements Insituts
+     *
      * @return bool
      */
     private function verifyAccesses($institute_users)
@@ -295,7 +319,8 @@ class Customer extends CustomerCore
     }
 
     /**
-     * Vérifie que les ip qui sont insérées dans les notes du client dans le BO de prestashop sont strictement égales à l'ip du visiteur courant
+     * Vérifie que les ip qui sont insérées dans les notes du client dans le BO de prestashop sont strictement égales à l'ip du visiteur
+     * courant
      */
     private function verifyIP($cond)
     {
@@ -449,6 +474,7 @@ class Customer extends CustomerCore
 
     /**
      * Récupère tous les bénéficiaires d'un abonnement (une commande comportant un abonnement doit être valide)
+     *
      * @param $attributesFilter null = aucun filtre ou un tableau avec l'id des attributs
      */
     public static function getAllSubscribers($includeBigInstitutes = false, $dateStart = null, $dateEnd = null, $excludeFromRemind = false, $attributesFilter = null)
