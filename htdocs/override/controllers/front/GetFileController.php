@@ -35,9 +35,11 @@ class GetFileController extends GetFileControllerCore
 
 	public function init()
 	{
+
+	    // Employees
 		if (isset($this->context->employee) && $this->context->employee->isLoggedBack() && Tools::getValue('file'))
 		{
-			// Admin can directly access to file
+            // Admin can directly access to file
 			$filename = Tools::getValue('file');
 			if (!Validate::isSha1($filename))
 				die(Tools::displayError());
@@ -63,6 +65,7 @@ class GetFileController extends GetFileControllerCore
          */
         else if ($key = Tools::getValue('pkey'))
         {
+
             if (!file_exists(_PS_DOWNLOAD_DIR_ . $key)) {
                 $this->displayCustomError('This file no longer exists.');
             }
@@ -70,16 +73,19 @@ class GetFileController extends GetFileControllerCore
             $customer = Context::getContext()->customer;
             $customer->manageSubscriptions();
 
-            if (!$customer->current_subscription || $customer->current_subscription && !$customer->current_subscription->is_archive) {
+            $sub = $customer->getActiveWebSubscription();
+            if ($sub) {
+                $file = _PS_DOWNLOAD_DIR_ . $key;
+                $filename = ProductDownload::getFilenameFromFilename($key);
+            } else {
                 $this->displayCustomError('No active subscription with archive access.');
             }
 
-            $file = _PS_DOWNLOAD_DIR_.$key;
-            $filename = ProductDownload::getFilenameFromFilename($key);
         }
 		else
 		{
-			if (!($key = Tools::getValue('key')))
+
+            if (!($key = Tools::getValue('key')))
 				$this->displayCustomError('Invalid key.');
 
 			Tools::setCookieLanguage();
