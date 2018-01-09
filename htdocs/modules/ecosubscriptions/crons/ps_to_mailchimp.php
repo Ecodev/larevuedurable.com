@@ -1,8 +1,8 @@
 #!/usr/bin/php
 <?php
 
-require_once(dirname(__FILE__) . '/../../config/config.inc.php');
-require_once(dirname(__FILE__) . "/../autoload.php");
+require_once(__DIR__ . '/../../../config/config.inc.php');
+require_once(__DIR__ . "/../autoload.php");
 require_once(_PS_MODULE_DIR_ . "/mailchimp/mailchimp.php");
 
 $date = date(_DATE_FORMAT_);
