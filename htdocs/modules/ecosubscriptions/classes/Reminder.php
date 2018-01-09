@@ -45,7 +45,7 @@ class Reminder
         $campaigns = $this->api->campaigns([], 0, 1000);
         if ($print) p($campaigns);
 
-        $lists = $this->api->lists([], 0, 1000);
+        $lists = $this->api->lists([], 0, 100);
         if($print) d($lists);
 
         return [
