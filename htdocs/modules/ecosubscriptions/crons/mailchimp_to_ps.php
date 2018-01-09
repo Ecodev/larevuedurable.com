@@ -1,18 +1,18 @@
 <?php
 
 require_once(__DIR__ . '/../../../config/config.inc.php');
-require_once(_PS_MODULE_DIR_ . 'ecotools/ecotools.php');
+require_once(__DIR__ . '/../../ecotools/ecotools.php');
 
 $message = date(_DATE_FORMAT_) . ' - MC Sync - ';
-error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/logs/cron_log.txt');
+error_log($message . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../logs/cron_log.txt');
 
-$message = EcoTools::arrayToString($_POST);
-error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/logs/cron_log.txt');
+$message = Tools::arrayToString($_POST);
+error_log($message . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../logs/cron_log.txt');
 
 if (isset($_POST) && isset($_POST['type'])) {
-	$type = $_POST['type'];
+    $type = $_POST['type'];
 
-	// if subscribe
+    // if subscribe
     // "type": "subscribe",
     // "fired_at": "2009-03-26 21:35:57",
     // "data[id]": "8a25ff1d98",
@@ -26,29 +26,21 @@ if (isset($_POST) && isset($_POST['type'])) {
     // "data[ip_opt]": "10.20.10.30",
     // "data[ip_signup]": "10.20.10.30"
 
-	if ($type == 'subscribe') {
-		$success = DB::getInstance()->update(
-			'customer',
-			array( 'newsletter' => 1 ),
-			"email='".$_POST['data']['email']."'"
-		);
-		$success2 = DB::getInstance()->update(
-			'newsletter',
-			array('active' => 1),
-			"email='".$_POST['data']['email']."'"
-		);
+    if ($type == 'subscribe') {
+        $success = DB::getInstance()->update('customer', array('newsletter' => 1), "email='" . $_POST['data']['email'] . "'");
+        $success2 = DB::getInstance()->update('newsletter', array('active' => 1), "email='" . $_POST['data']['email'] . "'");
 
-		if (!$success || !$success2) {
-			$message = 'subscribe fail for ' . $_POST['data']['email'];
-		} else {
-			$message = 'subscribe success for ' . $_POST['data']['email'];
-		}
+        if (!$success || !$success2) {
+            $message = 'subscribe fail for ' . $_POST['data']['email'];
+        } else {
+            $message = 'subscribe success for ' . $_POST['data']['email'];
+        }
 
-		error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/logs/cron_log.txt');
+        error_log($message . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../logs/cron_log.txt');
         exit();
-	}
+    }
 
-	// if unsubscribe or cleaned
+    // if unsubscribe or cleaned
     // "type": "unsubscribe",
     // "fired_at": "2009-03-26 21:40:57",
     // "data[action]": "unsub",
@@ -71,27 +63,18 @@ if (isset($_POST) && isset($_POST['type'])) {
     // "data[reason]": "hard",
     // "data[email]": "api+cleaned@mailchimp.com"
 
-	if ($type == 'unsubscribe' || $type = 'cleaned')
-	{
-		$success = DB::getInstance()->update(
-			'customer',
-			array('newsletter' => 0),
-			"email='".$_POST['data']['email']."'"
-		);
+    if ($type == 'unsubscribe' || $type = 'cleaned') {
+        $success = DB::getInstance()->update('customer', array('newsletter' => 0), "email='" . $_POST['data']['email'] . "'");
 
-        $success2 = DB::getInstance()->update(
-			'newsletter',
-			array('active' => 0),
-			"email='".$_POST['data']['email']."'"
-		);
+        $success2 = DB::getInstance()->update('newsletter', array('active' => 0), "email='" . $_POST['data']['email'] . "'");
 
-		if (!$success || !$success2) {
-			$message = 'unsubscribe fail for ' . $_POST['data']['email'];
-		} else {
-			$message = 'unsubscribe success for ' . $_POST['data']['email'];
-		}
+        if (!$success || !$success2) {
+            $message = 'unsubscribe fail for ' . $_POST['data']['email'];
+        } else {
+            $message = 'unsubscribe success for ' . $_POST['data']['email'];
+        }
 
-        error_log($message . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/cron_log.txt');
-		exit();
-	}
+        error_log($message . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../logs/cron_log.txt');
+        exit();
+    }
 }
