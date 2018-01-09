@@ -4,10 +4,10 @@ require_once(__DIR__ . '/../../../config/config.inc.php');
 require_once(_PS_MODULE_DIR_ . 'ecotools/ecotools.php');
 
 $message = date(_DATE_FORMAT_) . ' - MC Sync - ';
-error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/../../logs/cron_log.txt');
+error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/logs/cron_log.txt');
 
 $message = EcoTools::arrayToString($_POST);
-error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/../../logs/cron_log.txt');
+error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/logs/cron_log.txt');
 
 if (isset($_POST) && isset($_POST['type'])) {
 	$type = $_POST['type'];
@@ -44,7 +44,7 @@ if (isset($_POST) && isset($_POST['type'])) {
 			$message = 'subscribe success for ' . $_POST['data']['email'];
 		}
 
-		error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/../../logs/cron_log.txt');
+		error_log($message.chr(10).chr(10), 3, $_SERVER['DOCUMENT_ROOT'].'/logs/cron_log.txt');
         exit();
 	}
 
@@ -91,7 +91,7 @@ if (isset($_POST) && isset($_POST['type'])) {
 			$message = 'unsubscribe success for ' . $_POST['data']['email'];
 		}
 
-        error_log($message . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/../../logs/cron_log.txt');
+        error_log($message . chr(10) . chr(10), 3, $_SERVER['DOCUMENT_ROOT'] . '/logs/cron_log.txt');
 		exit();
 	}
 }
