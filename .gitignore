@@ -59,6 +59,8 @@ htdocs/modules/ecosubscriptions/data/files/import/from_cresus/*
 !htdocs/modules/ecosubscriptions/data/files/import/from_cresus/.gitkeep
 htdocs/modules/ecosubscriptions/data/files/import/to_cresus/*
 !htdocs/modules/ecosubscriptions/data/files/import/to_cresus/.gitkeep
+htdocs/modules/ecosubscriptions/data/files/import/to_mailchimp/*
+!htdocs/modules/ecosubscriptions/data/files/import/to_mailchimp/.gitkeep
 htdocs/modules/ecodevsubscription/cron_log.txt
 htdocs/modules/ecosubscriptions/data/files/import/from_cresus/*
 !htdocs/modules/ecosubscriptions/data/files/import/from_cresus/.gitkeep

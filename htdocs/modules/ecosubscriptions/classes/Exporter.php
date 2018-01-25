@@ -3,11 +3,35 @@
 class Exporter
 {
 
+    public static function exportForMailChimp($filterNumber)
+    {
+
+        $time = new DateTime();
+        $time = $time->format('Y-m-d-H\hi\ms\s');
+        $filename = __DIR__ . '/../data/files/import/to_mailchimp/to_mailchimp_' . $time . '.csv';
+        $filename_link = '/modules/ecosubscriptions/data/files/import/to_mailchimp/to_mailchimp_' . $time . '.csv';
+
+        $users = Customer::getNewsletterSubscribers($filterNumber, true);
+
+        file_put_contents($filename, '');
+        $file = fopen($filename, 'w');
+
+        // Entêtes
+        fputcsv($file, array_keys($users[0]), ';');
+
+        // Contenu
+        foreach ($users as $user) {
+            fputcsv($file, $user, ';');
+        }
+
+        return $filename_link;
+    }
+
     public static function export($config)
     {
         $time = new DateTime();
         $time = $time->format('Y-m-d-H\hi\ms\s');
-        $filename = dirname(__FILE__) . '/../data/files/import/to_cresus/' . $time . '.csv';
+        $filename = __DIR__ . '/../data/files/import/to_cresus/' . $time . '.csv';
         $filename_link = '/modules/ecosubscriptions/data/files/import/to_cresus/' . $time . '.csv';
 
         file_put_contents($filename, '');
@@ -33,7 +57,6 @@ class Exporter
         if ($date_end->modify('+1 day') > $last_saved_export_date) {
             Configuration::updateValue('ECODEV_LAST_EXPORT_DATE', $date_end->modify('-1 day')->format(_DATE_FORMAT_SHORT_));
         }
-
 
         $data[$config['dernier_num']] = '';
         $data[$config['duration']] = '';

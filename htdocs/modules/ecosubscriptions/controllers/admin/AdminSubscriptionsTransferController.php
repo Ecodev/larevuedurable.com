@@ -40,11 +40,21 @@ class AdminSubscriptionsTransferController extends AbstractAdminSubscriptionsCon
         if ($result == -4) {
             $this->errors[] = 'Exception générique. Voir le message ci-dessous : ';
         } elseif ($result == 10) {
-            $this->confirmations[] ='Importation réussie';
+            $this->confirmations[] = 'Importation réussie';
         } else {
 
-            $this->confirmations[] ="Importation réussie. <a href='$result'>Téléchargez le fichier</a>.";
+            $this->confirmations[] = "Importation réussie. <a href=\"$result\">Téléchargez le fichier</a>.";
         }
+
+    }
+
+    public function exportForMailChimp()
+    {
+        $num = Tools::getValue('filterNumber', null);
+        $num = empty($num) ? null : $num;
+
+        $result = Exporter::exportForMailChimp($num);
+        $this->confirmations[] = "Exportation réussie. <a href=\"$result\">Téléchargez le fichier</a>.";
     }
 
     public function import()
@@ -55,7 +65,7 @@ class AdminSubscriptionsTransferController extends AbstractAdminSubscriptionsCon
             $message = "Les utilisateurs suivants n'ont pas été importés : ";
             $this->errors[] = $message . "<br/>" . implode('<br/>', $errors);
         } else {
-            $this->confirmations[] ='Importation réussie';
+            $this->confirmations[] = 'Importation réussie';
         }
     }
 

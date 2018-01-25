@@ -231,6 +231,7 @@ class Customer extends CustomerCore
 
     /**
      * Ne garde que le premier état de l'historique de chaque commande (selon l'ordre défini dans la requette SQL)
+     *
      * @return array Retourne une liste d'abonnements (objets Subscription)
      */
     private static function cleanExtraOrderStatus($subscriptions)
@@ -253,6 +254,7 @@ class Customer extends CustomerCore
      * S'il en existe plusieurs, le permier qui est trouvé sera utilisé. Dans la mesure où l'utilisateur bénéficiaire n'a pas de droits sur
      * l'abonnement, il n'importe pas de savoir de qui il le détient. Une mention est affichée dans la page abonnement si la personne
      * bénéficie d'un abonnement tiers.
+     *
      * @return Retourne un tableau représentant la personne ayant acheté un abonnement pour lui
      */
     private function getInstituteBuyer()
@@ -526,9 +528,14 @@ class Customer extends CustomerCore
     /**
      *    Retourne les adresses email des clients connectés aux newsletter via la création d'un compte ou via le module en page d'accueil
      */
-    public static function getNewsletterSubscribers()
+    public static function getNewsletterSubscribers($filterNumber = null, $ignoreNewsletterFlag = false)
     {
-        $sql = "select c.email as EMAIL , c.firstname as FNAME, c.lastname as LNAME, c.id_customer as ID FROM ps_customer c WHERE c.newsletter=1";
+        $sql = 'select c.email as EMAIL , c.firstname as FNAME, c.lastname as LNAME, c.id_customer as ID FROM ps_customer c';
+
+        if (!$ignoreNewsletterFlag) {
+            $sql .= ' WHERE c.newsletter=1';
+        }
+
         $users = Db::getInstance()->executeS($sql);
         foreach ($users as $key => $user) {
             $customer = new Customer($user['ID']);
@@ -571,11 +578,17 @@ class Customer extends CustomerCore
 
         }
 
-        $sql = 'select email as EMAIL FROM ps_newsletter WHERE active=1';
-        $users2 = Db::getInstance()->executeS($sql);
-        $users = array_merge($users2, $users);
+        if ($filterNumber === null) {
+            $sqlEmails = 'select email as EMAIL FROM ps_newsletter WHERE active=1';
+            $emails = Db::getInstance()->executeS($sqlEmails);
+            $users = array_merge($emails, $users);
+        } else {
+            $users = array_filter($users, function ($u) use (&$filterNumber) {
+                return in_array($filterNumber, explode(',', $u['NUMEROS']));
+            });
+        }
 
-        return $users;
+        return array_values($users);
     }
 
     public static function getNewsletterUnsubscribed()
