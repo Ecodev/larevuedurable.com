@@ -529,6 +529,65 @@ class Customer extends CustomerCore
     }
 
     /**
+     * Retourne une liste formatée pour MailChimp qui inclu les abonnés à un numéro spécifié
+     * ainsi que les utilisateurs qui bénéficient des abonnements pro/institutions (même s'ils n'ont pas de compte ouvert)
+     *
+     * @param $filterNumber
+     *
+     * @return array
+     */
+    public static function getNewsletterSubscribersWithInactiveInherited($filterNumber)
+    {
+        $users = self::getNewsletterSubscribers($filterNumber, true);
+
+        $usersIds = array_map(function ($user) {
+            return $user['ID'];
+        }, $users);
+
+        // récupère toutes les personnes ayant acheté un abonnement institut
+        $sql = '
+		select c.id_customer, c.note, cu.id_customization, GROUP_CONCAT(cud.value) as emails
+			FROM ps_customer c
+			LEFT JOIN `ps_orders` o ON (c.`id_customer` = o.`id_customer`)
+			LEFT JOIN `ps_order_detail` od ON (od.`id_order` = o.`id_order`)
+			LEFT JOIN ps_cart ca ON ca.id_cart = o.id_cart
+			LEFT JOIN ps_customization cu ON cu.id_cart = ca.id_cart
+			LEFT JOIN ps_customized_data cud ON cud.id_customization = cu.id_customization
+			LEFT JOIN ps_product_attribute_combination pac on pac.id_product_attribute = od.product_attribute_id
+		WHERE c.id_customer IN (' . implode(',', $usersIds) . ') GROUP BY c.id_customer';
+
+        $acheteurs_tiers = Db::getInstance()->executeS($sql);
+
+        $usersWithoutAccount = [];
+
+        // Identifie si les conditions sont dans les notes ou dans les champs personnalisés
+        // Transforme les conditions sous leur forme originelle pour les mettre dans une cellule "conditions" à raison d'une par ligne
+        foreach ($acheteurs_tiers as $key => $acheteur) {
+
+            if (!empty($acheteur['note'])) {
+                $emails = explode("\n", $acheteur['note']);
+            } else {
+                $emails = explode(',', $acheteur['emails']);
+            }
+
+            // Filter emails only
+            $emails = array_filter($emails, function ($email) {
+                return filter_var($email, FILTER_VALIDATE_EMAIL);
+            });
+
+            // Add to previous added elements
+            $usersWithoutAccount = array_merge($usersWithoutAccount, $emails);
+        }
+
+        // Add to users list, filtering duplicates
+        foreach (array_unique($usersWithoutAccount) as $user) {
+            array_push($users, ['EMAIL' => $user]);
+        }
+
+        return $users;
+    }
+
+    /**
      *    Retourne les adresses email des clients connectés aux newsletter via la création d'un compte ou via le module en page d'accueil
      */
     public static function getNewsletterSubscribers($filterNumber = null, $ignoreNewsletterFlag = false)

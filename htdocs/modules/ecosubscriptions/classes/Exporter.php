@@ -11,7 +11,7 @@ class Exporter
         $filename = __DIR__ . '/../data/files/import/to_mailchimp/to_mailchimp_' . $time . '.csv';
         $filename_link = '/modules/ecosubscriptions/data/files/import/to_mailchimp/to_mailchimp_' . $time . '.csv';
 
-        $users = Customer::getNewsletterSubscribers($filterNumber, true);
+        $users = Customer::getNewsletterSubscribersWithInactiveInherited($filterNumber, true);
 
         file_put_contents($filename, '');
         $file = fopen($filename, 'w');
