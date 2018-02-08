@@ -1,0 +1,12 @@
+td .hidden-google-captcha {
+    padding-left: 17px;
+}
+td > .hidden-google-captcha label {
+    text-align: left;
+}
+td > .hidden-google-captcha input {
+	width: 100%;
+}
+td > #module_form_submit_btn {
+	margin-top: 10px;
+}
