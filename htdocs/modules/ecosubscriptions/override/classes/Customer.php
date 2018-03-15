@@ -2,6 +2,7 @@
 
 class Customer extends CustomerCore
 {
+
     public $user_subscriptions = [];
     public $user_ignored_subscriptions = [];
 
@@ -439,7 +440,7 @@ class Customer extends CustomerCore
             return false;
         }
 
-        //        self::$_defaultGroupId[(int) $id_customer] = $group_id;
+        self::$_defaultGroupId[(int) $id_customer] = $group_id;
         self::$_defaultGroupId[(int) $id_customer] = Db::getInstance()->execute('
 			UPDATE `' . _DB_PREFIX_ . 'customer`
 			SET `id_default_group` = ' . $group_id . '
@@ -475,8 +476,10 @@ class Customer extends CustomerCore
 
     /**
      * Récupère tous les bénéficiaires d'un abonnement (une commande comportant un abonnement doit être valide)
+     *
+     * @param $attributesFilter null = aucun filtre ou un tableau avec l'id des attributs
      */
-    public static function getAllSubscribers($includeBigInstitutes = false, $dateStart = null, $dateEnd = null, $excludeFromRemind = false)
+    public static function getAllSubscribers($includeBigInstitutes = false, $dateStart = null, $dateEnd = null, $excludeFromRemind = false, $attributesFilter = null)
     {
         // récupère toutes les personnes ayant acheté un abonnement institut
         $sql = 'SELECT c.id_customer as ID, c.email as EMAIL , c.firstname as FNAME, c.lastname as LNAME';
@@ -523,6 +526,33 @@ class Customer extends CustomerCore
     public static function getAllSubscribersForRemind()
     {
         return self::getAllSubscribers(false, null, null, true);
+    }
+
+    public static function getUnsubscribed($lastEditionNumbers) {
+
+        $subscribers = self::getAllSubscribers();
+        $results = [];
+
+        foreach($subscribers as $subscriber) {
+            $customer = new Customer($subscriber['ID']);
+            $customer->manageSubscriptions();
+            foreach($customer->user_subscriptions as $subscription) {
+                if (!$customer->current_subscription &&
+                    $subscription->is_archive &&
+                    !$subscription->is_paper &&
+                    in_array($subscription->last_edition, $lastEditionNumbers, false)
+                ) {
+                    $results[] = [
+                        'EMAIL' => $subscriber['EMAIL'],
+                        'FNAME' => $subscriber['FNAME'],
+                        'LNAME' => $subscriber['LNAME'],
+                    ];
+                    break;
+                }
+            }
+        }
+
+        return $results;
     }
 
     /**

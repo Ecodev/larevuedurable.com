@@ -57,6 +57,20 @@ class AdminSubscriptionsTransferController extends AbstractAdminSubscriptionsCon
         $this->confirmations[] = "Exportation réussie. <a href=\"$result\">Téléchargez le fichier</a>.";
     }
 
+    public function exportUnsubscribedForMailChimp()
+    {
+        $val = Tools::getValue('lastSubsNumbers', '');
+
+        $nums = explode(',', $val);
+
+        $nums = array_map(function($num) {
+            return (int) trim($num);
+        }, $nums);
+
+        $result = Exporter::exportUnsubscribedForMailChimp($nums);
+        $this->confirmations[] = "Exportation réussie. <a href=\"$result\">Téléchargez le fichier</a>.";
+    }
+
     public function import()
     {
         $importer = new Importer();

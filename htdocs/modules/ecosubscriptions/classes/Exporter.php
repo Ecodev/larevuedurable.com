@@ -27,6 +27,31 @@ class Exporter
         return $filename_link;
     }
 
+    public static function exportUnsubscribedForMailChimp($numbers)
+    {
+        $time = new DateTime();
+        $time = $time->format('Y-m-d-H\hi\ms\s');
+        $filename = __DIR__ . '/../data/files/import/to_mailchimp/desabonnes_to_mailchimp_' . $time . '.csv';
+        $filename_link = '/modules/ecosubscriptions/data/files/import/to_mailchimp/desabonnes_to_mailchimp_' . $time . '.csv';
+
+        $users = Customer::getUnsubscribed($numbers, true);
+
+        file_put_contents($filename, '');
+        $file = fopen($filename, 'w');
+
+
+        // Entêtes
+        fputcsv($file, ['EMAIL', 'FNAME', 'LNAME'], ';');
+
+        // Contenu
+        foreach ($users as $user) {
+            var_dump($user);
+            fputcsv($file, $user, ';');
+        }
+
+        return $filename_link;
+    }
+
     public static function export($config)
     {
         $time = new DateTime();

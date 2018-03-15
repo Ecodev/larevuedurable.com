@@ -47,11 +47,26 @@
     <fieldset>
         <legend>Exporter abonnés pour mailchimp</legend>
 
-        Exporté les abonnés au numéro :
+        Exporter les abonnés au numéro :
         <input type="number" name="filterNumber" />
         (Si aucun numéro n'est fourni, tous les abonnés seront retournés)
 
         <input type="hidden" name="action" value="exportForMailChimp" />
+        <p>
+            <input type="submit" value="Exporter" class="button" />
+        </p>
+    </fieldset>
+</form>
+
+<br/>
+<form action="{$currentIndex|escape}&amp;token={$currentTab->token|escape}&amp;" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Exporter les anciens abonnés pour mailchimp</legend>
+
+        Exporter les anciens abonnés dont le dernier numéro de leur abonnement peut être :
+        <input type="text" name="lastSubsNumbers" placeholder="53,54,55,56,57,58" />
+
+        <input type="hidden" name="action" value="exportUnsubscribedForMailChimp" />
         <p>
             <input type="submit" value="Exporter" class="button" />
         </p>

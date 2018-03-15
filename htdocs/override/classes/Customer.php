@@ -528,6 +528,33 @@ class Customer extends CustomerCore
         return self::getAllSubscribers(false, null, null, true);
     }
 
+    public static function getUnsubscribed($lastEditionNumbers) {
+
+        $subscribers = self::getAllSubscribers();
+        $results = [];
+
+        foreach($subscribers as $subscriber) {
+            $customer = new Customer($subscriber['ID']);
+            $customer->manageSubscriptions();
+            foreach($customer->user_subscriptions as $subscription) {
+                if (!$customer->current_subscription &&
+                    $subscription->is_archive &&
+                    !$subscription->is_paper &&
+                    in_array($subscription->last_edition, $lastEditionNumbers, false)
+                ) {
+                    $results[] = [
+                         'EMAIL' => $subscriber['EMAIL'],
+                         'FNAME' => $subscriber['FNAME'],
+                         'LNAME' => $subscriber['LNAME'],
+                    ];
+                    break;
+                }
+            }
+        }
+
+        return $results;
+    }
+
     /**
      * Retourne une liste formatée pour MailChimp qui inclu les abonnés à un numéro spécifié
      * ainsi que les utilisateurs qui bénéficient des abonnements pro/institutions (même s'ils n'ont pas de compte ouvert)
