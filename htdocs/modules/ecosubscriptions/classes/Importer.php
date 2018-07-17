@@ -2,7 +2,7 @@
 
 class Importer
 {
-    public $debug = 0;
+    public $debug = true;
     public $siteurl;
     public $apikey;
     public $webService;
@@ -107,7 +107,7 @@ class Importer
             $cart_id_1 = $this->createCart($user, $customer->id, $start_date_1);
 
             if (!isset($address_id)) {
-                $address_id = $this->getAddressId($user, $customer->id);
+                $address_id = $this->getAddressId($user, (int) $customer->id);
             }
 
             $this->createOrder($user, $customer->id, $cart_id_1, $start_date_1, $address_id);
