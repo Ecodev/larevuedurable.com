@@ -2,7 +2,7 @@
 
 class Importer
 {
-    public $debug = true;
+    public $debug = false;
     public $siteurl;
     public $apikey;
     public $webService;
