@@ -16,6 +16,7 @@ logs/emails/*
 !logs/emails/.gitkeep
 
 vendor/*
+auth.json
 
 htdocs/*
 !htdocs/robots.txt
