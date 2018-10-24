@@ -1,0 +1,12 @@
+{
+    "require": {
+        "setasign/fpdi-fpdf": "2.0.0",
+        "setasign/eval/fpdi_pdf-parser/ioncube/php5.6": "2.0.3"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://www.setasign.com/downloads/"
+        }
+    ]
+}
