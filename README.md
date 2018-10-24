@@ -19,6 +19,11 @@ rm -rf htdocs/install-dev # remove installation only files
 git checkout -- . # be sure that we did not overwrite anything from our project
 ``` 
 
+Install PHP dependencies
+```
+composer install
+```
+
 Import DB and execute SQL:
 ```
 UPDATE `ps_configuration` SET `value` = 'larevuedurable.lan' WHERE `ps_configuration`.`name` IN ('PS_SHOP_DOMAIN', 'PS_SHOP_DOMAIN_SSL');
