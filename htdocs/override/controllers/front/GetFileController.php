@@ -28,7 +28,6 @@ require_once(_PS_TOOL_DIR_.'tcpdf/config/lang/eng.php');
 require_once(_PS_TOOL_DIR_.'tcpdf/tcpdf.php');
 require_once(_PS_MODULE_DIR_.'ecosubscriptions/autoload.php');
 require_once(_PS_ROOT_DIR_.'/../vendor/autoload.php');
-// require_once(_PS_ROOT_DIR_.'/../vendor/setasign/fpdi/src/autoload.php');
 
 class GetFileController extends GetFileControllerCore
 {
@@ -193,14 +192,13 @@ class GetFileController extends GetFileControllerCore
         }
 
         for ($i = 1; $i <= $pageCount; $i++) {
-            $tplidx = $pdf->ImportPage($i);
+            $tplidx = $pdf->ImportPage($i, \setasign\Fpdi\PdfReader\PageBoundaries::BLEED_BOX);
             $s = $pdf->getTemplateSize($tplidx);
-            $pdf->AddPage($s['orientation']);
+            $pdf->AddPage($s['orientation'], $s);
             $pdf->useTemplate($tplidx);
             $pdf->SetAutoPageBreak(1);
             $pdf->SetDisplayMode('real');
             $pdf->setAuthor('La Revue Durable');
-            $pdf->setY(+15);
             $pdf->SetFont('Helvetica', 'IB', 14);
             $pdf->Cell(0, 5, $text, 0, 0, 'C');
         }
@@ -209,8 +207,6 @@ class GetFileController extends GetFileControllerCore
         $pdf->Output($file, 'F');
         return $file;
     }
-
-
 
     function detectMimeType($file, $filename)
     {
