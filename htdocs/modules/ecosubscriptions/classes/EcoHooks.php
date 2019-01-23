@@ -6,6 +6,12 @@ class EcoHooks extends Module
     public function hookDisplayHeader()
     {
         (new LocalSubscriptionsController($this, $this->context))->header();
+
+        $this->smarty->assign([
+            'isWebSubscriber' => $this->context->customer->getActiveWebSubscription() !== null
+        ]);
+
+        return $this->display($this->name, 'header.tpl');
     }
 
     public function hookDisplayAdminOrder($params) {
