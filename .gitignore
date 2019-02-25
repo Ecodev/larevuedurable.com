@@ -54,10 +54,9 @@ htdocs/administrator/themes/default/template/helpers/list/*
 htdocs/modules/prestablog/themes/*/up-img/*
 htdocs/modules/prestablog/themes/default/up-img/*
 htdocs/modules/homeslider/images/*
-htdocs/modules/ecodevscripts/data/files/de_cresus/*
-!htdocs/modules/ecodevscripts/data/files/de_cresus/.gitkeep
-htdocs/modules/ecodevscripts/data/files/pour_cresus/*
-!htdocs/modules/ecodevscripts/data/files/pour_cresus/.gitkeep
+htdocs/modules/ecosubscriptions/data/files/*
+!htdocs/modules/ecosubscriptions/data/files/.gitkeep
+htdocs/modules/ecosubscriptions/data/files/*
 htdocs/modules/ecosubscriptions/data/files/import/from_cresus/*
 !htdocs/modules/ecosubscriptions/data/files/import/from_cresus/.gitkeep
 htdocs/modules/ecosubscriptions/data/files/import/to_cresus/*

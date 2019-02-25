@@ -63,7 +63,7 @@ class AdminSubscriptionsTransferController extends AbstractAdminSubscriptionsCon
 
         $nums = explode(',', $val);
 
-        $nums = array_map(function($num) {
+        $nums = array_map(function ($num) {
             return (int) trim($num);
         }, $nums);
 
@@ -117,5 +117,38 @@ class AdminSubscriptionsTransferController extends AbstractAdminSubscriptionsCon
 
         return array_flip($config);
 
+    }
+
+    public function exportSubscribersWithHistory()
+    {
+        $time = new DateTime();
+        $time = $time->format('Y-m-d-H\hi\ms\s');
+        $filename = __DIR__ . '/../../data/files/import/subscribers_with_history_' . $time . '.csv';
+        $filename_link = '/modules/ecosubscriptions/data/files/import/subscribers_with_history_' . $time . '.csv';
+
+        $requiredNumber = (int) trim(Tools::getValue('requiredNumber', ''));
+        $results = Customer::getWebSubscribersWithHistory($requiredNumber);
+
+        file_put_contents($filename, '');
+        $file = fopen($filename, 'w');
+
+        $headerKeys = [];
+
+        foreach ($results as $result) {
+            $keys = array_keys($result);
+            if (count($keys) > count($headerKeys)) {
+                $headerKeys = $keys;
+            }
+        }
+
+        // Entêtes
+        fputcsv($file, $headerKeys, ';');
+
+        // Contenu
+        foreach ($results as $user) {
+            fputcsv($file, $user, ';');
+        }
+
+        $this->confirmations[] = "Exportation réussie. <a href=\"$filename_link\">Téléchargez le fichier</a>.";
     }
 }

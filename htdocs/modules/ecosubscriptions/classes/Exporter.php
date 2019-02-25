@@ -39,7 +39,6 @@ class Exporter
         file_put_contents($filename, '');
         $file = fopen($filename, 'w');
 
-
         // Entêtes
         fputcsv($file, ['EMAIL', 'FNAME', 'LNAME'], ';');
 

@@ -555,6 +555,72 @@ class Customer extends CustomerCore
         return $results;
     }
 
+
+    /**
+     * Return associative array of subscribers with their address and subscribed numbers
+     * Only considers subscriptions with web (in other words : exclude subscriptions for paper only)
+     * Consider only actually subscribed users.
+     *
+     * @param null $requiredNumber If provided, only considers users that were subscribed to that number
+     *
+     * @return array
+     */
+    public static function getWebSubscribersWithHistory($requiredNumber = null)
+    {
+
+        $subscribers = self::getAllSubscribers();
+        $results = [];
+
+        foreach ($subscribers as $subscriber) {
+            $customer = new Customer($subscriber['ID']);
+            $customer->manageSubscriptions();
+            $isSubscriber = $customer->current_subscription && $customer->current_subscription->is_active && $customer->current_subscription->is_archive;
+            $subscribedNumbers = [];
+
+            foreach ($customer->user_subscriptions as $subscription) {
+                for ($i = $subscription->first_edition; $i <= $subscription->last_edition; $i++) {
+                    $subscribedNumbers[] = $i;
+                }
+            }
+
+            $hasRequiredNumber = !$requiredNumber || $requiredNumber && in_array($requiredNumber, $subscribedNumbers);
+
+            if ($isSubscriber && $hasRequiredNumber) {
+                sort($subscribedNumbers);
+                $formattedUser = [
+                    'EMAIL' => $subscriber['EMAIL'],
+                    'FNAME' => $subscriber['FNAME'],
+                    'LNAME' => $subscriber['LNAME'],
+                    'NUMBERS' => join($subscribedNumbers, ',')
+                ];
+
+                $addresses = array_filter($customer->getAddresses(1), function ($address) {
+                    return $address['active'] && !$address['deleted'];
+                });
+
+                $addressCount = 0;
+                foreach ($addresses as $address) {
+                    $addressCount++;
+                    $addressName = 'ADDRESS' . $addressCount;
+                    $formattedUser[$addressName . ':company'] = $address['company'];
+                    $formattedUser[$addressName . ':firstname'] = $address['firstname'];
+                    $formattedUser[$addressName . ':lastname'] = $address['lastname'];
+                    $formattedUser[$addressName . ':address1'] = $address['address1'];
+                    $formattedUser[$addressName . ':address2'] = $address['address2'];
+                    $formattedUser[$addressName . ':postcode'] = $address['postcode'];
+                    $formattedUser[$addressName . ':city'] = $address['city'];
+                    $formattedUser[$addressName . ':country'] = $address['country'];
+                }
+
+                $results[] = $formattedUser;
+
+            }
+
+        }
+
+        return $results;
+    }
+
     /**
      * Retourne une liste formatée pour MailChimp qui inclu les abonnés à un numéro spécifié
      * ainsi que les utilisateurs qui bénéficient des abonnements pro/institutions (même s'ils n'ont pas de compte ouvert)

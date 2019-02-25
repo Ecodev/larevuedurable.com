@@ -72,3 +72,18 @@
         </p>
     </fieldset>
 </form>
+
+<br/>
+<form action="{$currentIndex|escape}&amp;token={$currentTab->token|escape}&amp;" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Exporter les abonnés actuels et leur historique</legend>
+
+        <input type="number" min="0" name="requiredNumber" placeholder="Numéro abonnné requis"/>
+        <i>Si ce numéro d'édition est fourni, seuls les utilisateurs y ayant été (ou y étant encore) abonnés seront considérés.</i>
+
+        <input type="hidden" name="action" value="exportSubscribersWithHistory" />
+        <p>
+            <input type="submit" value="Exporter" class="button" />
+        </p>
+    </fieldset>
+</form>
