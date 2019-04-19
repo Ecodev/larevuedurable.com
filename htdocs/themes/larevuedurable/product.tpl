@@ -269,7 +269,7 @@ var fieldRequired = '{l s='Please fill in all the required fields before saving 
                     <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "pkey={$hash|escape:'htmlall':'UTF-8'}")}" onclick="ga('send', 'pageview', '/direct-download/{$product->reference}');ga('send', 'event', 'download', 'direct', 'detail page', {$product->reference});">Télécharger (votre abonnement vous donne accès)</a>
                 {elseif $orders|count > 0 && $product->is_virtual}
                     {assign "free" true}
-                    <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "key={$hash|escape:'htmlall':'UTF-8'}-{$orders[0].download_hash|escape:'htmlall':'UTF-8'}&id_order={$orders[0].id_order}&secure_key={$orders[0].secure_key}")}">  Télécharger (vous l'avez déjà acheté)</a>
+                    <a class="button_mini color-myaccount" href="{$link->getPageLink('get-file', true, NULL, "pkey={$hash|escape:'htmlall':'UTF-8'}-{$orders[0].download_hash|escape:'htmlall':'UTF-8'}&id_order={$orders[0].id_order}&secure_key={$orders[0].secure_key}")}">  Télécharger (vous l'avez déjà acheté)</a>
                 {/if}
             </p>
         {/if}
