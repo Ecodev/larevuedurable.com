@@ -531,24 +531,24 @@ class Customer extends CustomerCore
         return self::getAllSubscribers(false, null, null, true);
     }
 
-    public static function getUnsubscribed($lastEditionNumbers) {
+    public static function getUnsubscribed($lastEditionNumbers)
+    {
 
         $subscribers = self::getAllSubscribers();
         $results = [];
 
-        foreach($subscribers as $subscriber) {
+        foreach ($subscribers as $subscriber) {
             $customer = new Customer($subscriber['ID']);
             $customer->manageSubscriptions();
-            foreach($customer->user_subscriptions as $subscription) {
-                if (!$customer->current_subscription &&
-                    $subscription->is_archive &&
-                    !$subscription->is_paper &&
-                    in_array($subscription->last_edition, $lastEditionNumbers, false)
-                ) {
+            foreach ($customer->user_subscriptions as $subscription) {
+                if (!$customer->current_subscription
+                    && $subscription->is_archive
+                    && !$subscription->is_paper
+                    && in_array($subscription->last_edition, $lastEditionNumbers, false)) {
                     $results[] = [
-                         'EMAIL' => $subscriber['EMAIL'],
-                         'FNAME' => $subscriber['FNAME'],
-                         'LNAME' => $subscriber['LNAME'],
+                        'EMAIL' => $subscriber['EMAIL'],
+                        'FNAME' => $subscriber['FNAME'],
+                        'LNAME' => $subscriber['LNAME'],
                     ];
                     break;
                 }
@@ -578,10 +578,25 @@ class Customer extends CustomerCore
             $customer->manageSubscriptions();
             $isSubscriber = $customer->current_subscription && $customer->current_subscription->is_active && $customer->current_subscription->is_archive;
             $subscribedNumbers = [];
+            $activeSubscription = null;
+            $lastSubscriptionType = null;
 
             foreach ($customer->user_subscriptions as $subscription) {
                 for ($i = $subscription->first_edition; $i <= $subscription->last_edition; $i++) {
                     $subscribedNumbers[] = $i;
+                }
+                if ($subscription->is_active) {
+                    $activeSubscription = $subscription;
+                }
+            }
+
+            if ($activeSubscription) {
+                if ($activeSubscription->is_archive && $activeSubscription->is_paper) {
+                    $lastSubscriptionType = 'web + papier';
+                } else {
+                    if ($activeSubscription->is_archive && !$activeSubscription->is_paper) {
+                        $lastSubscriptionType = 'web';
+                    }
                 }
             }
 
@@ -593,7 +608,8 @@ class Customer extends CustomerCore
                     'EMAIL' => $subscriber['EMAIL'],
                     'FNAME' => $subscriber['FNAME'],
                     'LNAME' => $subscriber['LNAME'],
-                    'NUMBERS' => join($subscribedNumbers, ',')
+                    'NUMBERS' => join($subscribedNumbers, ','),
+                    'ACTIVE_SUB_TYPE' => $lastSubscriptionType
                 ];
 
                 $addresses = array_filter($customer->getAddresses(1), function ($address) {
