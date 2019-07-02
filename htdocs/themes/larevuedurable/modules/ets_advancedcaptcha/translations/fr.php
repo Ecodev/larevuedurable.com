@@ -22,3 +22,12 @@ $_MODULE['<{ets_advancedcaptcha}larevuedurable>front-contact-form-v_1_5_deb10517
 $_MODULE['<{ets_advancedcaptcha}larevuedurable>front-contact-form-v_1_5_13d6078da2e6592822ede083931d6826'] = 'Fichier';
 $_MODULE['<{ets_advancedcaptcha}larevuedurable>front-contact-form-v_1_5_4c2a8fe7eaf24721cc7a9f0175115bd4'] = 'Message';
 $_MODULE['<{ets_advancedcaptcha}larevuedurable>front-contact-form-v_1_5_94966d90747b97d1f0f206c98a8b1ac3'] = 'Envoyer';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>contactform_v_1_7_c3f204190e5261d4996203bfb65f2bbf'] = 'Entrez le code de sécurité';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>contactform_v_1_7_00f26302f753ea4871b7634a6d025bf9'] = 'Contrôle de sécurité';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>contactform_v_1_7_792bb28aea0e109daf741be7eb18ec87'] = 'Code de sécurité';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>contactform_v_1_7_46017c210d1eb8c92f27a120f66b88f5'] = 'Rafraichir le code';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>contactform_v_1_7_94966d90747b97d1f0f206c98a8b1ac3'] = 'Envoyer';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>front-captcha_c3f204190e5261d4996203bfb65f2bbf'] = 'Entrez le code de sécurité';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>front-captcha_00f26302f753ea4871b7634a6d025bf9'] = 'Contrôle de sécurité';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>front-captcha_792bb28aea0e109daf741be7eb18ec87'] = 'Code de sécurité';
+$_MODULE['<{ets_advancedcaptcha}larevuedurable>front-captcha_46017c210d1eb8c92f27a120f66b88f5'] = 'Rafraichir le code';

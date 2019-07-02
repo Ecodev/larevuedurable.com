@@ -20,5 +20,5 @@ $_MODULE['<{bankwirebvr}larevuedurable>bankwirebvr_3ec365dd533ddb7ef3d1c111186ce
 $_MODULE['<{bankwirebvr}larevuedurable>bankwirebvr_5fe24fbb39b58daacb7c7905ba6e3534'] = 'Comme le code banque, l\'IBAN ou encore le BIC';
 $_MODULE['<{bankwirebvr}larevuedurable>bankwirebvr_f9a1a1bb716cbae0503d351ea2af4b34'] = 'Adresse de la banque';
 $_MODULE['<{bankwirebvr}larevuedurable>bankwirebvr_b17f3f4dcf653a5776792498a9b44d6a'] = 'Adresse de la banque';
-$_MODULE['<{bankwirebvr}larevuedurable>payment_3e52aa40017c5689e918bf12f0527168'] = 'Payer par virement bancaire avec un BVR (traitement plus long)';
 $_MODULE['<{bankwirebvr}larevuedurable>payment_return_4b9f458a12c4d0b53f15ecd176f7724f'] = 'Vous allez recevoir un bulletin de versemment (BVR) pour effectuer le paiement. Vous pouvez également payer avec les coordonnées bancaires mentionnées ci-dessous : ';
+$_MODULE['<{bankwirebvr}larevuedurable>payment_3e52aa40017c5689e918bf12f0527168'] = 'Payer par virement bancaire avec un BVR (traitement plus long)';

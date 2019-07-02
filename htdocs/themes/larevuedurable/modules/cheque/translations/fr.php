@@ -33,8 +33,6 @@ $_MODULE['<{cheque}larevuedurable>payment_execution_7135ff14c7931e1c8e9d33aff3df
 $_MODULE['<{cheque}larevuedurable>payment_execution_0881a11f7af33bc1b43e437391129d66'] = 'Veuillez confirmer votre commande en cliquant sur \"Je confirme ma commande\"';
 $_MODULE['<{cheque}larevuedurable>payment_execution_46b9e3665f187c739c55983f757ccda0'] = 'Je confirme ma commande';
 $_MODULE['<{cheque}larevuedurable>payment_execution_569fd05bdafa1712c4f6be5b153b8418'] = 'Autres moyens de paiement';
-$_MODULE['<{cheque}larevuedurable>payment_f05fd8637f8a6281466a507fcb56baec'] = 'Payer par chèque';
-$_MODULE['<{cheque}larevuedurable>payment_841728ede901f5134574c4656aba5464'] = 'Payer par chèque (traitement plus long)';
 $_MODULE['<{cheque}larevuedurable>payment_return_88526efe38fd18179a127024aba8c1d7'] = 'Votre commande sur %s a bien été enregistrée.';
 $_MODULE['<{cheque}larevuedurable>payment_return_61da27a5dd1f8ced46c77b0feaa9e159'] = 'Veuillez nous envoyer un chèque avec :';
 $_MODULE['<{cheque}larevuedurable>payment_return_543baa3e0ca83589be12aff8036b5fe6'] = 'un montant de';
@@ -47,3 +45,5 @@ $_MODULE['<{cheque}larevuedurable>payment_return_ffd2478830ca2f519f7fe7ee259d4b9
 $_MODULE['<{cheque}larevuedurable>payment_return_0db71da7150c27142eef9d22b843b4a9'] = 'Pour toute question ou information complémentaire, veuillez contacter notre';
 $_MODULE['<{cheque}larevuedurable>payment_return_decce112a9e64363c997b04aa71b7cb8'] = 'support client';
 $_MODULE['<{cheque}larevuedurable>payment_return_9bdf695c5a30784327137011da6ef568'] = 'Nous avons rencontré un problème avec votre commande, veuillez contacter notre support client';
+$_MODULE['<{cheque}larevuedurable>payment_f05fd8637f8a6281466a507fcb56baec'] = 'Payer par chèque';
+$_MODULE['<{cheque}larevuedurable>payment_841728ede901f5134574c4656aba5464'] = 'Payer par chèque (traitement plus long)';

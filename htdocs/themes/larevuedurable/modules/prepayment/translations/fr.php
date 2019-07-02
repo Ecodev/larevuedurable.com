@@ -125,12 +125,12 @@ $_MODULE['<{prepayment}larevuedurable>columnblock_ebd92742b38ef4e09cc421fa6439ce
 $_MODULE['<{prepayment}larevuedurable>columnblock_09f7576800f41ca5499a371c281983e9'] = 'Recharger mon compte';
 $_MODULE['<{prepayment}larevuedurable>customeraccount_cb61665c7184067b367368271d47bcdd'] = 'Mon compte prépayé';
 $_MODULE['<{prepayment}larevuedurable>myaccountblock_cb61665c7184067b367368271d47bcdd'] = 'Mon compte prépayé';
-$_MODULE['<{prepayment}larevuedurable>payment_f33de3753881ab45e8f1fe2f9a743910'] = 'Débiter mon compte prépayé.';
-$_MODULE['<{prepayment}larevuedurable>payment_2da469718b16d06ae43a78099dd4ca0e'] = 'Débiter mon compte prépayé (la commande sera plus rapide)';
 $_MODULE['<{prepayment}larevuedurable>paymentreturn_88526efe38fd18179a127024aba8c1d7'] = 'Votre commande sur %s est effectuée.';
 $_MODULE['<{prepayment}larevuedurable>paymentreturn_7f4e3e566b18edadf340123bb5c6cf86'] = 'Votre commande est terminée et payée.';
 $_MODULE['<{prepayment}larevuedurable>paymentreturn_13f4ac6dc75b5829499cb9cf8b733071'] = 'Un email vous a été envoyé contenant toutes les informations.';
 $_MODULE['<{prepayment}larevuedurable>paymentreturn_0db71da7150c27142eef9d22b843b4a9'] = 'Pour toutes questions ou plus d\'informations, merci de contacter notre';
 $_MODULE['<{prepayment}larevuedurable>paymentreturn_64430ad2835be8ad60c59e7d44e4b0b1'] = 'service client';
 $_MODULE['<{prepayment}larevuedurable>paymentreturn_8de637e24570c1edb0357826a2ad5aea'] = 'Nous avons détecté un problème avec votre commande. Si vous pensez qu\'il s\'agit d\'une erreur, merci de contacter notre';
+$_MODULE['<{prepayment}larevuedurable>payment_f33de3753881ab45e8f1fe2f9a743910'] = 'Débiter mon compte prépayé.';
+$_MODULE['<{prepayment}larevuedurable>payment_2da469718b16d06ae43a78099dd4ca0e'] = 'Débiter mon compte prépayé (la commande sera plus rapide)';
 $_MODULE['<{prepayment}larevuedurable>productbuttons_c1f5fc787405665499e23e38425aa9fb'] = 'Achat prépayé';

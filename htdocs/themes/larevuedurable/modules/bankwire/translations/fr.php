@@ -36,8 +36,6 @@ $_MODULE['<{bankwire}larevuedurable>payment_execution_3dd021316505c0204989f98424
 $_MODULE['<{bankwire}larevuedurable>payment_execution_93c1f9dffc8c38b2c108d449a9181d92'] = 'Veuillez confirmer votre commande en cliquant sur \"Je confirme ma commande\"';
 $_MODULE['<{bankwire}larevuedurable>payment_execution_baa62374832554652160fe5a827b2741'] = 'Je confirme ma commande';
 $_MODULE['<{bankwire}larevuedurable>payment_execution_569fd05bdafa1712c4f6be5b153b8418'] = 'Autres moyens de paiement';
-$_MODULE['<{bankwire}larevuedurable>payment_5e1695822fc5af98f6b749ea3cbc9b4c'] = 'Payer par virement bancaire';
-$_MODULE['<{bankwire}larevuedurable>payment_eb1d50032721fa4c9d3518c417f91b9d'] = 'Payer par virement bancaire (traitement plus long)';
 $_MODULE['<{bankwire}larevuedurable>payment_return_88526efe38fd18179a127024aba8c1d7'] = 'Votre commande sur %s a bien été enregistrée.';
 $_MODULE['<{bankwire}larevuedurable>payment_return_1f8cdc30326f1f930b0c87b25fdac965'] = 'Veuillez nous envoyer un virement bancaire avec :';
 $_MODULE['<{bankwire}larevuedurable>payment_return_b2f40690858b404ed10e62bdf422c704'] = 'un montant de';
@@ -51,3 +49,5 @@ $_MODULE['<{bankwire}larevuedurable>payment_return_b9a1cae09e5754424e33764777cfc
 $_MODULE['<{bankwire}larevuedurable>payment_return_ca7e41a658753c87973936d7ce2429a8'] = 'Pour toute question ou information complémentaire, veuillez contacter notre';
 $_MODULE['<{bankwire}larevuedurable>payment_return_dfe239de8c0b2453a8e8f7657a191d5d'] = 'support client';
 $_MODULE['<{bankwire}larevuedurable>payment_return_d15feee53d81ea16269e54d4784fa123'] = 'Nous avons rencontré un problème avec votre commande. Merci de prendre contact avec notre support client';
+$_MODULE['<{bankwire}larevuedurable>payment_5e1695822fc5af98f6b749ea3cbc9b4c'] = 'Payer par virement bancaire';
+$_MODULE['<{bankwire}larevuedurable>payment_eb1d50032721fa4c9d3518c417f91b9d'] = 'Payer par virement bancaire (traitement plus long)';
