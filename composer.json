@@ -3,7 +3,7 @@
         "setasign/fpdi-fpdf": "2.0.0",
         "setasign/fpdi-tfpdf": "^2.0",
         "setasign/fpdi-tcpdf": "^2.0",
-        "setasign/fpdi_pdf-parser": "2.0.3"
+        "setasign/fpdi_pdf-parser": "2.0.4"
     },
     "repositories": [
         {

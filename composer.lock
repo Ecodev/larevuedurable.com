@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "feda4441e31f4575154a137d5bdfbbb3",
+    "content-hash": "c83d3023e910c9151e8d91e46e7459ab",
     "packages": [
         {
             "name": "setasign/fpdf",
@@ -225,12 +225,10 @@
         },
         {
             "name": "setasign/fpdi_pdf-parser",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "dist": {
                 "type": "zip",
-                "url": "https://www.setasign.com/downloads/2016019/FPDI_PDF-Parser-2.0.3.zip",
-                "reference": null,
-                "shasum": null
+                "url": "https://www.setasign.com/downloads/2132008/FPDI_PDF-Parser-2.0.4.zip"
             },
             "require": {
                 "setasign/fpdi": "^2.0"
@@ -247,7 +245,7 @@
             "support": {
                 "email": "support@setasign.com"
             },
-            "time": "2018-02-22T00:00:00+00:00"
+            "time": "2018-11-06T00:00:00+00:00"
         },
         {
             "name": "setasign/tfpdf",
