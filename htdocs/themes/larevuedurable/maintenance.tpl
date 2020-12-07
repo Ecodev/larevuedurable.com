@@ -67,24 +67,10 @@
 			 
 				 <p>Cher visiteur,</p>
 				 
-				 <p>Vous êtes bien sur le site de LaRevueDurable. Une intervention technique très malencontreuse sur un serveur clef nous condamne à être hors-service depuis 
-				 mercredi dernier.</p>
+				 <p>Nous sommes en train de mettre à jour notre site et il sera revenu demain.</p>
 				 
-				 <p>Nous espérons que ce site sera rendu à nouveau fonctionnel d'ici peu, mais ne sommes pas maîtres du jeu.</p>
+				 <p>Nous vous remercions pour votre compréhension.</p>
 				 
-				 <p>En attendant, vous pouvez :</p>
-				 
-				 <p>
-				 Ecouter l'émission de la RTS sur notre dossier consacré aux technologies de l'information et de la communication 
-				 (la panne est arrivée juste après cette émission: sans doute une vengeance du système informatique qui ne supporte pas la critique) :<br/> 
-				 <a href='http://www.rts.ch/audio/la-1ere/programmes/cqfd/5549128-la-face-cachee-de-l-immaterialite-05-02-2014.html'>www.rts.ch/audio/la-1ere/programmes/cqfd/5549128-la-face-cachee-de-l-immaterialite-05-02-2014.html</a>
-				 </p>
-				 			 
-				 <p>Regarder ce soir Couleurs locales sur la RTS notre action sur les grands parents et le climat.</p>
-				 
-				 <p>Ecrire à sylvia.generoso@larevuedurable.com pour lui demander de vous prévenir dès que le site sera à nouveau en ligne.</p>
-				 
-				 <p>Avec toutes nos plus plates excuses pour cette situation,</p>
 				 
 				 <p>Toute l'équipe de LaRevueDurable</p>
 			 </div>
