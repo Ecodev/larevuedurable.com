@@ -67,12 +67,11 @@
 			 
 				 <p>Cher visiteur,</p>
 				 
-				 <p>Nous sommes en train de mettre à jour notre site et il sera revenu demain.</p>
+				 <p>Vous pourrez bientôt découvrir le tout nouveau site des Artisans de la
+					 transition. Encore un peu de patience</p>
 				 
-				 <p>Nous vous remercions pour votre compréhension.</p>
 				 
-				 
-				 <p>Toute l'équipe de LaRevueDurable</p>
+				 <p>Susana</p>
 			 </div>
 			 
 			 <span style="clear:both;">&nbsp;</span>
